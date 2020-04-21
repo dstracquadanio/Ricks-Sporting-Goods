@@ -61,6 +61,11 @@ nav {
   padding: 50px;
 }
 
+#items button {
+  background: #ceb14b;
+  font-size: 16px;
+}
+
 #items img {
   width: 200px;
   display: block;

@@ -5,7 +5,7 @@ import {fetchSingleItem} from '../store/selectedItem'
 export class SingleItem extends React.Component {
   componentDidMount() {
     const itemId = this.props.match.params.itemId
-    this.props.fetchSingleItem(itemId)
+    this.props.fetchSingleItem(+itemId)
   }
 
   render() {
@@ -16,7 +16,7 @@ export class SingleItem extends React.Component {
         <h3>Item: {selectedItem.name}</h3>
         <h3>Price: {selectedItem.price}</h3>
         <img src={selectedItem.imageUrl} />
-        <h3>Quanity: {selectedItem.quantity}</h3>
+        <h3>Quantity: {selectedItem.quantity}</h3>
       </div>
     )
   }
