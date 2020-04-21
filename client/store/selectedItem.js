@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import axios from 'axios'
 
 /**
@@ -19,19 +20,26 @@ const setItem = (data) => ({
  * THUNK CREATORS
  */
 export const fetchSingleItem = (id) => async (dispatch) => {
-  const {data} = await axios.get(`/api/items/${id}`)
-  dispatch(setItem(data))
+  try {
+    const {data} = await axios.get(`/api/items/${id}`)
+    dispatch(setItem(data))
+  } catch (error) {
+    console.log('there is an error', error)
+  }
 }
 
 /**
  * REDUCER
  */
-const defaultSelectedItem = {
-  selectedItem: {},
-}
-export default function (state = defaultSelectedItem, action) {
+const defaultSelectedItem = {}
+export default function selectedItemReducer(
+  state = defaultSelectedItem,
+  action
+) {
   switch (action.type) {
     case SET_ITEM:
-      return {...state, selectedItem: action.data}
+      return action.data
+    default:
+      return state
   }
 }

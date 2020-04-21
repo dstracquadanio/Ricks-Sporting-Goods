@@ -9,7 +9,8 @@ export class SingleItem extends React.Component {
   }
 
   render() {
-    const selectedItem = this.props.selectedItem.selectedItem
+    const selectedItem = this.props.selectedItem
+    console.log(this.props)
     return (
       <div>
         <h3>Item: {selectedItem.name}</h3>
