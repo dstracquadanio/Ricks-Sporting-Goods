@@ -9,7 +9,8 @@ export class AllItems extends Component {
 
   render() {
     console.log(this.props)
-    const items = this.viewFilter()
+    let {items} = this.props
+    items = this.viewFilter(items)
     return (
       <div>
         {items.map((item) => {
@@ -27,12 +28,15 @@ export class AllItems extends Component {
     )
   }
 
-  viewFilter() {
-    if (this.props.match.path === `/items/:sport`) {
-      return this.props.items.filter(
-        (item) => item.name === this.props.match.params.sport
-      )
-    } else return this.props.items
+  viewFilter(items) {
+    let singleSport = []
+    items.map((item) => {
+      if (this.props.location.pathname === `/items/${item.name}`) {
+        singleSport.push(item)
+      }
+    })
+    if (!singleSport[0]) return items
+    else return singleSport
   }
 }
 

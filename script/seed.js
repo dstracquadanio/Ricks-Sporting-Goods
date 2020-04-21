@@ -23,6 +23,16 @@ async function seed() {
       price: 30.0,
       quantity: 5,
     }),
+    Item.create({
+      name: 'football',
+      price: 25.0,
+      quantity: 2,
+    }),
+    Item.create({
+      name: 'basketball',
+      price: 5.0,
+      quantity: 4,
+    }),
   ])
 
   console.log(`seeded ${users.length} users`)
