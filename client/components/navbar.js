@@ -9,7 +9,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <h1>BOILERMAKER</h1>
     <nav>
       {isLoggedIn ? (
-        <div>
+        <div className="left-nav">
           {/* The navbar will show these links after you log in */}
           <Link to="/home">Home</Link>
           <a href="#" onClick={handleClick}>
@@ -17,12 +17,18 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           </a>
         </div>
       ) : (
-        <div>
+        <div className="left-nav">
           {/* The navbar will show these links before you log in */}
+          <Link to="/home">Home</Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
         </div>
       )}
+      <div className="right-nav">
+        <Link to="/allItems">All</Link>
+        <Link to="/basketball">Basketball</Link>
+        <Link to="/baseball">Baseball</Link>
+      </div>
     </nav>
     <hr />
   </div>
@@ -31,17 +37,17 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleClick() {
       dispatch(logout())
-    }
+    },
   }
 }
 
@@ -52,5 +58,5 @@ export default connect(mapState, mapDispatch)(Navbar)
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
 }

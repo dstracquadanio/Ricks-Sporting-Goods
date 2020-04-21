@@ -19,3 +19,16 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* CLASSES */
+.home-image {
+  height: 360px;
+  width: 360px;
+}
+
+/* ID */
