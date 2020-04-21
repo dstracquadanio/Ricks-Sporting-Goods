@@ -14,14 +14,16 @@ async function seed() {
 
   const items = await Promise.all([
     Item.create({
-      name: 'basketball',
+      name: 'basketball hoop',
       price: 10.0,
       quantity: 9,
+      sport: 'basketball',
     }),
     Item.create({
-      name: 'football',
+      name: 'football helmet',
       price: 30.0,
       quantity: 5,
+      sport: 'football',
     }),
   ])
 
