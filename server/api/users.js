@@ -17,10 +17,21 @@ router.get('/', async (req, res, next) => {
 })
 
 // add or update shopping cart:
-// NEEDS TO BE UPDATE OR CREATE!!
-router.post('/', async (req, res, next) => {
+//expects an item in request body with an itemId
+router.put('/:userId', async (req, res, next) => {
   try {
-    await ShoppingCartItem.create(req.body)
+    const itemId = req.body.itemId
+    const userId = req.params.userId
+    const [instance, wasCreated] = await ShoppingCartItem.findOrCreate({
+      where: {
+        userId,
+        itemId,
+      },
+      defaults: req.body,
+    })
+    if (wasCreated === false) {
+      await instance.update(req.body)
+    }
     res.sendStatus(201)
   } catch (err) {
     next(err)
