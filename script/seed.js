@@ -22,11 +22,15 @@ async function seed() {
       name: 'football',
       price: 30.0,
       quantity: 5,
+      imageUrl:
+        'https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&w=288&h=288&transparent=true',
     }),
     Item.create({
       name: 'football',
       price: 25.0,
       quantity: 2,
+      imageUrl:
+        'https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&w=288&h=288&transparent=true',
     }),
     Item.create({
       name: 'basketball',

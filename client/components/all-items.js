@@ -34,8 +34,7 @@ export class AllItems extends Component {
         singleSport.push(item)
       }
     })
-    if (!singleSport[0]) return items
-    else return singleSport
+    return !singleSport.length ? items : singleSport
   }
 }
 
