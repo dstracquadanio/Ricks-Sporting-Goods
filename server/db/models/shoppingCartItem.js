@@ -38,6 +38,13 @@ const ShoppingCartItem = db.define('shoppingCartItem', {
       notEmpty: true,
     },
   },
+  itemId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    validate: {
+      min: 0,
+    },
+  },
 })
 
 module.exports = ShoppingCartItem
