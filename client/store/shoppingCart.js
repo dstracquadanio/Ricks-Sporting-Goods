@@ -11,7 +11,9 @@ const checkout = (items) => ({
 export const checkoutThunk = (checkoutObj) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.put()
+      await axios.put('/api/users/checkout', checkoutObj)
+      const {data} = await axios.put('/api/items/checkout', checkoutObj)
+      dispatch(checkout(data))
     } catch (error) {
       console.log('Checkout Thunk Error:', error)
     }
@@ -26,6 +28,8 @@ const defaultShoppingCart = []
  */
 export default function (state = defaultShoppingCart, action) {
   switch (action.type) {
+    case CHECKOUT:
+      return []
     default:
       return state
   }

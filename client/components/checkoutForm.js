@@ -33,10 +33,13 @@ class DisconnectedCheckoutForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.checkout({
-      user: '',
-      shoppingCart: '',
-    })
+
+    if (this.props.user.id) {
+      this.props.checkout({
+        userId: this.props.user.id,
+        shoppingCart: this.props.shoppingCart,
+      })
+    }
     this.setState({
       name: '',
       address: '',
@@ -83,24 +86,35 @@ const userTest = {
   id: 1,
   name: 'Cam',
   address: 'address 1',
-  email: 'my email',
+  email: 'myemail@email.com',
 }
 const guestTest = {}
 
-const cartTest = {}
+const cartTest = [
+  {
+    id: 2,
+    name: 'basketball hoop',
+    quantity: 2,
+    price: 10.0,
+    sport: 'basketball',
+  },
+  {id: 1, name: 'football helmet', quantity: 1, price: 30.0, sport: 'football'},
+  {id: 3, name: 'football', quantity: 1, price: 25.0, sport: 'football'},
+]
 // ***************************************************************
 
 const mapStateToProps = (state) => {
   return {
     // user: state.user,
-    user: guestTest,
+    // items: state.items
+    // shoppingCart: state.shoppingCart
+    user: userTest,
     shoppingCart: cartTest,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // addCampus: obj => dispatch(addCampusThunk(obj)),
     checkout: (obj) => dispatch(checkoutThunk(obj)),
   }
 }
