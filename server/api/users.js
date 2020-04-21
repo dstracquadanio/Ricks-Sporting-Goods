@@ -19,7 +19,20 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     await ShoppingCartItem.create(req.body)
-    res.end()
+    res.sendStatus(201)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:userId/cart/', async (req, res, next) => {
+  try {
+    const cart = await ShoppingCartItem.findAll({
+      where: {
+        userId: req.params.userId,
+      },
+    })
+    res.json(cart)
   } catch (err) {
     next(err)
   }
