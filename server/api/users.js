@@ -16,6 +16,8 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// add or update shopping cart:
+// NEEDS TO BE UPDATE OR CREATE!!
 router.post('/', async (req, res, next) => {
   try {
     await ShoppingCartItem.create(req.body)
