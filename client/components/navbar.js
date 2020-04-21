@@ -26,10 +26,10 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       )}
       <div className="right-nav">
         <Link to="/items">All</Link>
-        <Link to="/items/basketball">Basketball</Link>
-        <Link to="/items/football">Football</Link>
-        <Link to="/items/baseball">Baseball</Link>
-        <Link to="/items/eSports">eSports</Link>
+        <Link to="/basketball/items">Basketball</Link>
+        <Link to="/football/items">Football</Link>
+        <Link to="/baseball/items">Baseball</Link>
+        <Link to="/eSports/items">eSports</Link>
       </div>
     </nav>
     <hr />

@@ -2,10 +2,11 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import AllItems from './components/all-items'
 import {Login, Signup, UserHome, CheckoutForm} from './components'
-import {me} from './store'
+import AllItems from './components/all-items'
 import singleItem from './components/singleItem'
+import {me} from './store'
+import {getItems} from './store/items'
 
 /**
  * COMPONENT
@@ -13,6 +14,7 @@ import singleItem from './components/singleItem'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    this.props.getItems()
   }
 
   render() {
@@ -24,8 +26,9 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route exact path="/items" component={AllItems} />
+        <Route path="/:sport/items" component={AllItems} />
+        <Route path="/items/:id" component={singleItem} />
         <Route path="/formtest" component={CheckoutForm} />
-        <Route exact path="/items/:id" component={singleItem} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -52,6 +55,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
+    getItems: () => dispatch(getItems()),
     loadInitialData() {
       dispatch(me())
     },
