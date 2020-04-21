@@ -14,16 +14,18 @@ async function seed() {
 
   const items = await Promise.all([
     Item.create({
-      name: 'basketball',
+      name: 'basketball hoop',
       price: 10.0,
       quantity: 9,
+      sport: 'basketball',
     }),
     Item.create({
-      name: 'football',
+      name: 'football helmet',
       price: 30.0,
       quantity: 5,
       imageUrl:
         'https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&w=288&h=288&transparent=true',
+      sport: 'football',
     }),
     Item.create({
       name: 'football',
@@ -31,11 +33,13 @@ async function seed() {
       quantity: 2,
       imageUrl:
         'https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&w=288&h=288&transparent=true',
+      sport: 'football',
     }),
     Item.create({
       name: 'basketball',
       price: 5.0,
       quantity: 4,
+      sport: 'football',
     }),
   ])
 

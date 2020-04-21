@@ -31,6 +31,13 @@ const Item = db.define('item', {
       min: 0,
     },
   },
+  sport: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
 })
 
 module.exports = Item

@@ -30,6 +30,13 @@ const User = db.define('user', {
   address: {
     type: Sequelize.STRING,
   },
+  name: {
+    type: Sequelize.STRING,
+  },
+  isAdmin: {
+    type: Sequelize.STRING,
+    defaultValue: 'N',
+  },
 })
 
 module.exports = User
