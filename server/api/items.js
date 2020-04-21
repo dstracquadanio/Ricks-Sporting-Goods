@@ -21,16 +21,17 @@ router.get('/:itemId', async (req, res, next) => {
 })
 
 // purchasing an item (reducing quantity)
-router.put('/', async (req, res, next) => {
+router.put('/checkout', async (req, res, next) => {
   try {
     // example input:
     // req.body: {
     //  items: [{id: 1, quantity: 2}, {id: 2 quantity: 3}]
     //    }
-    for (let item of req.body.items) {
+    for (let item of req.body.shoppingCart) {
+      const currentItem = await Item.findByPk(item.id)
       await Item.update(
         {
-          quantity: item.quantity,
+          quantity: currentItem.quantity - item.quantity,
         },
         {
           where: {
@@ -39,7 +40,8 @@ router.put('/', async (req, res, next) => {
         }
       )
     }
-    res.sendStatus(201)
+    const updatedItems = await Item.findAll()
+    res.json(updatedItems)
   } catch (err) {
     next(err)
   }
