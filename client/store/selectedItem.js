@@ -33,8 +33,5 @@ export default function (state = defaultSelectedItem, action) {
   switch (action.type) {
     case SET_ITEM:
       return {...state, selectedItem: action.data}
-
-    default:
-      return state
   }
 }
