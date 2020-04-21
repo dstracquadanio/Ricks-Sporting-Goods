@@ -39,3 +39,21 @@ router.get('/:userId/cart/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/checkout', async (req, res, next) => {
+  try {
+    const userId = req.body.userId
+    const itemArray = req.body.shoppingCart
+    for (let item of itemArray) {
+      await ShoppingCartItem.destroy({
+        where: {
+          userId: userId,
+          id: item.id,
+        },
+      })
+    }
+    res.sendStatus(201)
+  } catch (err) {
+    next(err)
+  }
+})
