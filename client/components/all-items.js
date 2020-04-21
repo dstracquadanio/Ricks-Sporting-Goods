@@ -11,10 +11,10 @@ export class AllItems extends Component {
     let {items} = this.props
     items = this.viewFilter(items)
     return (
-      <div>
+      <div id="items">
         {items.map((item) => {
           return (
-            <div key={item.id}>
+            <div key={item.id} className="singleItem">
               <h2>{item.name}</h2>
               <h3>Price: {item.price}</h3>
               <h3>Quantity: {item.quantity}</h3>
@@ -30,7 +30,7 @@ export class AllItems extends Component {
   viewFilter(items) {
     let singleSport = []
     items.map((item) => {
-      if (this.props.location.pathname === `/items/${item.name}`) {
+      if (this.props.location.pathname === `/items/${item.sport}`) {
         singleSport.push(item)
       }
     })
