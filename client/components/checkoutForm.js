@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-// import {addCampusThunk} from '../redux/campuses'
+import {checkoutThunk} from '../store/shoppingCart'
 
 class DisconnectedCheckoutForm extends Component {
   constructor() {
@@ -33,7 +33,10 @@ class DisconnectedCheckoutForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.addCampus(this.state)
+    this.props.checkout({
+      user: '',
+      shoppingCart: '',
+    })
     this.setState({
       name: '',
       address: '',
@@ -83,18 +86,22 @@ const userTest = {
   email: 'my email',
 }
 const guestTest = {}
+
+const cartTest = {}
 // ***************************************************************
 
 const mapStateToProps = (state) => {
   return {
     // user: state.user,
-    user: userTest,
+    user: guestTest,
+    shoppingCart: cartTest,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     // addCampus: obj => dispatch(addCampusThunk(obj)),
+    checkout: (obj) => dispatch(checkoutThunk(obj)),
   }
 }
 
