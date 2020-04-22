@@ -48,3 +48,12 @@ router.put('/checkout', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/', (req, res, next) => {
+  try {
+    const createItem = Item.create(req.body)
+    res.json(createItem)
+  } catch (err) {
+    next(err)
+  }
+})

@@ -9,6 +9,7 @@ import {
   CheckoutForm,
   ShoppingCart,
   SubmitPage,
+  addItems,
 } from './components'
 import AllItems from './components/all-items'
 import singleItem from './components/singleItem'
@@ -42,6 +43,7 @@ class Routes extends Component {
         <Route path="/ShoppingCart" component={ShoppingCart} />
         <Route path="/checkout" component={CheckoutForm} />
         <Route path="/submitPage" component={SubmitPage} />
+        <Route path="/addItems" component={addItems} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
