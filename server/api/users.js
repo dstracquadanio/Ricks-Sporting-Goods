@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, ShoppingCartItem} = require('../db/models')
+const {User, ShoppingCart} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ['id', 'email'],
+      attributes: ['id', 'email', 'isAdmin'],
     })
     res.json(users)
   } catch (err) {
@@ -22,16 +22,17 @@ router.put('/:userId', async (req, res, next) => {
   try {
     const itemId = req.body.itemId
     const userId = req.params.userId
-    const [instance, wasCreated] = await ShoppingCartItem.findOrCreate({
-      where: {
-        userId,
-        itemId,
-      },
-      defaults: req.body,
-    })
-    if (wasCreated === false) {
-      await instance.update(req.body)
-    }
+    await ShoppingCart.addOrUpdateItemToCart(userId, itemId, req.body)
+    // const [instance, wasCreated] = await ShoppingCart.findOrCreate({
+    //   where: {
+    //     userId,
+    //     itemId,
+    //   },
+    //   defaults: req.body,
+    // })
+    // if (wasCreated === false) {
+    //   await instance.update(req.body)
+    // }
     res.sendStatus(201)
   } catch (err) {
     next(err)
@@ -40,7 +41,9 @@ router.put('/:userId', async (req, res, next) => {
 
 router.get('/:userId/cart/', async (req, res, next) => {
   try {
-    const cart = await ShoppingCartItem.findAll({
+    // const cart = User.getShoppingCartItem()
+
+    const cart = await ShoppingCart.findAll({
       where: {
         userId: req.params.userId,
       },
@@ -53,11 +56,13 @@ router.get('/:userId/cart/', async (req, res, next) => {
 })
 
 router.put('/:userId/checkout', async (req, res, next) => {
+  //middleware: security
+  //TESTS
   try {
     const userId = req.body.userId
     const itemArray = req.body.shoppingCart
     for (let item of itemArray) {
-      await ShoppingCartItem.destroy({
+      await ShoppingCart.destroy({
         where: {
           userId: userId,
           itemId: item.id,

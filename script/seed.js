@@ -1,20 +1,32 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Item, ShoppingCartItem} = require('../server/db/models')
+const {User, Item, ShoppingCart} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
+  const [cody, murphy] = await Promise.all([
     User.create({email: 'cody@email.com', password: '123'}),
     User.create({email: 'murphy@email.com', password: '123'}),
   ])
 
-  const items = await Promise.all([
+  const [
+    hoop,
+    helmet,
+    football,
+    basketball,
+    glove,
+    cam_photo,
+    anderson_mouse,
+    darren_basketball,
+    fieldgoal_posts,
+    monitor,
+    home_plate,
+  ] = await Promise.all([
     Item.create({
-      name: 'basketball hoop',
+      name: 'Basketball Hoop',
       price: 10.0,
       quantity: 9,
       imageUrl:
@@ -22,7 +34,7 @@ async function seed() {
       sport: 'basketball',
     }),
     Item.create({
-      name: 'football helmet',
+      name: 'Football Helmet',
       price: 30.0,
       quantity: 5,
       imageUrl:
@@ -30,7 +42,7 @@ async function seed() {
       sport: 'football',
     }),
     Item.create({
-      name: 'football',
+      name: 'Football',
       price: 25.0,
       quantity: 2,
       imageUrl:
@@ -38,13 +50,13 @@ async function seed() {
       sport: 'football',
     }),
     Item.create({
-      name: 'basketball',
+      name: 'Basketball',
       price: 30.0,
       quantity: 4,
       sport: 'basketball',
     }),
     Item.create({
-      name: 'baseball glove',
+      name: 'Baseball Glove',
       price: 40.0,
       quantity: 7,
       imageUrl:
@@ -100,49 +112,46 @@ async function seed() {
       sport: 'baseball',
     }),
   ])
-  const shoppingCartItems = await Promise.all([
-    ShoppingCartItem.create({
+  const shoppingCarts = await Promise.all([
+    ShoppingCart.create({
       name: 'basketball hoop',
       price: 10.0,
       quantity: 2,
       imageUrl:
         'https://www.anthem-sports.com/media/extendware/ewimageopt/media/inline/b0/c/bison-pro-tech-competition-breakaway-basketball-goal-ba35--eeb.jpg',
       sport: 'basketball',
-      itemId: 2,
-      userId: 1,
+      itemId: hoop.id,
     }),
-    ShoppingCartItem.create({
+    ShoppingCart.create({
       name: 'football helmet',
       price: 30.0,
       quantity: 1,
       imageUrl:
         'https://cdn.vox-cdn.com/thumbor/Ck7EIuSSZBpSn7QIkFZHpAhGuS0=/26x136:1026x803/1200x800/filters:focal(26x136:1026x803)/cdn.vox-cdn.com/uploads/chorus_image/image/30673345/speedflex_quarter_view_lr__2_.0.jpg',
       sport: 'football',
-      itemId: 1,
-      userId: 1,
+      itemId: helmet.id,
     }),
-    ShoppingCartItem.create({
+    ShoppingCart.create({
       name: 'football',
       price: 25.0,
       quantity: 1,
       imageUrl:
         'https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&w=288&h=288&transparent=true',
       sport: 'football',
-      itemId: 3,
-      userId: 1,
+      itemId: football.id,
     }),
-    ShoppingCartItem.create({
+    ShoppingCart.create({
       name: 'basketball',
       price: 30.0,
       quantity: 2,
       sport: 'basketball',
-      itemId: 4,
-      userId: 1,
+      itemId: basketball.id,
     }),
   ])
+  const orders = await Promise.all([cody.addShoppingCart(1)])
 
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded ${items.length} users`)
+  console.log(`ITEMS: ${hoop}`)
+  // console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 }
 

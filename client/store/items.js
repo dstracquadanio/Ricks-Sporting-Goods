@@ -20,7 +20,7 @@ export default function itemsReducer(state = defaultItems, action) {
     case GOT_ITEMS:
       return action.items
     case CHECKOUT:
-      return action.items
+      return action.items //HERE simulate backend model change
     default:
       return state
   }

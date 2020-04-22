@@ -40,4 +40,9 @@ const Item = db.define('item', {
   },
 })
 
+Item.prototype.updateQuantities = function (purchasedQuant) {
+  let newQuantity = this.quantity - purchasedQuant
+  this.update({quantity: newQuantity})
+}
+
 module.exports = Item
