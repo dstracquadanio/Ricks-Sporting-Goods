@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, Switch} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
@@ -15,7 +15,14 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
           <a href="#" onClick={handleClick}>
             Logout
           </a>
-          {isAdmin ? <Link to="/users">VIEW USERS</Link> : ''}
+          {isAdmin ? (
+            <Fragment>
+              <Link to="/users">VIEW USERS</Link>
+              <Link to="/additems">ADD AN ITEM</Link>
+            </Fragment>
+          ) : (
+            ''
+          )}
         </div>
       ) : (
         <div className="left-nav">
