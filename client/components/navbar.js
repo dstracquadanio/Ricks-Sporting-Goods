@@ -6,7 +6,7 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>BOILERMAKER</h1>
+    <h1>Grace Shopper</h1>
     <nav>
       {isLoggedIn ? (
         <div className="left-nav">
@@ -30,7 +30,13 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         <Link to="/football/items">Football</Link>
         <Link to="/baseball/items">Baseball</Link>
         <Link to="/eSports/items">eSports</Link>
-        <Link to="/shoppingCart">Shopping Cart</Link>
+        <Link to="/shoppingCart">
+          <img
+            id="shopping-cart-img"
+            src="https://www.freepngimg.com/thumb/cart/2-2-cart-png-file.png"
+            alt="cart image"
+          />
+        </Link>
       </div>
     </nav>
     <hr />

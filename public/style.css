@@ -25,6 +25,12 @@ form div {
 nav {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 78px;
+}
+
+button {
+  margin-top: 1em;
 }
 
 /* CLASSES */
@@ -63,6 +69,9 @@ nav {
 
 .line-item {
   margin-bottom: 0.3em;
+
+.singleItem {
+  width: 15%;
 }
 
 .form-container {
@@ -81,9 +90,16 @@ nav {
   border-radius: 5px;
 }
 
+.right-nav {
+  display: flex;
+  align-items: center;
+}
+
+/* IDs */
 #items {
   display: flex;
   flex-flow: row wrap;
+  justify-content: center;
 }
 
 #items .singleItem {
@@ -104,6 +120,12 @@ nav {
   margin: auto;
 }
 
-button {
-  margin-top: 1em;
+#shopping-cart-img {
+  height: 36px;
+  border-radius: 10px;
+  transition: height 0.5s ease;
+}
+
+#shopping-cart-img:hover {
+  height: 38px;
 }
