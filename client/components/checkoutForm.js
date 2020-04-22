@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {checkoutThunk} from '../store/shoppingCart'
+import {checkoutThunk} from '../store/Cart'
 import history from '../history'
 
 class DisconnectedCheckoutForm extends Component {
@@ -36,7 +36,7 @@ class DisconnectedCheckoutForm extends Component {
     if (this.props.user.id) {
       this.props.checkout({
         userId: this.props.user.id,
-        shoppingCart: this.props.shoppingCart,
+        Cart: this.props.Cart,
       })
     }
     this.setState({
@@ -84,7 +84,7 @@ class DisconnectedCheckoutForm extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
-    shoppingCart: state.shoppingCart,
+    Cart: state.Cart,
   }
 }
 

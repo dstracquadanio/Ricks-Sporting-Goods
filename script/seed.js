@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Item, ShoppingCart} = require('../server/db/models')
+const {User, Item, Cart} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -112,8 +112,8 @@ async function seed() {
       sport: 'baseball',
     }),
   ])
-  const shoppingCarts = await Promise.all([
-    ShoppingCart.create({
+  const Carts = await Promise.all([
+    Cart.create({
       name: 'basketball hoop',
       price: 10.0,
       quantity: 2,
@@ -121,8 +121,9 @@ async function seed() {
         'https://www.anthem-sports.com/media/extendware/ewimageopt/media/inline/b0/c/bison-pro-tech-competition-breakaway-basketball-goal-ba35--eeb.jpg',
       sport: 'basketball',
       itemId: hoop.id,
+      userId: cody.id,
     }),
-    ShoppingCart.create({
+    Cart.create({
       name: 'football helmet',
       price: 30.0,
       quantity: 1,
@@ -130,8 +131,9 @@ async function seed() {
         'https://cdn.vox-cdn.com/thumbor/Ck7EIuSSZBpSn7QIkFZHpAhGuS0=/26x136:1026x803/1200x800/filters:focal(26x136:1026x803)/cdn.vox-cdn.com/uploads/chorus_image/image/30673345/speedflex_quarter_view_lr__2_.0.jpg',
       sport: 'football',
       itemId: helmet.id,
+      userId: cody.id,
     }),
-    ShoppingCart.create({
+    Cart.create({
       name: 'football',
       price: 25.0,
       quantity: 1,
@@ -139,16 +141,17 @@ async function seed() {
         'https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&w=288&h=288&transparent=true',
       sport: 'football',
       itemId: football.id,
+      userId: murphy.id,
     }),
-    ShoppingCart.create({
+    Cart.create({
       name: 'basketball',
       price: 30.0,
       quantity: 2,
       sport: 'basketball',
       itemId: basketball.id,
+      userId: murphy.id,
     }),
   ])
-  const orders = await Promise.all([cody.addShoppingCart(1)])
 
   console.log(`ITEMS: ${hoop}`)
   // console.log(`seeded ${users.length} users`)

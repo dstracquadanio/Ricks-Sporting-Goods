@@ -1,17 +1,16 @@
 const User = require('./user')
-const ShoppingCart = require('./shoppingCart')
+const Cart = require('./cart')
 const Item = require('./item')
+const PurchasedItem = require('./purchasedItems')
 
 /* ASSOCIATIONS */
-// ShoppingCart.belongsTo(User)
-// User.hasMany(ShoppingCart)
-User.belongsToMany(ShoppingCart, {through: 'Order'})
-ShoppingCart.belongsTo(Item)
+User.belongsToMany(Item, {through: Cart})
+Item.belongsToMany(User, {through: Cart})
+PurchasedItem.belongsTo(User)
 
 module.exports = {
   User,
   Item,
-  ShoppingCart,
+  Cart,
+  PurchasedItem,
 }
-
-//test

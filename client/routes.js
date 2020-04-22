@@ -7,14 +7,14 @@ import {
   Signup,
   UserHome,
   CheckoutForm,
-  ShoppingCart,
+  Cart,
   SubmitPage,
 } from './components'
 import AllItems from './components/all-items'
 import singleItem from './components/singleItem'
 import {me} from './store'
 import {getItems} from './store/items'
-import {getCartThunk} from './store/shoppingCart'
+import {getCartThunk} from './store/Cart'
 
 /**
  * COMPONENT
@@ -39,7 +39,7 @@ class Routes extends Component {
         <Route exact path="/items" component={AllItems} />
         <Route path="/:sport/items" component={AllItems} />
         <Route path="/items/:id" component={singleItem} />
-        <Route path="/ShoppingCart" component={ShoppingCart} />
+        <Route path="/Cart" component={Cart} />
         <Route path="/checkout" component={CheckoutForm} />
         <Route path="/submitPage" component={SubmitPage} />
         {isLoggedIn && (
