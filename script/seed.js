@@ -139,40 +139,8 @@ async function seed() {
     }),
   ])
 
-  const shoppingCartItems = await Promise.all([
-    ShoppingCartItem.create({
-      id: 1,
-      name: 'basketball hoop',
-      price: 10.0,
-      quantity: 2,
-      sport: 'basketball',
-      userId: 1,
-    }),
-    ShoppingCartItem.create({
-      id: 3,
-      name: 'football',
-      price: 25.0,
-      quantity: 1,
-      imageUrl:
-        'https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&w=288&h=288&transparent=true',
-      sport: 'football',
-      userId: 1,
-    }),
-    ShoppingCartItem.create({
-      id: 2,
-      name: 'football helmet',
-      price: 30.0,
-      quantity: 1,
-      imageUrl:
-        'https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&w=288&h=288&transparent=true',
-      sport: 'football',
-      userId: 1,
-    }),
-  ])
-
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${items.length} users`)
-  console.log(`seeded ${shoppingCartItems.length} users`)
   console.log(`seeded successfully`)
 }
 
