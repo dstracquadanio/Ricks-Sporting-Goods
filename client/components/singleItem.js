@@ -1,33 +1,41 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchSingleItem} from '../store/selectedItem'
+
+const pStyle = {
+  width: '400px',
+  height: '400px',
+  border: '1px solid #ddd',
+  borderRadius: '4px',
+  padding: '5px',
+}
 
 export class SingleItem extends React.Component {
-  componentDidMount() {
-    const itemId = this.props.match.params.itemId
-    this.props.fetchSingleItem(+itemId)
-  }
-
   render() {
-    const selectedItem = this.props.selectedItem
-    console.log(this.props)
+    const items = this.props.items
+    let itemId = this.props.match.params.id
     return (
       <div>
-        <h3>Item: {selectedItem.name}</h3>
-        <h3>Price: {selectedItem.price}</h3>
-        <img src={selectedItem.imageUrl} />
-        <h3>Quantity: {selectedItem.quantity}</h3>
+        {items.map((item) => {
+          if (String(item.id) === itemId) {
+            return (
+              <div key={item.id}>
+                <h3>Item: {item.name}</h3>
+                <img style={pStyle} src={item.imageUrl} />
+                <h3>Description: {item.description}</h3>
+                <h3>Price: ${item.price}</h3>
+                <h3>Quantity: {item.quantity}</h3>
+              </div>
+            )
+          }
+          return null
+        })}
       </div>
     )
   }
 }
 
 const mapState = (state) => ({
-  selectedItem: state.selectedItem,
+  items: state.items,
 })
 
-const mapDispatch = (dispatch) => ({
-  fetchSingleItem: (id) => dispatch(fetchSingleItem(id)),
-})
-
-export default connect(mapState, mapDispatch)(SingleItem)
+export default connect(mapState, null)(SingleItem)
