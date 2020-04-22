@@ -99,10 +99,12 @@ async function seed() {
         'https://previews.123rf.com/images/toddtaulman/toddtaulman1511/toddtaulman151100007/48690694-baseball-home-plate-with-dirt-and-chalk-lines.jpg',
       sport: 'baseball',
     }),
+  ])
+  const shoppingCartItems = await Promise.all([
     ShoppingCartItem.create({
       name: 'basketball hoop',
       price: 10.0,
-      quantity: 9,
+      quantity: 2,
       imageUrl:
         'https://www.anthem-sports.com/media/extendware/ewimageopt/media/inline/b0/c/bison-pro-tech-competition-breakaway-basketball-goal-ba35--eeb.jpg',
       sport: 'basketball',
@@ -112,7 +114,7 @@ async function seed() {
     ShoppingCartItem.create({
       name: 'football helmet',
       price: 30.0,
-      quantity: 5,
+      quantity: 1,
       imageUrl:
         'https://cdn.vox-cdn.com/thumbor/Ck7EIuSSZBpSn7QIkFZHpAhGuS0=/26x136:1026x803/1200x800/filters:focal(26x136:1026x803)/cdn.vox-cdn.com/uploads/chorus_image/image/30673345/speedflex_quarter_view_lr__2_.0.jpg',
       sport: 'football',
@@ -122,7 +124,7 @@ async function seed() {
     ShoppingCartItem.create({
       name: 'football',
       price: 25.0,
-      quantity: 2,
+      quantity: 1,
       imageUrl:
         'https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&w=288&h=288&transparent=true',
       sport: 'football',
@@ -132,7 +134,7 @@ async function seed() {
     ShoppingCartItem.create({
       name: 'basketball',
       price: 30.0,
-      quantity: 4,
+      quantity: 2,
       sport: 'basketball',
       itemId: 4,
       userId: 1,
