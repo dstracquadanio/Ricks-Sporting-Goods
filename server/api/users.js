@@ -57,7 +57,7 @@ router.get('/:userId/cart/', async (req, res, next) => {
 
 // MAKE INTO A DELETE ROUTE
 // USE CLASS METHODS AND MAKE SHORTER
-router.put('/:userId/checkout', async (req, res, next) => {
+router.delete('/:userId/checkout', async (req, res, next) => {
   //middleware: security
   //TESTS
   try {

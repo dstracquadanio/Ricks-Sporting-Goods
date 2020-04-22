@@ -28,8 +28,8 @@ const checkout = (items) => ({
 export const checkoutThunk = (checkoutObj) => {
   return async (dispatch) => {
     try {
-      await axios.put(`/api/users/${checkoutObj.userId}/checkout`, checkoutObj)
-      const {data} = await axios.put('/api/items/checkout', checkoutObj)
+      await axios.delete(`/api/users/${checkoutObj.userId}/checkout`)
+      const {data} = await axios.put('/api/items/checkout', checkoutObj.Cart)
       dispatch(checkout(data))
     } catch (error) {
       console.log('Checkout Thunk Error:', error)
