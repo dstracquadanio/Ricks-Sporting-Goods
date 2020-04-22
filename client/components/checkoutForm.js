@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {checkoutThunk} from '../store/shoppingCart'
+import history from '../history'
 
 class DisconnectedCheckoutForm extends Component {
   constructor() {
@@ -16,13 +17,11 @@ class DisconnectedCheckoutForm extends Component {
   }
 
   componentDidMount() {
-    if (this.props.user.id) {
-      this.setState({
-        name: this.props.user.name,
-        address: this.props.user.address,
-        email: this.props.user.email,
-      })
-    }
+    this.setState({
+      name: this.props.user.name || '',
+      address: this.props.user.address || '',
+      email: this.props.user.email || '',
+    })
   }
 
   handleChange(event) {
@@ -45,6 +44,7 @@ class DisconnectedCheckoutForm extends Component {
       address: '',
       email: '',
     })
+    history.push('/submitPage')
   }
 
   render() {
@@ -81,35 +81,10 @@ class DisconnectedCheckoutForm extends Component {
   }
 }
 
-// ********** TEST DATA. DELETE WHEN DONE USING **************
-const userTest = {
-  id: 1,
-  name: 'Cam',
-  address: 'address 1',
-  email: 'myemail@email.com',
-}
-const guestTest = {}
-
-const cartTest = [
-  {
-    id: 2,
-    name: 'basketball hoop',
-    quantity: 2,
-    price: 10.0,
-    sport: 'basketball',
-  },
-  {id: 1, name: 'football helmet', quantity: 1, price: 30.0, sport: 'football'},
-  {id: 3, name: 'football', quantity: 1, price: 25.0, sport: 'football'},
-]
-// ***************************************************************
-
 const mapStateToProps = (state) => {
   return {
-    // user: state.user,
-    // items: state.items
-    // shoppingCart: state.shoppingCart
-    user: userTest,
-    shoppingCart: cartTest,
+    user: state.user,
+    shoppingCart: state.shoppingCart,
   }
 }
 

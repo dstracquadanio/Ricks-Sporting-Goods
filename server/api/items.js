@@ -4,7 +4,9 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const items = await Item.findAll()
+    const items = await Item.findAll({
+      order: [['name', 'ASC']],
+    })
     res.json(items)
   } catch (err) {
     next(err)
@@ -28,14 +30,14 @@ router.put('/checkout', async (req, res, next) => {
     //  items: [{id: 1, quantity: 2}, {id: 2 quantity: 3}]
     //    }
     for (let item of req.body.shoppingCart) {
-      const currentItem = await Item.findByPk(item.id)
+      const currentItem = await Item.findByPk(item.itemId)
       await Item.update(
         {
           quantity: currentItem.quantity - item.quantity,
         },
         {
           where: {
-            id: item.id,
+            id: item.itemId,
           },
         }
       )

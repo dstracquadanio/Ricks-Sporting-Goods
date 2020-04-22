@@ -44,6 +44,7 @@ router.get('/:userId/cart/', async (req, res, next) => {
       where: {
         userId: req.params.userId,
       },
+      order: [['name', 'ASC']],
     })
     res.json(cart)
   } catch (err) {
@@ -51,7 +52,7 @@ router.get('/:userId/cart/', async (req, res, next) => {
   }
 })
 
-router.put('/checkout', async (req, res, next) => {
+router.put('/:userId/checkout', async (req, res, next) => {
   try {
     const userId = req.body.userId
     const itemArray = req.body.shoppingCart
@@ -59,7 +60,7 @@ router.put('/checkout', async (req, res, next) => {
       await ShoppingCartItem.destroy({
         where: {
           userId: userId,
-          id: item.id,
+          itemId: item.id,
         },
       })
     }

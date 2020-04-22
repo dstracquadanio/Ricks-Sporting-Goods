@@ -2,11 +2,19 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, CheckoutForm} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  CheckoutForm,
+  ShoppingCart,
+  SubmitPage,
+} from './components'
 import AllItems from './components/all-items'
 import singleItem from './components/singleItem'
 import {me} from './store'
 import {getItems} from './store/items'
+import {getCartThunk} from './store/shoppingCart'
 
 /**
  * COMPONENT
@@ -19,7 +27,10 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
-
+    // put this on the /me route
+    if (isLoggedIn) {
+      this.props.getCartItems(this.props.user.id)
+    }
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -28,7 +39,9 @@ class Routes extends Component {
         <Route exact path="/items" component={AllItems} />
         <Route path="/:sport/items" component={AllItems} />
         <Route path="/items/:id" component={singleItem} />
-        <Route path="/formtest" component={CheckoutForm} />
+        <Route path="/ShoppingCart" component={ShoppingCart} />
+        <Route path="/checkout" component={CheckoutForm} />
+        <Route path="/submitPage" component={SubmitPage} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -50,12 +63,14 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
+    user: state.user,
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
     getItems: () => dispatch(getItems()),
+    getCartItems: (userId) => dispatch(getCartThunk(userId)),
     loadInitialData() {
       dispatch(me())
     },
