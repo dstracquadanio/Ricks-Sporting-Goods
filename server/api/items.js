@@ -27,23 +27,17 @@ router.put('/checkout', async (req, res, next) => {
   try {
     // example input:
     // req.body: {
-    //  items: [{id: 1, quantity: 2}, {id: 2 quantity: 3}]
+    //  userId: 1,
+    //  cart: [{id: 1, quantity: 2}, {id: 2 quantity: 3}]
     //    }
-    for (let item of req.body.shoppingCart) {
+    for (let item of req.body /* .cart */) {
       const currentItem = await Item.findByPk(item.itemId)
-      await Item.update(
-        {
-          quantity: currentItem.quantity - item.quantity,
-        },
-        {
-          where: {
-            id: item.itemId,
-          },
-        }
-      )
+      await currentItem.updateQuantities(item.quantity)
     }
+    // vv Delete this vv
     const updatedItems = await Item.findAll()
     res.json(updatedItems)
+    //res.sendStatus(2??)
   } catch (err) {
     next(err)
   }

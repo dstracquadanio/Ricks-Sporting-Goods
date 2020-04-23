@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, ShoppingCartItem} = require('../db/models')
+const {User, Cart, PurchasedItem} = require('../db/models')
 module.exports = router
 
 const isAdminMiddleware = (req, res, next) => {
@@ -28,21 +28,12 @@ router.get('/', async (req, res, next) => {
 })
 
 // add or update shopping cart:
-//expects an item in request body with an itemId
+// Expecting the new total quantity of the cart. (Not incrementing)
 router.put('/:userId', async (req, res, next) => {
   try {
-    const itemId = req.body.itemId
+    const itemId = req.body.id
     const userId = req.params.userId
-    const [instance, wasCreated] = await ShoppingCartItem.findOrCreate({
-      where: {
-        userId,
-        itemId,
-      },
-      defaults: req.body,
-    })
-    if (wasCreated === false) {
-      await instance.update(req.body)
-    }
+    await Cart.addOrUpdateItemToCart(userId, itemId, req.body)
     res.sendStatus(201)
   } catch (err) {
     next(err)
@@ -51,7 +42,9 @@ router.put('/:userId', async (req, res, next) => {
 
 router.get('/:userId/cart/', async (req, res, next) => {
   try {
-    const cart = await ShoppingCartItem.findAll({
+    // const cart = User.getShoppingCartItem()
+
+    const cart = await Cart.findAll({
       where: {
         userId: req.params.userId,
       },
@@ -63,18 +56,27 @@ router.get('/:userId/cart/', async (req, res, next) => {
   }
 })
 
-router.put('/:userId/checkout', async (req, res, next) => {
+// MAKE INTO A DELETE ROUTE
+// USE CLASS METHODS AND MAKE SHORTER
+router.delete('/:userId/checkout', async (req, res, next) => {
+  //middleware: security
+  //TESTS
   try {
-    const userId = req.body.userId
-    const itemArray = req.body.shoppingCart
-    for (let item of itemArray) {
-      await ShoppingCartItem.destroy({
-        where: {
-          userId: userId,
-          itemId: item.id,
-        },
-      })
+    const purchased = await Cart.findAll({
+      where: {
+        userId: req.params.userId,
+      },
+    })
+    const newOrderNum = await PurchasedItem.newOrderNumber()
+    for (let item of purchased) {
+      item.dataValues.orderNumber = newOrderNum
+      await PurchasedItem.create(item.dataValues)
     }
+    await Cart.destroy({
+      where: {
+        userId: req.params.userId,
+      },
+    })
     res.sendStatus(201)
   } catch (err) {
     next(err)
