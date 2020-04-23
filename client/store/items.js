@@ -3,6 +3,7 @@ import axios from 'axios'
 const GOT_ITEMS = 'GOT_ITEMS'
 const CHECKOUT = 'CHECKOUT'
 const DELETE_ITEM = 'DELETE_ITEM'
+const UPDATE_ITEM = 'UPDATE_ITEM'
 
 // GET ALL ITEMS
 export const gotItems = (items) => ({
@@ -12,6 +13,11 @@ export const gotItems = (items) => ({
 
 const removeItem = (data) => ({
   type: DELETE_ITEM,
+  data,
+})
+
+const updateItem = (data) => ({
+  type: UPDATE_ITEM,
   data,
 })
 
@@ -27,6 +33,13 @@ export const removeSingleItem = (id) => {
   }
 }
 
+export const updateSingleItem = (id) => {
+  return async (dispatch) => {
+    await axios.put(`/api/items/${id}`)
+    dispatch(updateItem(id))
+  }
+}
+
 const defaultItems = []
 export default function itemsReducer(state = defaultItems, action) {
   switch (action.type) {
@@ -36,6 +49,8 @@ export default function itemsReducer(state = defaultItems, action) {
       return action.items //HERE simulate backend model change
     case DELETE_ITEM:
       return state.filter((item) => item.id !== action.data)
+    case UPDATE_ITEM:
+      return action.items
     default:
       return state
   }

@@ -63,7 +63,7 @@ router.param('userId', async (req, res, next, userId) => {
 //   }
 // })
 router.get('/:userId/cart/', (req, res, next) => {
-  res.json(req.currentUser.update())
+  res.json(req.currentUser.CartItems())
 })
 
 //ADD ITEM TO CART, IF ALREADY THERE UPDATE ITEM IN CART
