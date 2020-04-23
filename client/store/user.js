@@ -7,7 +7,6 @@ import {getCartThunk} from './cart'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-const GET_ALL_USERS = 'GET_ALL_USERS'
 
 /**
  * INITIAL STATE
