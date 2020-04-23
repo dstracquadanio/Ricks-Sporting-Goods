@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const ShoppingCart = db.define('ShoppingCart', {
+const Cart = db.define('cart', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -38,20 +38,9 @@ const ShoppingCart = db.define('ShoppingCart', {
       notEmpty: true,
     },
   },
-  itemId: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    validate: {
-      min: 0,
-    },
-  },
-  status: {
-    type: Sequelize.ENUM('pending', 'purchased'),
-    defaultValue: 'pending',
-  },
 })
 
-ShoppingCart.addOrUpdateItemToCart = async function (userId, itemId, itemObj) {
+Cart.addOrUpdateItemToCart = async function (userId, itemId, itemObj) {
   const [instance, wasCreated] = await this.findOrCreate({
     where: {
       userId,
@@ -64,4 +53,4 @@ ShoppingCart.addOrUpdateItemToCart = async function (userId, itemId, itemObj) {
   }
 }
 
-module.exports = ShoppingCart
+module.exports = Cart

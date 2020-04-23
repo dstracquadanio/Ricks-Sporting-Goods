@@ -2,12 +2,12 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
-const DisconnectedShoppingCart = (props) => {
+const DisconnectedCart = (props) => {
   return (
     <div className="container-1">
-      {props.shoppingCart.map((item) => {
+      {props.cart.map((item) => {
         return (
-          <div key={item.id} className="container-2">
+          <div key={item.itemId} className="container-2">
             <img src={item.imageUrl} alt="" />
             <div className="container-3">
               <div className="line-item">{item.name}</div>
@@ -26,10 +26,10 @@ const DisconnectedShoppingCart = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    shoppingCart: state.shoppingCart,
+    cart: state.cart,
   }
 }
 
-const CheckoutForm = connect(mapStateToProps)(DisconnectedShoppingCart)
+const Cart = connect(mapStateToProps)(DisconnectedCart)
 
-export default CheckoutForm
+export default Cart

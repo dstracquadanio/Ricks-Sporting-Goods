@@ -27,10 +27,10 @@ router.put('/checkout', async (req, res, next) => {
   try {
     // example input:
     // req.body: {
-    //userId: 1,
-    //  shoppingCart: [{id: 1, quantity: 2}, {id: 2 quantity: 3}]
+    //  userId: 1,
+    //  cart: [{id: 1, quantity: 2}, {id: 2 quantity: 3}]
     //    }
-    for (let item of req.body /* .shoppingCart */) {
+    for (let item of req.body /* .cart */) {
       const currentItem = await Item.findByPk(item.itemId)
       await currentItem.updateQuantities(item.quantity)
     }

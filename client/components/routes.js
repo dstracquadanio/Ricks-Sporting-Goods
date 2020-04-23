@@ -2,20 +2,14 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {
-  Login,
-  Signup,
-  UserHome,
-  CheckoutForm,
-  ShoppingCart,
-  SubmitPage,
-} from './components'
-import AllItems from './components/all-items'
-import ViewUsers from './components/viewUsers'
-import singleItem from './components/singleItem'
-import {me} from './store'
-import {getItems} from './store/items'
-import {getCartThunk} from './store/shoppingCart'
+
+import {Login, Signup, UserHome, CheckoutForm, Cart, SubmitPage} from './index'
+import AllItems from './all-items'
+import singleItem from './singleItem'
+import ViewUsers from './viewUsers'
+import {me} from '../store'
+import {getItems} from '../store/items'
+import {getCartThunk} from '../store/cart'
 
 /**
  * COMPONENT
@@ -29,10 +23,6 @@ class Routes extends Component {
   render() {
     const {isLoggedIn} = this.props
     const {isAdmin} = this.props.user
-    // put this on the /me route
-    if (isLoggedIn) {
-      this.props.getCartItems(this.props.user.id)
-    }
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -41,7 +31,7 @@ class Routes extends Component {
         <Route exact path="/items" component={AllItems} />
         <Route path="/:sport/items" component={AllItems} />
         <Route path="/items/:id" component={singleItem} />
-        <Route path="/ShoppingCart" component={ShoppingCart} />
+        <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={CheckoutForm} />
         <Route path="/submitPage" component={SubmitPage} />
         {isLoggedIn && (
