@@ -81,26 +81,45 @@ router.put('/:userId', async (req, res, next) => {
 
 //DELETES USER'S CART ON CHECKOUT, AND ADDS THOSE ITEMS TO PURCHASED HISTORY IN DB
 // USE CLASS METHODS AND MAKE SHORTER
+// router.delete('/:userId/checkout', async (req, res, next) => {
+//   //middleware: security
+//   //TESTS
+//   try {
+//     const purchased = await Cart.findAll({
+//       where: {
+//         userId: req.params.userId,
+//       },
+//     })
+//     const newOrderNum = await PurchasedItem.newOrderNumber()
+//     for (let item of purchased) {
+//       item.dataValues.orderNumber = newOrderNum
+//       await PurchasedItem.create(item.dataValues)
+//     }
+//     await Cart.destroy({
+//       where: {
+//         userId: req.params.userId,
+//       },
+//     })
+//     res.sendStatus(204)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
+
+//DELETES USER'S CART ON CHECKOUT, AND ADDS THOSE ITEMS TO PURCHASED HISTORY IN DB
+// USE CLASS METHODS AND MAKE SHORTER
 router.delete('/:userId/checkout', async (req, res, next) => {
   //middleware: security
   //TESTS
   try {
-    const purchased = await Cart.findAll({
-      where: {
-        userId: req.params.userId,
-      },
-    })
+    const cartArray = req.currentUser.CartItems
     const newOrderNum = await PurchasedItem.newOrderNumber()
-    for (let item of purchased) {
+    for (let item of cartArray) {
       item.dataValues.orderNumber = newOrderNum
       await PurchasedItem.create(item.dataValues)
     }
-    await Cart.destroy({
-      where: {
-        userId: req.params.userId,
-      },
-    })
-    res.sendStatus(201)
+    await req.currentUser.removeItems(cartArray.map((item) => item.itemId))
+    res.sendStatus(204)
   } catch (err) {
     next(err)
   }
