@@ -6,6 +6,8 @@ const PurchasedItem = require('./purchasedItems')
 /* ASSOCIATIONS */
 User.belongsToMany(Item, {through: Cart})
 Item.belongsToMany(User, {through: Cart})
+
+User.hasMany(Cart, {as: 'CartItems'})
 PurchasedItem.belongsTo(User)
 
 module.exports = {

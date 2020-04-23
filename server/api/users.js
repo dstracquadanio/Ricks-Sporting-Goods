@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Cart, PurchasedItem} = require('../db/models')
+const {User, Cart, PurchasedItem, Item} = require('../db/models')
 module.exports = router
 
 const isAdminMiddleware = (req, res, next) => {
@@ -13,6 +13,7 @@ const isAdminMiddleware = (req, res, next) => {
   }
 }
 
+//GET ALL USERS
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -27,7 +28,45 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// add or update shopping cart:
+//SERVES REQ.CURRENTUSER FOR EVERY ROUTE THAT HAS /:userId
+router.param('userId', async (req, res, next, userId) => {
+  try {
+    req.currentUser = await User.findByPk(userId, {
+      attributes: ['id', 'email'],
+      include: [
+        {
+          model: Cart,
+          as: 'CartItems',
+        },
+      ],
+    })
+    if (!req.currentUser) throw new Error()
+    next()
+  } catch (err) {
+    res.status(404).send(`Error at router.param: User at id: ${userId}`)
+    next(err)
+  }
+})
+
+//GET THIS USER'S CART
+// router.get('/:userId/cart/', async (req, res, next) => {
+//   try {
+//     const cart = await Cart.findAll({
+//       where: {
+//         userId: req.params.userId,
+//       },
+//       order: [['name', 'ASC']],
+//     })
+//     res.json(cart)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
+router.get('/:userId/cart/', (req, res, next) => {
+  res.json(req.currentUser.update())
+})
+
+//ADD ITEM TO CART, IF ALREADY THERE UPDATE ITEM IN CART
 // Expecting the new total quantity of the cart. (Not incrementing)
 router.put('/:userId', async (req, res, next) => {
   try {
@@ -40,44 +79,47 @@ router.put('/:userId', async (req, res, next) => {
   }
 })
 
-router.get('/:userId/cart/', async (req, res, next) => {
-  try {
-    // const cart = User.getShoppingCartItem()
+//DELETES USER'S CART ON CHECKOUT, AND ADDS THOSE ITEMS TO PURCHASED HISTORY IN DB
+// USE CLASS METHODS AND MAKE SHORTER
+// router.delete('/:userId/checkout', async (req, res, next) => {
+//   //middleware: security
+//   //TESTS
+//   try {
+//     const purchased = await Cart.findAll({
+//       where: {
+//         userId: req.params.userId,
+//       },
+//     })
+//     const newOrderNum = await PurchasedItem.newOrderNumber()
+//     for (let item of purchased) {
+//       item.dataValues.orderNumber = newOrderNum
+//       await PurchasedItem.create(item.dataValues)
+//     }
+//     await Cart.destroy({
+//       where: {
+//         userId: req.params.userId,
+//       },
+//     })
+//     res.sendStatus(204)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
-    const cart = await Cart.findAll({
-      where: {
-        userId: req.params.userId,
-      },
-      order: [['name', 'ASC']],
-    })
-    res.json(cart)
-  } catch (err) {
-    next(err)
-  }
-})
-
-// MAKE INTO A DELETE ROUTE
+//DELETES USER'S CART ON CHECKOUT, AND ADDS THOSE ITEMS TO PURCHASED HISTORY IN DB
 // USE CLASS METHODS AND MAKE SHORTER
 router.delete('/:userId/checkout', async (req, res, next) => {
   //middleware: security
   //TESTS
   try {
-    const purchased = await Cart.findAll({
-      where: {
-        userId: req.params.userId,
-      },
-    })
+    const cartArray = req.currentUser.CartItems
     const newOrderNum = await PurchasedItem.newOrderNumber()
-    for (let item of purchased) {
+    for (let item of cartArray) {
       item.dataValues.orderNumber = newOrderNum
       await PurchasedItem.create(item.dataValues)
     }
-    await Cart.destroy({
-      where: {
-        userId: req.params.userId,
-      },
-    })
-    res.sendStatus(201)
+    await req.currentUser.removeItems(cartArray.map((item) => item.itemId))
+    res.sendStatus(204)
   } catch (err) {
     next(err)
   }
