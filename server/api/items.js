@@ -22,7 +22,7 @@ router.get('/:itemId', async (req, res, next) => {
   }
 })
 
-// purchasing an item (reducing quantity)
+// PURCHASING THE CART (reducing quantities in Item table)
 router.put('/checkout', async (req, res, next) => {
   try {
     // example input:
@@ -30,7 +30,7 @@ router.put('/checkout', async (req, res, next) => {
     //  userId: 1,
     //  cart: [{id: 1, quantity: 2}, {id: 2 quantity: 3}]
     //    }
-    for (let item of req.body /* .cart */) {
+    for (let item of req.body) {
       const currentItem = await Item.findByPk(item.itemId)
       await currentItem.updateQuantities(item.quantity)
     }
