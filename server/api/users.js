@@ -23,16 +23,6 @@ router.put('/:userId', async (req, res, next) => {
     const itemId = req.body.id
     const userId = req.params.userId
     await Cart.addOrUpdateItemToCart(userId, itemId, req.body)
-    // const [instance, wasCreated] = await Cart.findOrCreate({
-    //   where: {
-    //     userId,
-    //     itemId,
-    //   },
-    //   defaults: req.body,
-    // })
-    // if (wasCreated === false) {
-    //   await instance.update(req.body)
-    // }
     res.sendStatus(201)
   } catch (err) {
     next(err)
@@ -68,17 +58,8 @@ router.delete('/:userId/checkout', async (req, res, next) => {
     })
     const newOrderNum = await PurchasedItem.newOrderNumber()
     for (let item of purchased) {
-      await PurchasedItem.create({
-        name: item.name,
-        price: item.price,
-        description: item.description,
-        imageUrl: item.imageUrl,
-        quantity: item.quantity,
-        sport: item.sport,
-        itemId: item.itemId,
-        userId: item.userId,
-        orderNumber: newOrderNum,
-      })
+      item.dataValues.orderNumber = newOrderNum
+      await PurchasedItem.create(item.dataValues)
     }
     await Cart.destroy({
       where: {

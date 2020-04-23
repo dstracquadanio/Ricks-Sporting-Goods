@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {getCartThunk} from './cart'
 
 /**
  * ACTION TYPES
@@ -25,6 +26,9 @@ export const me = () => async (dispatch) => {
   try {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
+    if (res.data.id) {
+      dispatch(getCartThunk(res.data.id))
+    }
   } catch (err) {
     console.error(err)
   }
@@ -40,6 +44,9 @@ export const auth = (email, password, method) => async (dispatch) => {
 
   try {
     dispatch(getUser(res.data))
+    if (res.data.id) {
+      dispatch(getCartThunk(res.data.id))
+    }
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)

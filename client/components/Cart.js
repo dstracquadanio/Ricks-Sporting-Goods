@@ -5,8 +5,7 @@ import {Link} from 'react-router-dom'
 const DisconnectedCart = (props) => {
   return (
     <div className="container-1">
-      {console.log(props.Cart)}
-      {props.Cart.map((item) => {
+      {props.cart.map((item) => {
         return (
           <div key={item.itemId} className="container-2">
             <img src={item.imageUrl} alt="" />
@@ -27,7 +26,7 @@ const DisconnectedCart = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    Cart: state.Cart,
+    cart: state.cart,
   }
 }
 

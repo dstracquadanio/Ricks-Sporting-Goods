@@ -30,7 +30,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         <Link to="/football/items">Football</Link>
         <Link to="/baseball/items">Baseball</Link>
         <Link to="/eSports/items">eSports</Link>
-        <Link to="/Cart">
+        <Link to="/cart">
           <img
             id="shopping-cart-img"
             src="https://www.freepngimg.com/thumb/cart/2-2-cart-png-file.png"

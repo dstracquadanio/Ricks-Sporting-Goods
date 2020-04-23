@@ -14,10 +14,12 @@ export class AllItems extends Component {
             <div key={item.id} className="singleItem">
               <Link to={`/items/${item.id}`}>
                 <h2>{item.name}</h2>
-                <h3>Price: {item.price}</h3>
-                <h3>Quantity: {item.quantity}</h3>
-                <img src={item.imageUrl} />
-                {item.description ? <p>{item.description}</p> : ''}
+                <div className="container-4">
+                  <h3>Price: {item.price}</h3>
+                  <h3>Quantity: {item.quantity}</h3>
+                  <img src={item.imageUrl} />
+                  {item.description ? <p>{item.description}</p> : ''}
+                </div>
               </Link>
               <button type="button">Add Item To Cart</button>
             </div>

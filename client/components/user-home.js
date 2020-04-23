@@ -7,8 +7,7 @@ import {Link} from 'react-router-dom'
  * COMPONENT
  */
 export const UserHome = (props) => {
-  const {email} = props
-
+  const {email} = props.user
   return (
     <div>
       <h3>Welcome, {email}</h3>
