@@ -51,3 +51,22 @@ router.put('/checkout', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/', (req, res, next) => {
+  try {
+    const createItem = Item.create(req.body)
+    res.json(createItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/:itemId', (req, res, next) => {
+  Item.destroy({
+    where: {
+      id: req.params.itemId,
+    },
+  })
+    .then(() => res.status(204).end())
+    .catch(next)
+})

@@ -5,8 +5,10 @@ import PropTypes from 'prop-types'
 
 import {Login, Signup, UserHome, CheckoutForm, Cart, SubmitPage} from './index'
 import AllItems from './all-items'
-import singleItem from './singleItem'
 import ViewUsers from './viewUsers'
+import singleItem from './singleItem'
+import addItems from './addItems'
+import itemList from './components/itemList'
 import {me} from '../store'
 import {getItems} from '../store/items'
 import {getCartThunk} from '../store/cart'
@@ -34,6 +36,7 @@ class Routes extends Component {
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={CheckoutForm} />
         <Route path="/submitPage" component={SubmitPage} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -41,6 +44,8 @@ class Routes extends Component {
             {isLoggedIn && isAdmin && (
               <Switch>
                 <Route path="/users" component={ViewUsers} />
+                <Route path="/addItems" component={addItems} />
+                <Route path="/updateitems" component={itemList} />
               </Switch>
             )}
             <Route component={UserHome} />

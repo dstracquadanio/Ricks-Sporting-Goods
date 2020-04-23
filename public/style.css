@@ -145,3 +145,13 @@ button {
 #shopping-cart-img:hover {
   height: 38px;
 }
+
+#item-list {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+#single-item-container {
+  display: flex;
+  align-items: center;
+}
