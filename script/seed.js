@@ -7,10 +7,15 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const [cody, murphy] = await Promise.all([
+  const [cody, murphy, admin] = await Promise.all([
     User.create({email: 'cody@email.com', password: '123'}),
     User.create({email: 'murphy@email.com', password: '123'}),
-    User.create({email: 'admin@email.com', password: 'admin', isAdmin: true}),
+    User.create({
+      email: 'admin@email.com',
+      password: 'admin',
+      name: 'Big Admin Man',
+      isAdmin: true,
+    }),
   ])
 
   const [
@@ -69,7 +74,7 @@ async function seed() {
       price: 1000.0,
       quantity: 1,
       imageUrl:
-        'https://media-exp1.licdn.com/dms/image/C4D03AQFCvxv5s0eohQ/profile-displayphoto-shrink_200_200/0?e=1587600000&v=beta&t=JBCGp73X8YhXkimNi0wqz2oKgWe0n_6rCmaTtmaRmo8',
+        'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1966.png',
       sport: 'basketball',
     }),
     Item.create({
@@ -151,6 +156,14 @@ async function seed() {
       sport: 'basketball',
       itemId: basketball.id,
       userId: murphy.id,
+    }),
+    Cart.create({
+      name: 'Home Plate',
+      price: 100.0,
+      quantity: 2,
+      sport: 'baseball',
+      itemId: home_plate.id,
+      userId: admin.id,
     }),
   ])
 

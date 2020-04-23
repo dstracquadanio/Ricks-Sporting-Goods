@@ -124,3 +124,12 @@ router.delete('/:userId/checkout', async (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/:userId/cart/:itemId', async (req, res, next) => {
+  try {
+    await Cart.destroy({where: {itemId: req.params.itemId}})
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+})
