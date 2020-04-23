@@ -68,7 +68,7 @@ async function seed() {
       price: 1000.0,
       quantity: 1,
       imageUrl:
-        'https://media-exp1.licdn.com/dms/image/C4D03AQFCvxv5s0eohQ/profile-displayphoto-shrink_200_200/0?e=1587600000&v=beta&t=JBCGp73X8YhXkimNi0wqz2oKgWe0n_6rCmaTtmaRmo8',
+        'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1966.png',
       sport: 'basketball',
     }),
     Item.create({

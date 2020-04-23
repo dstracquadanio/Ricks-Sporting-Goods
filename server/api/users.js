@@ -63,14 +63,14 @@ router.param('userId', async (req, res, next, userId) => {
 //   }
 // })
 router.get('/:userId/cart/', (req, res, next) => {
-  res.json(req.currentUser.update())
+  res.json(req.currentUser.CartItems)
 })
 
 //ADD ITEM TO CART, IF ALREADY THERE UPDATE ITEM IN CART
 // Expecting the new total quantity of the cart. (Not incrementing)
 router.put('/:userId', async (req, res, next) => {
   try {
-    const itemId = req.body.id
+    const itemId = req.body.itemId
     const userId = req.params.userId
     await Cart.addOrUpdateItemToCart(userId, itemId, req.body)
     res.sendStatus(201)

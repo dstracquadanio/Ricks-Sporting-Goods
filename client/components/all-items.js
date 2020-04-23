@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {updateCartThunk} from '../store/cart'
 
 export class AllItems extends Component {
   render() {
@@ -21,7 +22,26 @@ export class AllItems extends Component {
                   {item.description ? <p>{item.description}</p> : ''}
                 </div>
               </Link>
-              <button type="button">Add Item To Cart</button>
+              <button
+                type="button"
+                onClick={() => {
+                  let itemToSend = {...item}
+                  let itemInCart = this.props.cart.filter(
+                    (cartItem) => cartItem.itemId === itemToSend.id
+                  )[0]
+                  if (itemInCart) {
+                    itemToSend.quantity = itemInCart.quantity + 1
+                  } else {
+                    itemToSend.quantity = 1
+                  }
+                  this.props.updateCart({
+                    user: this.props.user,
+                    item: itemToSend,
+                  })
+                }}
+              >
+                Add Item To Cart
+              </button>
             </div>
           )
         })}
@@ -32,6 +52,14 @@ export class AllItems extends Component {
 
 const mapStateToProps = (state) => ({
   items: state.items,
+  user: state.user,
+  cart: state.cart,
 })
 
-export default connect(mapStateToProps)(AllItems)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateCart: (obj) => dispatch(updateCartThunk(obj)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllItems)
