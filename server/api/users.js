@@ -70,7 +70,7 @@ router.get('/:userId/cart/', (req, res, next) => {
 // Expecting the new total quantity of the cart. (Not incrementing)
 router.put('/:userId', async (req, res, next) => {
   try {
-    const itemId = req.body.id
+    const itemId = req.body.itemId
     const userId = req.params.userId
     await Cart.addOrUpdateItemToCart(userId, itemId, req.body)
     res.sendStatus(201)
