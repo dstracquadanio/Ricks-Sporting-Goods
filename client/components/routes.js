@@ -2,19 +2,16 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {
-  Login,
-  Signup,
-  UserHome,
-  CheckoutForm,
-  ShoppingCart,
-  SubmitPage,
-} from './components'
-import AllItems from './components/all-items'
-import singleItem from './components/singleItem'
-import {me} from './store'
-import {getItems} from './store/items'
-import {getCartThunk} from './store/shoppingCart'
+
+import {Login, Signup, UserHome, CheckoutForm, Cart, SubmitPage} from './index'
+import AllItems from './all-items'
+import ViewUsers from './viewUsers'
+import singleItem from './singleItem'
+import addItems from './addItems'
+import itemList from './components/itemList'
+import {me} from '../store'
+import {getItems} from '../store/items'
+import {getCartThunk} from '../store/cart'
 
 /**
  * COMPONENT
@@ -27,10 +24,7 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
-    // put this on the /me route
-    if (isLoggedIn) {
-      this.props.getCartItems(this.props.user.id)
-    }
+    const {isAdmin} = this.props.user
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -39,13 +33,22 @@ class Routes extends Component {
         <Route exact path="/items" component={AllItems} />
         <Route path="/:sport/items" component={AllItems} />
         <Route path="/items/:id" component={singleItem} />
-        <Route path="/ShoppingCart" component={ShoppingCart} />
+        <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={CheckoutForm} />
         <Route path="/submitPage" component={SubmitPage} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            {isLoggedIn && isAdmin && (
+              <Switch>
+                <Route path="/users" component={ViewUsers} />
+                <Route path="/addItems" component={addItems} />
+                <Route path="/updateitems" component={itemList} />
+              </Switch>
+            )}
+            <Route component={UserHome} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
@@ -63,6 +66,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
+    isAdmin: !!state.user.isAdmin,
     user: state.user,
   }
 }
@@ -87,4 +91,5 @@ export default withRouter(connect(mapState, mapDispatch)(Routes))
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
 }

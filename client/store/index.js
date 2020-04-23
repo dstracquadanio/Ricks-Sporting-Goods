@@ -3,15 +3,15 @@ import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import itemsReducer from './items'
-import selectedItemReducer from './selectedItem'
 import userReducer from './user'
-import shoppingCartReducer from './shoppingCart'
+import allUsersReducer from './allUsers'
+import cartReducer from './cart'
 
 const reducer = combineReducers({
   items: itemsReducer,
-  selectedItem: selectedItemReducer,
   user: userReducer,
-  shoppingCart: shoppingCartReducer,
+  allUsers: allUsersReducer,
+  cart: cartReducer,
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -24,7 +24,6 @@ export * from './user'
 // after reducer is combined:
 // reducer: {
 //   items: [{}, {}, {},]
-//   selectedItem: {},
 //   user: {},
-//   shoppingCart: [{}, {}, {}]
+//   cart: [{}, {}, {}]
 // }

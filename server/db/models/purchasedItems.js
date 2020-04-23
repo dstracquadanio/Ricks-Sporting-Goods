@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Item = db.define('item', {
+const PurchasedItem = db.define('purchasedItems', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -38,11 +38,21 @@ const Item = db.define('item', {
       notEmpty: true,
     },
   },
+  itemId: {
+    type: Sequelize.INTEGER,
+  },
+  orderNumber: {
+    type: Sequelize.INTEGER,
+  },
 })
 
-Item.prototype.updateQuantities = async function (purchasedQuant) {
-  let newQuantity = this.quantity - purchasedQuant
-  await this.update({quantity: newQuantity})
+PurchasedItem.newOrderNumber = async function () {
+  const num = await this.max('orderNumber')
+  if (isNaN(num)) {
+    return 1
+  } else {
+    return num + 1
+  }
 }
 
-module.exports = Item
+module.exports = PurchasedItem

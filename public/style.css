@@ -67,12 +67,27 @@ button {
   margin-left: 2em;
 }
 
+.container-4 {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1em;
+  justify-content: flex-end;
+}
+
+.container-4 h3 {
+  margin-block-start: 0;
+  margin-block-end: 1em;
+}
+
 .line-item {
   margin-bottom: 0.3em;
 }
 
 .singleItem {
-  width: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 11%;
 }
 
 .form-container {
@@ -129,4 +144,14 @@ button {
 
 #shopping-cart-img:hover {
   height: 38px;
+}
+
+#item-list {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+#single-item-container {
+  display: flex;
+  align-items: center;
 }
