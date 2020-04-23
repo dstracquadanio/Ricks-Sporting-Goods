@@ -2,6 +2,17 @@ const router = require('express').Router()
 const {User, ShoppingCart} = require('../db/models')
 module.exports = router
 
+const isAdminMiddleware = (req, res, next) => {
+  const currentUser = req.session.user
+  if (currentUser && currentUser.isAdmin) {
+    next()
+  } else {
+    const error = new Error('Access Denied!')
+    error.status(401)
+    next(error)
+  }
+}
+
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
