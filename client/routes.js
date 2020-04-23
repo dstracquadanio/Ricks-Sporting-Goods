@@ -9,11 +9,12 @@ import {
   CheckoutForm,
   ShoppingCart,
   SubmitPage,
-  addItems,
 } from './components'
 import AllItems from './components/all-items'
 import ViewUsers from './components/viewUsers'
 import singleItem from './components/singleItem'
+import addItems from './components/addItems'
+import itemList from './components/itemList'
 import {me} from './store'
 import {getItems} from './store/items'
 import {getCartThunk} from './store/shoppingCart'
@@ -45,7 +46,7 @@ class Routes extends Component {
         <Route path="/ShoppingCart" component={ShoppingCart} />
         <Route path="/checkout" component={CheckoutForm} />
         <Route path="/submitPage" component={SubmitPage} />
-        <Route path="/addItems" component={addItems} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -53,6 +54,8 @@ class Routes extends Component {
             {isLoggedIn && isAdmin && (
               <Switch>
                 <Route path="/users" component={ViewUsers} />
+                <Route path="/addItems" component={addItems} />
+                <Route path="/updateitems" component={itemList} />
               </Switch>
             )}
             <Route component={UserHome} />

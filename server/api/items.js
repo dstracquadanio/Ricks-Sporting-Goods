@@ -57,3 +57,13 @@ router.post('/', (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/:itemId', (req, res, next) => {
+  Item.destroy({
+    where: {
+      id: req.params.itemId,
+    },
+  })
+    .then(() => res.status(204).end())
+    .catch(next)
+})

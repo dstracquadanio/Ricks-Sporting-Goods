@@ -6,6 +6,7 @@ import axios from 'axios'
  */
 
 const SET_ITEM = 'SET_ITEM'
+const DELETE_ITEM = 'DELETE_ITEM'
 
 /**
  * ACTION CREATORS
@@ -13,6 +14,11 @@ const SET_ITEM = 'SET_ITEM'
 
 const setItem = (data) => ({
   type: SET_ITEM,
+  data,
+})
+
+const removeItem = (data) => ({
+  type: DELETE_ITEM,
   data,
 })
 
@@ -28,6 +34,13 @@ export const fetchSingleItem = (id) => async (dispatch) => {
   }
 }
 
+export const removeSingleItem = (id) => {
+  return async (dispatch) => {
+    await axios.delete(`/api/items/${id}`)
+    dispatch(removeItem(id))
+  }
+}
+
 /**
  * REDUCER
  */
@@ -39,6 +52,8 @@ export default function selectedItemReducer(
   switch (action.type) {
     case SET_ITEM:
       return action.data
+    case DELETE_ITEM:
+      return state.filter((item) => item.id !== action.data)
     default:
       return state
   }

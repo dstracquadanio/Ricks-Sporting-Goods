@@ -19,6 +19,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
             <Fragment>
               <Link to="/users">VIEW USERS</Link>
               <Link to="/additems">ADD AN ITEM</Link>
+              <Link to="/updateitems">Update Items</Link>
             </Fragment>
           ) : (
             ''
