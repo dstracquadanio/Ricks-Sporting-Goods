@@ -35,7 +35,7 @@ export default function itemsReducer(state = defaultItems, action) {
     case CHECKOUT:
       return action.items
     case DELETE_ITEM:
-      return [...state].filter((item) => item.id !== action.data)
+      return state.filter((item) => item.id !== action.data)
     default:
       return state
   }
