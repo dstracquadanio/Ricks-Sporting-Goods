@@ -50,9 +50,9 @@ export const updateCartThunk = (obj) => {
   }
 }
 
-const checkout = (items) => ({
+const checkout = (cartItems) => ({
   type: CHECKOUT,
-  items,
+  cartItems,
 })
 export const checkoutThunk = (checkoutObj) => {
   return async (dispatch) => {
@@ -60,9 +60,8 @@ export const checkoutThunk = (checkoutObj) => {
       if (checkoutObj.user.id) {
         await axios.delete(`/api/users/${checkoutObj.user.id}/checkout`)
       }
-      // make sure still gets here if delete fails!!! (aka a guest)
-      const {data} = await axios.put('/api/items/checkout', checkoutObj.cart)
-      dispatch(checkout(data))
+      await axios.put('/api/items/checkout', checkoutObj.cart)
+      dispatch(checkout(checkoutObj.cart))
     } catch (error) {
       console.log('Checkout Thunk Error:', error)
     }
