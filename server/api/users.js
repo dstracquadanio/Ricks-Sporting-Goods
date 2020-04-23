@@ -63,7 +63,7 @@ router.param('userId', async (req, res, next, userId) => {
 //   }
 // })
 router.get('/:userId/cart/', (req, res, next) => {
-  res.json(req.currentUser.update())
+  res.json(req.currentUser.CartItems)
 })
 
 //ADD ITEM TO CART, IF ALREADY THERE UPDATE ITEM IN CART
@@ -119,6 +119,15 @@ router.delete('/:userId/checkout', async (req, res, next) => {
       await PurchasedItem.create(item.dataValues)
     }
     await req.currentUser.removeItems(cartArray.map((item) => item.itemId))
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/:userId/cart/:itemId', async (req, res, next) => {
+  try {
+    await Cart.destroy({where: {itemId: req.params.itemId}})
     res.sendStatus(204)
   } catch (err) {
     next(err)
