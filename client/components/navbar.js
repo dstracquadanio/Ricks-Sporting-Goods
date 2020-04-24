@@ -1,25 +1,24 @@
 import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link, Switch} from 'react-router-dom'
+import {NavLink, Switch} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
   <div>
-    <h1>Grace Shopper</h1>
     <nav>
       {isLoggedIn ? (
         <div className="left-nav">
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
+          <NavLink to="/home">Rick's Sporting Goods</NavLink>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
           {isAdmin ? (
             <Fragment>
-              <Link to="/users">VIEW USERS</Link>
-              <Link to="/additems">ADD AN ITEM</Link>
-              <Link to="/updateitems">UPDATE/REMOVE ITEM</Link>
+              <NavLink to="/users">VIEW USERS</NavLink>
+              <NavLink to="/additems">ADD AN ITEM</NavLink>
+              <NavLink to="/updateitems">UPDATE/REMOVE ITEM</NavLink>
             </Fragment>
           ) : (
             ''
@@ -28,24 +27,24 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
       ) : (
         <div className="left-nav">
           {/* The navbar will show these links before you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <NavLink to="/home">Rick's Sporting Goods</NavLink>
+          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/signup">Sign Up</NavLink>
         </div>
       )}
       <div className="right-nav">
-        <Link to="/items">All</Link>
-        <Link to="/basketball/items">Basketball</Link>
-        <Link to="/football/items">Football</Link>
-        <Link to="/baseball/items">Baseball</Link>
-        <Link to="/eSports/items">eSports</Link>
-        <Link to="/cart">
+        <NavLink to="/items">All</NavLink>
+        <NavLink to="/basketball/items">Basketball</NavLink>
+        <NavLink to="/football/items">Football</NavLink>
+        <NavLink to="/baseball/items">Baseball</NavLink>
+        <NavLink to="/eSports/items">eSports</NavLink>
+        <NavLink to="/cart">
           <img
             id="shopping-cart-img"
             src="https://www.freepngimg.com/thumb/cart/2-2-cart-png-file.png"
             alt="cart image"
           />
-        </Link>
+        </NavLink>
       </div>
     </nav>
     <hr />

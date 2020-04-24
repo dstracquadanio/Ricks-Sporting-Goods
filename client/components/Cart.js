@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {removeCartItemThunk} from '../store/Cart'
+import {removeCartItemThunk} from '../store/cart'
 
 const DisconnectedCart = (props) => {
   const handleSubmit = (event) => {

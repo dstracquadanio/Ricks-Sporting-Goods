@@ -4,6 +4,7 @@ body {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 label {
@@ -13,6 +14,17 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  transition: color 0.3s ease;
+  color: black;
+}
+
+nav a:hover {
+  color: #b6a39e;
+}
+
+nav a.active {
+  color: #b6a39e;
+  border-bottom: 3px solid black;
 }
 
 form div {
@@ -26,6 +38,8 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: x-large;
+  font-weight: bold;
   height: 78px;
 }
 
@@ -34,9 +48,29 @@ button {
 }
 
 /* CLASSES */
+
+/* .overlay { //Anderson might want this later
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(0, 0, 0, 0.8);
+  opacity: 0.6;
+  display: block;
+  z-index: 1001;
+  transition: background-color 2s ease-in-out 1s;
+} */
+
 .home-image {
   height: 360px;
   width: 360px;
+}
+
+.container-center-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container-1 {
@@ -88,6 +122,8 @@ button {
   flex-direction: column;
   justify-content: space-between;
   width: 11%;
+  border: 1px solid #ededed;
+  background-color: white;
 }
 
 .form-container {
@@ -106,9 +142,18 @@ button {
   border-radius: 5px;
 }
 
+.left-nav {
+  display: flex;
+  align-items: center;
+}
+
 .right-nav {
   display: flex;
   align-items: center;
+}
+
+.right-nav a {
+  margin-right: 1em;
 }
 
 /* IDs */
@@ -116,6 +161,7 @@ button {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  background-color: #f9f9f9;
 }
 
 #items .singleItem {
@@ -123,6 +169,13 @@ button {
   text-align: center;
   align-content: center;
   padding: 50px;
+  padding: 47px;
+  margin: 10px;
+  transition: box-shadow 0.3s ease;
+}
+
+#items .singleItem:hover {
+  box-shadow: 0px 0px 2px 0px;
 }
 
 #items button {
