@@ -24,7 +24,6 @@ nav a:hover {
 
 nav a.active {
   color: #b6a39e;
-  border-bottom: 3px solid black;
 }
 
 form div {
@@ -71,6 +70,23 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.container-even-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.auth-container {
+  width: 30em;
+  padding: 20px;
+  padding-top: 1px;
+  border: 1px solid #ededed;
+  margin-top: 30px;
+}
+
+.auth-container h2 {
+  font-weight: normal;
 }
 
 .container-1 {

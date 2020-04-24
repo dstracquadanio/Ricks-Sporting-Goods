@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import {Button, TextField} from '@material-ui/core'
+import ShopIcon from '@material-ui/icons/Shop'
 
 /**
  * COMPONENT
@@ -11,25 +13,38 @@ const AuthForm = (props) => {
 
   return (
     <div className="container-center-column">
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
+      <form className="auth-container" onSubmit={handleSubmit} name={name}>
+        <h2>{displayName}</h2>
+        <TextField
+          label="Email"
+          fullWidth
+          name="email"
+          require="true"
+          variant="filled"
+        />
+        <TextField
+          label="Password"
+          fullWidth
+          type="password"
+          name="password"
+          require="true"
+          variant="filled"
+        />
+        <div className="container-even-row">
+          <Button type="submit" variant="contained">
+            {displayName}
+          </Button>
+          <Button
+            startIcon={<ShopIcon />}
+            href="/auth/google"
+            variant="contained"
+            color="primary"
+          >
+            {displayName} with Google
+          </Button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
     </div>
   )
 }
@@ -52,7 +67,7 @@ const mapLogin = (state) => {
 const mapSignup = (state) => {
   return {
     name: 'signup',
-    displayName: 'Sign Up',
+    displayName: 'Sign-Up',
     error: state.user.error,
   }
 }
