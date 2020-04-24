@@ -32,13 +32,11 @@ class DisconnectedCheckoutForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    this.props.checkout({
+      user: this.props.user,
+      cart: this.props.cart,
+    })
 
-    if (this.props.user.id) {
-      this.props.checkout({
-        userId: this.props.user.id,
-        cart: this.props.cart,
-      })
-    }
     this.setState({
       name: '',
       address: '',
