@@ -18,7 +18,7 @@ const AuthForm = (props) => {
         <TextField
           fullWidth
           name="email"
-          required="true"
+          required={true}
           variant="outlined"
           placeholder="Email"
         />
@@ -26,7 +26,7 @@ const AuthForm = (props) => {
           fullWidth
           type="password"
           name="password"
-          required="true"
+          required={true}
           variant="outlined"
           placeholder="Password"
           color="secondary"

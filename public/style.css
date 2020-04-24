@@ -186,6 +186,15 @@ button {
   width: 9.5em;
 }
 
+.MuiMenu-list hr {
+  opacity: 0.1;
+}
+
+.MuiMenu-paper {
+  border-radius: 1px;
+  background-color: black;
+}
+
 .MuiMenu-list a {
   display: flex;
 }
