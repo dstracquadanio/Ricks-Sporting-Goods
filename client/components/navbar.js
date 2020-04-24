@@ -1,19 +1,22 @@
 import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {NavLink, Switch} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import {logout} from '../store'
+import AccountMenu from './accountMenu'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
-const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
-  <div>
-    <nav>
-      {isLoggedIn ? (
+const Navbar = ({handleClick, isLoggedIn, isAdmin}) => {
+  return (
+    <div>
+      <nav>
         <div className="left-nav">
-          {/* The navbar will show these links after you log in */}
+          <AccountMenu
+            isLoggedIn={isLoggedIn}
+            isAdmin={isAdmin}
+            handleLogout={handleClick}
+          />
           <NavLink to="/home">Rick's Sporting Goods</NavLink>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
           {isAdmin ? (
             <Fragment>
               <NavLink to="/users">VIEW USERS</NavLink>
@@ -24,32 +27,21 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
             ''
           )}
         </div>
-      ) : (
-        <div className="left-nav">
-          {/* The navbar will show these links before you log in */}
-          <NavLink to="/home">Rick's Sporting Goods</NavLink>
-          <NavLink to="/login">Login</NavLink>
-          <NavLink to="/signup">Sign Up</NavLink>
+        <div className="right-nav">
+          <NavLink to="/items">All</NavLink>
+          <NavLink to="/basketball/items">Basketball</NavLink>
+          <NavLink to="/football/items">Football</NavLink>
+          <NavLink to="/baseball/items">Baseball</NavLink>
+          <NavLink to="/eSports/items">eSports</NavLink>
+          <NavLink to="/cart">
+            <ShoppingCartIcon id="shopping-cart-img" fontSize="large" />
+          </NavLink>
         </div>
-      )}
-      <div className="right-nav">
-        <NavLink to="/items">All</NavLink>
-        <NavLink to="/basketball/items">Basketball</NavLink>
-        <NavLink to="/football/items">Football</NavLink>
-        <NavLink to="/baseball/items">Baseball</NavLink>
-        <NavLink to="/eSports/items">eSports</NavLink>
-        <NavLink to="/cart">
-          <img
-            id="shopping-cart-img"
-            src="https://www.freepngimg.com/thumb/cart/2-2-cart-png-file.png"
-            alt="cart image"
-          />
-        </NavLink>
-      </div>
-    </nav>
-    <hr />
-  </div>
-)
+      </nav>
+      <hr />
+    </div>
+  )
+}
 
 /**
  * CONTAINER

@@ -48,7 +48,7 @@ button {
 
 /* CLASSES */
 
-/* .overlay { //Anderson might want this later
+.overlay {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -59,7 +59,7 @@ button {
   display: block;
   z-index: 1001;
   transition: background-color 2s ease-in-out 1s;
-} */
+}
 
 .home-image {
   height: 360px;
@@ -172,6 +172,19 @@ button {
   margin-right: 1em;
 }
 
+.error-message {
+  color: red;
+}
+
+.MuiMenu-list {
+  outline: 0;
+  width: 9.5em;
+}
+
+.MuiMenu-list a {
+  display: flex;
+}
+
 /* IDs */
 #items {
   display: flex;
@@ -212,7 +225,7 @@ button {
 }
 
 #shopping-cart-img:hover {
-  height: 38px;
+  height: 50px;
 }
 
 #item-list {

@@ -43,7 +43,9 @@ const AuthForm = (props) => {
             {displayName} with Google
           </Button>
         </div>
-        {error && error.response && <div> {error.response.data} </div>}
+        {error && error.response && (
+          <div className="error-message"> {error.response.data} </div>
+        )}
       </form>
     </div>
   )
