@@ -196,7 +196,7 @@ button {
 
 #items button {
   background: #ceb14b;
-  font-size: 16px;
+  border-radius: 2px;
 }
 
 #items img {

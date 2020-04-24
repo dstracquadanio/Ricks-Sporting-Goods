@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {Button} from '@material-ui/core'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
 export class AllItems extends Component {
   render() {
@@ -21,7 +23,9 @@ export class AllItems extends Component {
                   {item.description ? <p>{item.description}</p> : ''}
                 </div>
               </Link>
-              <button type="button">Add Item To Cart</button>
+              <Button startIcon={<ShoppingCartIcon />} type="button">
+                Add to Cart
+              </Button>
             </div>
           )
         })}
