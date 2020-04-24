@@ -33,10 +33,14 @@ export const removeSingleItem = (id) => {
   }
 }
 
-export const updateSingleItem = (id) => {
+export const updateSingleItem = (id, changes) => {
   return async (dispatch) => {
-    await axios.put(`/api/items/${id}`)
-    dispatch(updateItem(id))
+    try {
+      const res = await axios.put(`/api/items/${id}`, changes)
+      dispatch(updateItem(res.data))
+    } catch (error) {
+      console.log('error')
+    }
   }
 }
 
@@ -50,7 +54,7 @@ export default function itemsReducer(state = defaultItems, action) {
     case DELETE_ITEM:
       return state.filter((item) => item.id !== action.data)
     case UPDATE_ITEM:
-      return action.items
+      return action.data
     default:
       return state
   }

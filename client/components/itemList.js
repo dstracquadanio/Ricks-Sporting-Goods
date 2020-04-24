@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {removeSingleItem} from '../store/items'
 import {Link} from 'react-router-dom'
-// import axios from "axios"
 
 const imageStyle = {
   width: '100px',

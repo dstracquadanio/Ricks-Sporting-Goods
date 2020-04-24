@@ -78,10 +78,9 @@ router.delete('/:itemId', async (req, res, next) => {
 router.put('/:itemId', async (req, res, next) => {
   try {
     const itemId = req.params.itemId
-    const [, item] = await Item.create(req.body, {
+    const [, item] = await Item.update(req.body, {
       where: {
         id: itemId,
-        returning: true,
       },
     })
     res.json(item)
