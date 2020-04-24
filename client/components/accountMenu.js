@@ -9,15 +9,14 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import VpnKeyIcon from '@material-ui/icons/VpnKey'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
+import AccountBoxIcon from '@material-ui/icons/AccountBox'
 
 export default function AccountMenu(props) {
   const {isLoggedIn, handleLogout} = props
   const [anchorEl, setAnchorEl] = React.useState(null)
-  let overlayLogic = false
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
-    overlayLogic = true
   }
 
   const handleClose = () => {
@@ -31,14 +30,13 @@ export default function AccountMenu(props) {
 
   return (
     <div>
-      {overlayLogic ? <div className="overlay"></div> : ''}
-
       <Button
         // aria-controls="simple-menu"
         // aria-haspopup="true"
         onClick={handleClick}
       >
         <MenuIcon />
+        {/* <AccountBoxIcon /> */}
       </Button>
       {isLoggedIn ? (
         <Menu

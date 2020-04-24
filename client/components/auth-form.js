@@ -16,19 +16,20 @@ const AuthForm = (props) => {
       <form className="auth-container" onSubmit={handleSubmit} name={name}>
         <h2>{displayName}</h2>
         <TextField
-          label="Email"
           fullWidth
           name="email"
-          require="true"
-          variant="filled"
+          required="true"
+          variant="outlined"
+          placeholder="Email"
         />
         <TextField
-          label="Password"
           fullWidth
           type="password"
           name="password"
-          require="true"
-          variant="filled"
+          required="true"
+          variant="outlined"
+          placeholder="Password"
+          color="secondary"
         />
         <div className="container-even-row">
           <Button type="submit" variant="contained">
