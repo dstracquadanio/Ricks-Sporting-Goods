@@ -50,6 +50,19 @@ export const updateCartThunk = (obj) => {
   }
 }
 
+export const editCartThunk = (obj) => {
+  return async (dispatch) => {
+    try {
+      if (obj.user.id) {
+        await axios.put(`/api/users/${obj.user.id}`, obj.item)
+      }
+      dispatch(updateCart(obj.item))
+    } catch (error) {
+      console.log('EditCart Thunk Error: ', error)
+    }
+  }
+}
+
 const checkout = (cartItems) => ({
   type: CHECKOUT,
   cartItems,
