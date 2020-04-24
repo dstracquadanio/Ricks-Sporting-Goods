@@ -16,7 +16,9 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => {
             isAdmin={isAdmin}
             handleLogout={handleClick}
           />
-          <NavLink to="/home">Rick's Sporting Goods</NavLink>
+          <NavLink to="/home">
+            <img id="logo" src="/Logo.png" alt="logo" />
+          </NavLink>
           {isAdmin ? (
             <Fragment>
               <NavLink to="/users">VIEW USERS</NavLink>

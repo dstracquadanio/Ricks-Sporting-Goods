@@ -15,11 +15,11 @@ export class AllItems extends Component {
           return (
             <div key={item.id} className="singleItem">
               <Link to={`/items/${item.id}`}>
-                <img src={item.imageUrl} />
                 <h2>{item.name}</h2>
                 <div className="container-4">
                   <h3>Price: {item.price}</h3>
                   <h3>Quantity: {item.quantity}</h3>
+                  <img src={item.imageUrl} />
                   {item.description ? <p>{item.description}</p> : ''}
                 </div>
               </Link>

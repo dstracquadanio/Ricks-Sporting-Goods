@@ -161,6 +161,11 @@ button {
 .left-nav {
   display: flex;
   align-items: center;
+  max-height: 100%;
+}
+
+.left-nav a {
+  max-height: 100px;
 }
 
 .right-nav {
@@ -236,4 +241,15 @@ button {
 #single-item-container {
   display: flex;
   align-items: center;
+}
+
+#logo {
+  max-width: 100%;
+  max-height: 100px;
+  display: block;
+  transition: filter 0.4s ease;
+}
+
+#logo:hover {
+  filter: sepia(20%);
 }
