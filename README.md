@@ -1,6 +1,4 @@
 # TEAM CONTRACT:
-test
-
 
 https://docs.google.com/document/d/1B7aHS6oAW70mvOuJIC9Cw-vHlBWCdJlCTqUcMm_HqJc/edit?ts=5e9dc5db
 
