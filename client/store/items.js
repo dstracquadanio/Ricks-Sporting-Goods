@@ -52,7 +52,20 @@ export default function itemsReducer(state = defaultItems, action) {
     case GOT_ITEMS:
       return action.items
     case CHECKOUT:
-      return action.items //HERE simulate backend model change
+      const cart = {}
+      action.cartItems.forEach((item) => {
+        cart[item.itemId] = item.quantity
+      })
+      return state.map((item) => {
+        if (cart[item.id]) {
+          return {
+            ...item,
+            quantity: item.quantity - cart[item.id],
+          }
+        } else {
+          return item
+        }
+      })
     case DELETE_ITEM:
       return state.filter((item) => item.id !== action.data)
     case UPDATE_ITEM:

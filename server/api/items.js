@@ -43,10 +43,7 @@ router.put('/checkout', async (req, res, next) => {
       const currentItem = await Item.findByPk(item.itemId)
       await currentItem.updateQuantities(item.quantity)
     }
-    // vv Delete this vv
-    const updatedItems = await Item.findAll()
-    res.json(updatedItems) //instead of sending back updated items just use front-end reducer to simulate the changes
-    //res.sendStatus(2??)
+    res.sendStatus(201)
   } catch (err) {
     next(err)
   }
