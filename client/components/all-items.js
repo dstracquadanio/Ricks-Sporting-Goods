@@ -5,6 +5,8 @@ import {Button} from '@material-ui/core'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import {updateCartThunk} from '../store/cart'
 import {attachQuantityToItem} from './utility'
+import {ThemeProvider} from '@material-ui/core/styles'
+import {theme1} from '../materialColorThemes'
 
 export class AllItems extends Component {
   render() {
@@ -17,17 +19,23 @@ export class AllItems extends Component {
           return (
             <div key={item.id} className="singleItem">
               <Link to={`/items/${item.id}`} className="container-4">
+                <img src={item.imageUrl} />
                 <h2>{item.name}</h2>
                 <h3>Price: {item.price}</h3>
                 <h3>Quantity: {item.quantity}</h3>
               </Link>
               <div className="container-4a">
                 <Link to={`/items/${item.id}`}>
-                  <img src={item.imageUrl} />
                   {item.description ? <p>{item.description}</p> : ''}
-                </div>
-              </Link>
-              <Button startIcon={<ShoppingCartIcon />} type="button" onClick={() => {
+                </Link>
+              </div>
+              <ThemeProvider theme={theme1}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  startIcon={<ShoppingCartIcon />}
+                  type="button"
+                  onClick={() => {
                     let itemToSend = attachQuantityToItem(
                       item,
                       this.props.cart,
@@ -37,9 +45,11 @@ export class AllItems extends Component {
                       user: this.props.user,
                       item: itemToSend,
                     })
-                  }}>
-                Add to Cart
-              </Button>
+                  }}
+                >
+                  Add to Cart
+                </Button>
+              </ThemeProvider>
             </div>
           )
         })}

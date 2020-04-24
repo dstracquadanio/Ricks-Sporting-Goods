@@ -210,10 +210,9 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 11%; //mess with this
+  width: 11%;
   border: 1px solid #ededed;
   background-color: white;
-  //difference
   align-items: center;
   height: auto;
   font-size: 16px;
@@ -337,17 +336,18 @@ button {
   box-shadow: 0px 0px 2px 0px;
 }
 
-#items button {
+/* #items button {
   background: #ceb14b;
   border-radius: 2px;
   cursor: pointer;
-}
+  padding-left: 20px;
+  padding-right: 20px;
+} */
 
 #items img {
   width: 200px;
   display: block;
   margin: auto;
-
 }
 
 #shopping-cart-img {
