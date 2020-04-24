@@ -3,6 +3,12 @@ import Itemform from './itemForm'
 import {connect} from 'react-redux'
 import {updateSingleItem} from '../store/items'
 
+const imageStyle = {
+  width: '50px',
+  height: 'auto',
+  padding: '5px',
+}
+
 class UpdateItems extends Component {
   constructor() {
     super()
@@ -50,9 +56,11 @@ class UpdateItems extends Component {
               return (
                 <div key={item.id}>
                   <h3>Item: {item.name}</h3>
-                  <h3>Description: {item.description}</h3>
                   <h3>Price: ${item.price}</h3>
+                  <h3>Description: {item.description}</h3>
+                  <img style={imageStyle} src={item.imageUrl} />
                   <h3>Quantity: {item.quantity}</h3>
+                  <h3>Sport: {item.sport}</h3>
                   <Itemform
                     {...this.state}
                     handleChange={this.handleChange}
