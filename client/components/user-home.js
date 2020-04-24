@@ -14,28 +14,28 @@ export const UserHome = (props) => {
       <Link to="/basketball/items">
         <img
           className="home-image"
-          src="https://png.pngtree.com/element_pic/00/16/08/0557a3eb9e85e92.jpg"
+          src="https://cdn.sqhk.co/sportcourt/2016/6/ihgjehc/110322_sc_0864-L.jpg"
           alt="basketball image"
         />
       </Link>
       <Link to="/baseball/items">
         <img
           className="home-image"
-          src="https://banner2.cleanpng.com/20180216/tqw/kisspng-mlb-baseball-softball-sport-vector-realistic-baseball-5a876783b07926.5427980315188232997228.jpg"
+          src="https://3un4r442rlbaljcks42rrh8j-wpengine.netdna-ssl.com/wp-content/uploads/2019/03/Batting-Cages-4.jpg"
           alt="baseball image"
         />
       </Link>
       <Link to="/football/items">
         <img
           className="home-image"
-          src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&w=288&h=288&transparent=true'"
+          src="https://lh3.googleusercontent.com/proxy/0AXimU68DcSk9_KGsqmtZBjNVaAJfETMFnYfT5FICxmtbKsuUZX0R_VUEAtpdGRdK6_fduqzsbmZIZi5WqV3dCebWiTz6MI-faIo844b6PlPPg886JA3HGzMZo1Xug"
           alt="football image"
         />
       </Link>
       <Link to="/eSports/items">
         <img
           className="home-image"
-          src="https://images-na.ssl-images-amazon.com/images/I/61hzuoXwjqL._AC_SX466_.jpg"
+          src="https://2txp1g4bjeyvg8rqz491ffs8-wpengine.netdna-ssl.com/wp-content/uploads/2019/12/A-Guide-To-Gaming-Platforms-For-Aspiring-Professional-Gamers.jpg"
           alt="mouse image"
         />
       </Link>
