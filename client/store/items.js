@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import axios from 'axios'
 
 const GOT_ITEMS = 'GOT_ITEMS'
@@ -37,6 +38,7 @@ export const updateSingleItem = (id, changes) => {
   return async (dispatch) => {
     try {
       const res = await axios.put(`/api/items/${id}`, changes)
+      console.log('this is updated single', res.data)
       dispatch(updateItem(res.data))
     } catch (error) {
       console.log('error')
@@ -54,7 +56,8 @@ export default function itemsReducer(state = defaultItems, action) {
     case DELETE_ITEM:
       return state.filter((item) => item.id !== action.data)
     case UPDATE_ITEM:
-      return action.data
+      const newItemList = state.filter((item) => item.id !== action.data.id)
+      return [...newItemList, action.data]
     default:
       return state
   }

@@ -82,6 +82,8 @@ router.put('/:itemId', async (req, res, next) => {
       where: {
         id: itemId,
       },
+      returning: true,
+      plain: true,
     })
     res.json(item)
   } catch (error) {

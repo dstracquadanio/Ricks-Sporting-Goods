@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {updateSingleItem} from '../store/items'
 
 const imageStyle = {
-  width: '50px',
+  width: '100px',
   height: 'auto',
   padding: '5px',
 }
