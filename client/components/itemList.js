@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {removeSingleItem} from '../store/items'
-// import axios from "axios"
+import {Link} from 'react-router-dom'
 
 const imageStyle = {
   width: '100px',
@@ -31,6 +31,7 @@ export class Itemlist extends Component {
                 <button type="button" onClick={() => removeSingleItem(item.id)}>
                   Remove
                 </button>
+                <Link to={`/updateitems/${item.id}`}>Update </Link>
               </div>
             </div>
           </div>
