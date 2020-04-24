@@ -25,19 +25,23 @@ export class AllItems extends Component {
                 <Link to={`/items/${item.id}`}>
                   <img src={item.imageUrl} />
                   {item.description ? <p>{item.description}</p> : ''}
-                </div>
-              </Link>
-              <Button startIcon={<ShoppingCartIcon />} type="button" onClick={() => {
-                    let itemToSend = attachQuantityToItem(
-                      item,
-                      this.props.cart,
-                      1
-                    )
-                    this.props.updateCart({
-                      user: this.props.user,
-                      item: itemToSend,
-                    })
-                  }}>
+                </Link>
+              </div>
+              <Button
+                startIcon={<ShoppingCartIcon />}
+                type="button"
+                onClick={() => {
+                  let itemToSend = attachQuantityToItem(
+                    item,
+                    this.props.cart,
+                    1
+                  )
+                  this.props.updateCart({
+                    user: this.props.user,
+                    item: itemToSend,
+                  })
+                }}
+              >
                 Add to Cart
               </Button>
             </div>

@@ -90,8 +90,10 @@ const removeCartItem = (itemId) => ({
 
 export const removeCartItemThunk = (userId, itemId) => async (dispatch) => {
   try {
-    await axios.delete(`/api/users/${userId}/cart/${itemId}`)
-    dispatch(removeCartItem(itemId))
+    if (userId) {
+      await axios.delete(`/api/users/${userId}/cart/${itemId}`)
+      dispatch(removeCartItem(itemId))
+    } else dispatch(removeCartItem(itemId))
   } catch (error) {
     console.log('Remove Item Thunk Error:', error)
   }
