@@ -9,6 +9,7 @@ import ViewUsers from './viewUsers'
 import singleItem from './singleItem'
 import addItems from './addItems'
 import itemList from './itemList'
+import updateItems from './updateItems'
 import {me} from '../store'
 import {getItems} from '../store/items'
 import {getCartThunk} from '../store/cart'
@@ -45,7 +46,8 @@ class Routes extends Component {
               <Switch>
                 <Route path="/users" component={ViewUsers} />
                 <Route path="/addItems" component={addItems} />
-                <Route path="/updateitems" component={itemList} />
+                <Route exact path="/updateitems" component={itemList} />
+                <Route path="/updateitems/:id" component={updateItems} />
               </Switch>
             )}
             <Route component={UserHome} />

@@ -49,21 +49,41 @@ router.put('/checkout', async (req, res, next) => {
   }
 })
 
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
-    const createItem = Item.create(req.body)
+    const createItem = await Item.create(req.body)
     res.json(createItem)
   } catch (err) {
     next(err)
   }
 })
 
-router.delete('/:itemId', (req, res, next) => {
-  Item.destroy({
-    where: {
-      id: req.params.itemId,
-    },
-  })
-    .then(() => res.status(204).end())
-    .catch(next)
+router.delete('/:itemId', async (req, res, next) => {
+  try {
+    const itemId = req.params.itemId
+    const removeItem = await Item.destroy({
+      where: {
+        id: itemId,
+      },
+    })
+    res.json(removeItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:itemId', async (req, res, next) => {
+  try {
+    const itemId = req.params.itemId
+    const [, item] = await Item.update(req.body, {
+      where: {
+        id: itemId,
+      },
+      returning: true,
+      plain: true,
+    })
+    res.json(item)
+  } catch (error) {
+    next(error)
+  }
 })
