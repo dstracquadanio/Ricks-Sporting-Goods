@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {Button} from '@material-ui/core'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import {updateCartThunk} from '../store/cart'
 import {attachQuantityToItem} from './utility'
 
@@ -23,10 +25,9 @@ export class AllItems extends Component {
                 <Link to={`/items/${item.id}`}>
                   <img src={item.imageUrl} />
                   {item.description ? <p>{item.description}</p> : ''}
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => {
+                </div>
+              </Link>
+              <Button startIcon={<ShoppingCartIcon />} type="button" onClick={() => {
                     let itemToSend = attachQuantityToItem(
                       item,
                       this.props.cart,
@@ -36,11 +37,9 @@ export class AllItems extends Component {
                       user: this.props.user,
                       item: itemToSend,
                     })
-                  }}
-                >
-                  Add Item To Cart
-                </button>
-              </div>
+                  }}>
+                Add to Cart
+              </Button>
             </div>
           )
         })}

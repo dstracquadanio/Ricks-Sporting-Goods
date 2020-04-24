@@ -1,56 +1,49 @@
 import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link, Switch} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import {logout} from '../store'
+import AccountMenu from './accountMenu'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
-const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
-  <div>
-    <h1>Rick's Sporting Goods</h1>
-    <nav>
-      {isLoggedIn ? (
+const Navbar = ({handleClick, isLoggedIn, isAdmin}) => {
+  return (
+    <div>
+      <nav>
         <div className="left-nav">
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+          <AccountMenu
+            isLoggedIn={isLoggedIn}
+            isAdmin={isAdmin}
+            handleLogout={handleClick}
+          />
+          <NavLink to="/home">
+            <img id="logo" src="/Logo.png" alt="logo" />
+          </NavLink>
           {isAdmin ? (
             <Fragment>
-              <Link to="/users">VIEW USERS</Link>
-              <Link to="/additems">ADD AN ITEM</Link>
-              <Link to="/updateitems">UPDATE/REMOVE ITEM</Link>
+              <NavLink to="/users">VIEW USERS</NavLink>
+              <NavLink to="/additems">ADD AN ITEM</NavLink>
+              <NavLink to="/updateitems">UPDATE/REMOVE ITEM</NavLink>
             </Fragment>
           ) : (
             ''
           )}
         </div>
-      ) : (
-        <div className="left-nav">
-          {/* The navbar will show these links before you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+        <div className="right-nav">
+          <NavLink to="/items">All</NavLink>
+          <NavLink to="/basketball/items">Basketball</NavLink>
+          <NavLink to="/football/items">Football</NavLink>
+          <NavLink to="/baseball/items">Baseball</NavLink>
+          <NavLink to="/eSports/items">eSports</NavLink>
+          <NavLink to="/cart">
+            <ShoppingCartIcon id="shopping-cart-img" fontSize="large" />
+          </NavLink>
         </div>
-      )}
-      <div className="right-nav">
-        <Link to="/items">All</Link>
-        <Link to="/basketball/items">Basketball</Link>
-        <Link to="/football/items">Football</Link>
-        <Link to="/baseball/items">Baseball</Link>
-        <Link to="/eSports/items">eSports</Link>
-        <Link to="/cart">
-          <img
-            id="shopping-cart-img"
-            src="https://www.freepngimg.com/thumb/cart/2-2-cart-png-file.png"
-            alt="cart image"
-          />
-        </Link>
-      </div>
-    </nav>
-    <hr />
-  </div>
-)
+      </nav>
+      <hr />
+    </div>
+  )
+}
 
 /**
  * CONTAINER
