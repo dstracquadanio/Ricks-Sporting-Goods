@@ -1,7 +1,8 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import ImgMediaCard from './homeCard'
 
 /**
  * COMPONENT
@@ -10,6 +11,7 @@ export const UserHome = (props) => {
   const {email} = props.user
   return (
     <div>
+      <ImgMediaCard sport="" imageUrl="" />
       <h3>Welcome, {email}</h3>
       <Link to="/basketball/items">
         <img
