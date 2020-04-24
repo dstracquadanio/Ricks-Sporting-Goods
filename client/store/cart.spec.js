@@ -6,6 +6,7 @@ import {
   checkoutThunk,
   updateCartThunk,
   editCartThunk,
+  removeCartItemThunk,
 } from './Cart'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
@@ -15,7 +16,7 @@ import thunkMiddleware from 'redux-thunk'
 const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
 
-describe('cart thunk creators', () => {
+describe('Cart thunk creators', () => {
   let store
   let mockAxios
 
@@ -43,7 +44,9 @@ describe('cart thunk creators', () => {
           userId: 2,
         },
       ]
-      mockAxios.onGet('/api/users/2/cart').replyOnce(200, fakeCart)
+      mockAxios
+        .onGet(`/api/users/${fakeCart[0].userId}/cart`)
+        .replyOnce(200, fakeCart)
       await store.dispatch(getCartThunk(2))
       const actions = store.getActions()
       expect(actions[0].type).to.be.equal('GET_CART')
@@ -66,7 +69,9 @@ describe('cart thunk creators', () => {
           userId: 2,
         },
       }
-      mockAxios.onDelete('/api/users/2/checkout').replyOnce(204)
+      mockAxios
+        .onDelete(`/api/users/${fakeCheckoutObj.user.id}/checkout`)
+        .replyOnce(204)
       mockAxios.onPut('/api/items/checkout').replyOnce(204)
       await store.dispatch(checkoutThunk(fakeCheckoutObj))
       const actions = store.getActions()
@@ -97,7 +102,7 @@ describe('cart thunk creators', () => {
         itemId: 1,
         userId: 2,
       }
-      mockAxios.onPut('/api/users/2').replyOnce(204)
+      mockAxios.onPut(`/api/users/${fakeItemObj.user.id}`).replyOnce(204)
       await store.dispatch(updateCartThunk(fakeItemObj))
       const actions = store.getActions()
       expect(actions[0].type).to.be.equal('UPDATE_CART')
@@ -120,11 +125,23 @@ describe('cart thunk creators', () => {
           userId: 2,
         },
       }
-      mockAxios.onPut('/api/users/2').replyOnce(204)
+      mockAxios.onPut(`/api/users/${fakeObj.user.id}`).replyOnce(204)
       await store.dispatch(editCartThunk(fakeObj))
       const actions = store.getActions()
       expect(actions[0].type).to.be.equal('UPDATE_CART')
       expect(actions[0].cartItem).to.be.deep.equal(fakeObj.item)
+    })
+  })
+
+  describe('removeCartItem Thunk', () => {
+    it('eventually dispatches the removeCartItem action', async () => {
+      const userId = 2
+      const itemId = 1
+      mockAxios.onDelete(`/api/users/${userId}/cart/${itemId}`).replyOnce(204)
+      await store.dispatch(removeCartItemThunk(userId, itemId))
+      const actions = store.getActions()
+      expect(actions[0].type).to.be.equal('REMOVE_CART_ITEM')
+      expect(actions[0].itemId).to.be.deep.equal(itemId)
     })
   })
 })
