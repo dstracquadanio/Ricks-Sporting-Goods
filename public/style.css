@@ -66,6 +66,11 @@ button {
   width: 360px;
 }
 
+.image-container {
+  display: flex;
+  height: 250px;
+}
+
 .container-center-column {
   display: flex;
   flex-direction: column;
@@ -357,9 +362,9 @@ button {
 } */
 
 #items img {
-  width: 200px;
   display: block;
   margin: auto;
+  max-width: 100%;
 }
 
 #shopping-cart-img {
@@ -390,7 +395,7 @@ button {
 }
 
 #logo:hover {
-  filter: grayscale(60%);
+  filter: grayscale(90%);
 }
 
 #search-icon {

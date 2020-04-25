@@ -26,7 +26,9 @@ export class AllItems extends Component {
           return (
             <div key={item.id} className="singleItem">
               <Link to={`/items/${item.id}`} className="container-4">
-                <img src={item.imageUrl} />
+                <div className="image-container">
+                  <img src={item.imageUrl} />
+                </div>
                 <h2>{item.name}</h2>
                 <h3>Price: {item.price}</h3>
                 <h3>Quantity: {item.quantity}</h3>
