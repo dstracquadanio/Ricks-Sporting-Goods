@@ -5,6 +5,7 @@ import {NavLink} from 'react-router-dom'
 import {logout} from '../store'
 import AccountMenu from './accountMenu'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import SearchBar from './navbarSearch'
 
 const Navbar = ({handleClick, isLoggedIn, isAdmin}) => {
   return (
@@ -29,6 +30,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => {
             ''
           )}
         </div>
+        <SearchBar />
         <div className="right-nav">
           <NavLink to="/items">All</NavLink>
           <NavLink to="/basketball/items">Basketball</NavLink>

@@ -8,7 +8,14 @@ import {attachQuantityToItem} from './utility'
 
 export class AllItems extends Component {
   render() {
-    let {items} = this.props
+    console.log(this.props)
+    let {items, searchBar} = this.props
+    // binary search?
+    if (searchBar.length) {
+      items = items.filter((item) => {
+        return item.name.toLowerCase().includes(searchBar)
+      })
+    }
     let {sport} = this.props.match.params
     items = !sport ? items : items.filter((item) => item.sport === sport)
     return (
@@ -56,6 +63,7 @@ const mapStateToProps = (state) => ({
   items: state.items,
   user: state.user,
   cart: state.cart,
+  searchBar: state.searchBar,
 })
 
 const mapDispatchToProps = (dispatch) => {
