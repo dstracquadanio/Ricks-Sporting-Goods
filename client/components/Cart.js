@@ -19,8 +19,6 @@ class DisconnectedCart extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    console.log('1')
-    console.log('LOOK HERE!', this.props)
     let userId = this.props.cart[0].userId
     this.props.removeCartItem(userId, +event.target.value)
   }
