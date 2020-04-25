@@ -38,7 +38,7 @@ const AuthForm = (props) => {
           <Button
             startIcon={<ShopIcon />}
             href="/auth/google"
-            variant="contained"
+            variant="outlined"
             color="primary"
           >
             {displayName} with Google
