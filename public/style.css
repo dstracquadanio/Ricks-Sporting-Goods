@@ -434,3 +434,15 @@ button {
 #search-icon {
   padding: 15px;
 }
+
+#oval {
+  position: absolute;
+  right: 20px;
+  color: white;
+  border-radius: 10px;
+  font-size: small;
+  background-color: #dc0073;
+  height: 18px;
+  width: 18px;
+  text-align: center;
+}

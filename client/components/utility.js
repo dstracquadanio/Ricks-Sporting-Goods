@@ -67,6 +67,7 @@ export const attachQuantityToCartItem = (item, cart, quantityToAdd) => {
   return itemToChange
 }
 
+//RENDERING AVATAR IN NAVBAR
 export const avatarLogic = (user) => {
   if (user.firstName && user.lastName) {
     const initials = `${user.firstName[0].toUpperCase()}${user.lastName[0].toUpperCase()}`
@@ -78,6 +79,11 @@ export const avatarLogic = (user) => {
   if (user.email) {
     return <Avatar>{`${user.email[0].toUpperCase()}`}</Avatar>
   } else {
-    return <Avatar />
+    return <Avatar variant="square" />
   }
+}
+
+//Cart items counter
+export const cartItemReducer = (accum, current) => {
+  return accum + current.quantity
 }

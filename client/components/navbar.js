@@ -7,9 +7,16 @@ import AccountMenu from './accountMenu'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import SearchBar from './navbarSearch'
 import {updateBar} from '../store/searchBar'
-import {avatarLogic} from './utility'
+import {avatarLogic, cartItemReducer} from './utility'
 
-const Navbar = ({user, handleClick, isLoggedIn, isAdmin, updateSearch}) => {
+const Navbar = ({
+  cart,
+  user,
+  handleClick,
+  isLoggedIn,
+  isAdmin,
+  updateSearch,
+}) => {
   return (
     <div>
       <nav>
@@ -52,15 +59,10 @@ const Navbar = ({user, handleClick, isLoggedIn, isAdmin, updateSearch}) => {
           <NavLink to="/eSports/items" onClick={() => updateSearch('')}>
             eSports
           </NavLink>
-          <NavLink className="corner-right" to="/home">
-            {avatarLogic(user)}
-          </NavLink>
-          <NavLink
-            className="corner-right"
-            to="/cart"
-            onClick={() => updateSearch('')}
-          >
+          <NavLink to="/home">{avatarLogic(user)}</NavLink>
+          <NavLink to="/cart" onClick={() => updateSearch('')}>
             <ShoppingCartIcon id="shopping-cart-img" fontSize="large" />
+            <span id="oval">{cart.reduce(cartItemReducer, 0)}</span>
           </NavLink>
         </div>
       </nav>
@@ -74,6 +76,7 @@ const Navbar = ({user, handleClick, isLoggedIn, isAdmin, updateSearch}) => {
 
 const mapState = (state) => {
   return {
+    cart: state.cart,
     user: state.user,
     isLoggedIn: !!state.user.id,
     isAdmin: !!state.user.isAdmin,
