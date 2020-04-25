@@ -9,18 +9,11 @@ import SearchIcon from '@material-ui/icons/Search'
 class DisconnectedSearchBar extends Component {
   constructor() {
     super()
-    this.state = {
-      searchBar: '',
-    }
-
     this.handleChange = this.handleChange.bind(this)
   }
 
-  async handleChange(event) {
-    await this.setState({
-      [event.target.name]: event.target.value,
-    })
-    this.props.updateBar(this.state.searchBar)
+  handleChange(event) {
+    this.props.updateBar(event.target.value)
   }
 
   render() {
@@ -38,7 +31,7 @@ class DisconnectedSearchBar extends Component {
           margin="dense"
           name="searchBar"
           type="search"
-          value={this.state.searchBar}
+          value={this.props.searchBar}
           placeholder="Search..."
           onChange={this.handleChange}
         />

@@ -279,6 +279,11 @@ button {
   justify-content: center;
 }
 
+.error {
+  color: red;
+  font-size: small;
+}
+
 .form-container {
   display: flex;
   flex-direction: column;
