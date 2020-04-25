@@ -5,7 +5,7 @@ import {NavLink} from 'react-router-dom'
 import {logout} from '../store'
 import AccountMenu from './accountMenu'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
-import Searchbar from './searchbar'
+import SearchBar from './navbarSearch'
 
 const Navbar = ({handleClick, isLoggedIn, isAdmin}) => {
   return (
@@ -20,7 +20,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => {
           <NavLink to="/home">
             <img id="logo" src="/Logo.png" alt="logo" />
           </NavLink>
-          <Searchbar />
+          <SearchBar />
           {isAdmin ? (
             <Fragment>
               <NavLink to="/users">VIEW USERS</NavLink>
