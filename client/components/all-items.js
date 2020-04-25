@@ -15,7 +15,7 @@ export class AllItems extends Component {
     // binary search?
     if (searchBar.length) {
       items = items.filter((item) => {
-        return item.name.toLowerCase().includes(searchBar)
+        return item.name.toLowerCase().includes(searchBar.toLowerCase())
       })
     }
     let {sport} = this.props.match.params

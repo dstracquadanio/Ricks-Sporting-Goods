@@ -38,7 +38,6 @@ export const updateSingleItem = (id, changes) => {
   return async (dispatch) => {
     try {
       const res = await axios.put(`/api/items/${id}`, changes)
-      console.log('this is updated single', res.data)
       dispatch(updateItem(res.data))
     } catch (error) {
       console.log('error')
@@ -70,7 +69,7 @@ export default function itemsReducer(state = defaultItems, action) {
       return state.filter((item) => item.id !== action.data)
     case UPDATE_ITEM:
       const newItemList = state.filter((item) => item.id !== action.data.id)
-      return [...newItemList, action.data]
+      return [...newItemList, action.data] //i think we can just map here instead
     default:
       return state
   }

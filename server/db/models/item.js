@@ -12,9 +12,9 @@ const Item = db.define('item', {
   price: {
     type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
+    // validate: {
+    //   notEmpty: true,
+    // },
   },
   description: {
     type: Sequelize.TEXT,
