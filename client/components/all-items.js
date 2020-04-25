@@ -4,17 +4,24 @@ import {Link} from 'react-router-dom'
 import {Button} from '@material-ui/core'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import {updateCartThunk} from '../store/cart'
-import {attachQuantityToItem} from './utility'
+import {checkInventory, attachQuantityToItem} from './utility'
 import {ThemeProvider} from '@material-ui/core/styles'
 import {theme1} from '../materialColorThemes'
 
 export class AllItems extends Component {
+  constructor() {
+    super()
+    this.state = {
+      addCartIssue: false,
+    }
+  }
+
   render() {
     let {items, searchBar} = this.props
     // binary search?
     if (searchBar.length) {
       items = items.filter((item) => {
-        return item.name.toLowerCase().includes(searchBar)
+        return item.name.toLowerCase().includes(searchBar.toLowerCase())
       })
     }
     let {sport} = this.props.match.params
@@ -31,6 +38,9 @@ export class AllItems extends Component {
                 <h2>{item.name}</h2>
                 <h3>Price: ${item.price}</h3>
                 <h3>Quantity: {item.quantity}</h3>
+                {this.state.addCartIssue === item.id && (
+                  <div className="error">Not enough in stock!</div>
+                )}
               </Link>
               <div className="container-4a">
                 <Link to={`/items/${item.id}`}>
@@ -43,16 +53,29 @@ export class AllItems extends Component {
                   color="secondary"
                   startIcon={<ShoppingCartIcon />}
                   type="button"
-                  onClick={() => {
-                    let itemToSend = attachQuantityToItem(
+                  onClick={async () => {
+                    let check = checkInventory(
                       item,
+                      this.props.items,
                       this.props.cart,
                       1
                     )
-                    this.props.updateCart({
-                      user: this.props.user,
-                      item: itemToSend,
+                    console.log('check!', check)
+                    await this.setState({
+                      addCartIssue: check,
                     })
+                    console.log(this.state.addCartIssue)
+                    if (!this.state.addCartIssue) {
+                      let itemToSend = attachQuantityToItem(
+                        item,
+                        this.props.cart,
+                        1
+                      )
+                      this.props.updateCart({
+                        user: this.props.user,
+                        item: itemToSend,
+                      })
+                    }
                   }}
                 >
                   Add to Cart

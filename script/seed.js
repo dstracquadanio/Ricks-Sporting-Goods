@@ -19,19 +19,7 @@ async function seed() {
     }),
   ])
 
-  const [
-    hoop,
-    helmet,
-    football,
-    basketball,
-    glove,
-    cam_photo,
-    anderson_mouse,
-    darren_basketball,
-    fieldgoal_posts,
-    monitor,
-    home_plate,
-  ] = await Promise.all(
+  const [hoop, helmet, football, basketball, glove] = await Promise.all(
     names.map((item, i) => {
       return Item.create({
         name: names[i],
@@ -96,11 +84,11 @@ async function seed() {
       userId: murphy.id,
     }),
     Cart.create({
-      name: 'Home Plate',
-      price: 100.0,
+      name: 'Baseball Glove',
+      price: 40.0,
       quantity: 2,
       sport: 'baseball',
-      itemId: home_plate.id,
+      itemId: glove.id,
       userId: admin.id,
     }),
   ])
