@@ -49,19 +49,6 @@ router.param('userId', async (req, res, next, userId) => {
 })
 
 //GET THIS USER'S CART
-// router.get('/:userId/cart/', async (req, res, next) => {
-//   try {
-//     const cart = await Cart.findAll({
-//       where: {
-//         userId: req.params.userId,
-//       },
-//       order: [['name', 'ASC']],
-//     })
-//     res.json(cart)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
 router.get('/:userId/cart/', (req, res, next) => {
   res.json(req.currentUser.CartItems)
 })
@@ -69,48 +56,21 @@ router.get('/:userId/cart/', (req, res, next) => {
 //ADD ITEM TO CART, IF ALREADY THERE UPDATE ITEM IN CART
 // Expecting the new total quantity of the cart. (Not incrementing)
 router.put('/:userId', async (req, res, next) => {
+  //Only current user should be allowed to do this?? idk if this is something to address
   try {
+    //SECURITY ALERT
     const itemId = req.body.itemId
     const userId = req.params.userId
     await Cart.addOrUpdateItemToCart(userId, itemId, req.body)
-    res.sendStatus(201)
+    res.sendStatus(200)
   } catch (err) {
     next(err)
   }
 })
 
 //DELETES USER'S CART ON CHECKOUT, AND ADDS THOSE ITEMS TO PURCHASED HISTORY IN DB
-// USE CLASS METHODS AND MAKE SHORTER
-// router.delete('/:userId/checkout', async (req, res, next) => {
-//   //middleware: security
-//   //TESTS
-//   try {
-//     const purchased = await Cart.findAll({
-//       where: {
-//         userId: req.params.userId,
-//       },
-//     })
-//     const newOrderNum = await PurchasedItem.newOrderNumber()
-//     for (let item of purchased) {
-//       item.dataValues.orderNumber = newOrderNum
-//       await PurchasedItem.create(item.dataValues)
-//     }
-//     await Cart.destroy({
-//       where: {
-//         userId: req.params.userId,
-//       },
-//     })
-//     res.sendStatus(204)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
-//DELETES USER'S CART ON CHECKOUT, AND ADDS THOSE ITEMS TO PURCHASED HISTORY IN DB
-// USE CLASS METHODS AND MAKE SHORTER
 router.delete('/:userId/checkout', async (req, res, next) => {
   //middleware: security
-  //TESTS
   try {
     const cartArray = req.currentUser.CartItems
     const newOrderNum = await PurchasedItem.newOrderNumber()
@@ -125,7 +85,9 @@ router.delete('/:userId/checkout', async (req, res, next) => {
   }
 })
 
+//REMOVE A CART ITEM
 router.delete('/:userId/cart/:itemId', async (req, res, next) => {
+  //SECURITY ALERT
   try {
     await Cart.destroy({where: {itemId: req.params.itemId}})
     res.sendStatus(204)

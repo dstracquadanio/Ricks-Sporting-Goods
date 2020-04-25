@@ -16,23 +16,22 @@ describe('Item routes', () => {
   describe('/api/items/', () => {
     let joe
     let pretendCart
-    // prettier-ignore
     const itemData = [
       {
         name: 'Toilet Paper',
-        price: 90.00,
+        price: 90.0,
         quantity: 6,
         sport: 'basketball',
       },
       {
         name: 'Paper Towel',
-        price: 22.00,
+        price: 22.0,
         quantity: 9,
         sport: 'basketball',
       },
       {
         name: 'Detergent',
-        price: 10.00,
+        price: 10.0,
         quantity: 2,
         sport: 'basketball',
       },
@@ -113,20 +112,32 @@ describe('Item routes', () => {
     it('PUT /api/items/:itemId updates item info', async () => {
       const item = await request(app).get(`/api/items/1`)
       expect(item.body.name).to.be.equal('Toilet Paper')
-      expect(typeof item.body.price).to.be.equal('number')
-      await request(app).put('/api/items/1').send({
+      await request(app)
+        .put('/api/items/1')
+        .send({
+          name: 'Tissues',
+          price: 50.0,
+          quantity: 2,
+          sport: 'basketball',
+        })
+        .expect(200)
+      const updatedItem = await request(app).get(`/api/items/1`)
+      expect(updatedItem.body.name).to.be.equal('Tissues')
+      expect(updatedItem.body.price).to.be.equal('50.00')
+      //Yes, we are expecting price to be served as a string because Postgres
+      //is annoying
+      expect(updatedItem.body.quantity).to.be.equal(2)
+    })
+    it('PUT /api/items/:itemId responds with updated item', async () => {
+      const updatedItem = await request(app).put('/api/items/1').send({
         name: 'Tissues',
         price: 50.0,
         quantity: 2,
         sport: 'basketball',
       })
-      /* .expect(200) */
-      const updatedItem = await request(app).get(`/api/items/1`)
       expect(updatedItem.body.name).to.be.equal('Tissues')
-      // expect(updatedItem.body.price).to.be.equal(50.0)
       expect(updatedItem.body.quantity).to.be.equal(2)
     })
-    // it('PUT /api/items/:itemId responds with updated item', async () => {})
     // it('PUT /api/items/:itemId only works for Admins', async () => {})
   })
 })

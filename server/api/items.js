@@ -36,7 +36,6 @@ router.put('/checkout', async (req, res, next) => {
   try {
     // example input:
     // req.body: {
-    //  userId: 1,     //WHY IS USERID NEEDED HERE
     //  cart: [{id: 1, quantity: 2}, {id: 2 quantity: 3}]
     //    }
     for (let item of req.body) {
@@ -75,15 +74,16 @@ router.delete('/:itemId', async (req, res, next) => {
 router.put('/:itemId', async (req, res, next) => {
   //need is isAdmin middleware here
   try {
-    const itemId = req.params.itemId
-    const [, item] = await Item.update(req.body, {
-      where: {
-        id: itemId,
-      },
-      returning: true,
-      plain: true,
-    })
-    res.json(item)
+    res.status(200)
+    res.json(await req.currentItem.update(req.body))
+    // const itemId = req.params.itemId
+    // const [, item] = await Item.update(req.body, {
+    //   where: {
+    //     id: itemId,
+    //   },
+    //   returning: true,
+    //   plain: true,
+    // })
   } catch (error) {
     next(error)
   }
