@@ -6,31 +6,33 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
+import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 500,
   },
 })
 
 export default function ImgMediaCard(props) {
+  const {sport, imageUrl} = props
   const classes = useStyles()
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="Contemplative Reptile"
-          height="300"
-          image="https://cdn.sqhk.co/sportcourt/2016/6/ihgjehc/110322_sc_0864-L.jpg"
-          // title="Contemplative Reptile"
-        />
-      </CardActionArea>
+      <Link to={`/${sport}/items`}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            alt="slide"
+            height="500"
+            image={imageUrl}
+          />
+        </CardActionArea>
+      </Link>
       <CardActions>
         <Button size="small" color="primary">
-          BASKETBALL
+          {sport}
         </Button>
       </CardActions>
     </Card>
