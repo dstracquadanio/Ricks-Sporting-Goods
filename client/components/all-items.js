@@ -29,7 +29,7 @@ export class AllItems extends Component {
                   <img src={item.imageUrl} />
                 </div>
                 <h2>{item.name}</h2>
-                <h3>Price: {item.price}</h3>
+                <h3>Price: ${item.price}</h3>
                 <h3>Quantity: {item.quantity}</h3>
               </Link>
               <div className="container-4a">

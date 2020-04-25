@@ -2,6 +2,7 @@
 
 const db = require('../server/db')
 const {User, Item, Cart} = require('../server/db/models')
+const {names, prices, quantities, imageUrls, sports} = require('./seedInfo')
 
 async function seed() {
   await db.sync({force: true})
@@ -30,97 +31,34 @@ async function seed() {
     fieldgoal_posts,
     monitor,
     home_plate,
-  ] = await Promise.all([
-    Item.create({
-      name: 'Basketball Hoop',
-      price: 10.0,
-      quantity: 9,
-      imageUrl:
-        'https://www.anthem-sports.com/media/extendware/ewimageopt/media/inline/b0/c/bison-pro-tech-competition-breakaway-basketball-goal-ba35--eeb.jpg',
-      sport: 'basketball',
-    }),
-    Item.create({
-      name: 'Football Helmet',
-      price: 30.0,
-      quantity: 5,
-      imageUrl:
-        'https://cdn.vox-cdn.com/thumbor/Ck7EIuSSZBpSn7QIkFZHpAhGuS0=/26x136:1026x803/1200x800/filters:focal(26x136:1026x803)/cdn.vox-cdn.com/uploads/chorus_image/image/30673345/speedflex_quarter_view_lr__2_.0.jpg',
-      sport: 'football',
-    }),
-    Item.create({
-      name: 'Football',
-      price: 25.0,
-      quantity: 2,
-      imageUrl:
-        'https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&w=288&h=288&transparent=true',
-      sport: 'football',
-    }),
-    Item.create({
-      name: 'Basketball',
-      price: 30.0,
-      quantity: 4,
-      sport: 'basketball',
-    }),
-    Item.create({
-      name: 'Baseball Glove',
-      price: 40.0,
-      quantity: 7,
-      imageUrl:
-        'https://target.scene7.com/is/image/Target/GUEST_6c6b3561-8fbb-4019-8e2d-7a7eb00ee749?wid=325&hei=325&qlt=80&fmt=webp',
-      sport: 'baseball',
-    }),
-    Item.create({
-      name: 'Signed Cam Ratliff Photo',
-      price: 1000.0,
-      quantity: 1,
-      imageUrl:
-        'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1966.png',
-      sport: 'basketball',
-    }),
-    Item.create({
-      name: 'Signed Anderson Chan mouse',
-      price: 1000.0,
-      quantity: 1,
-      imageUrl:
-        'https://images-na.ssl-images-amazon.com/images/I/61hzuoXwjqL._AC_SX466_.jpg',
-      sport: 'eSports',
-    }),
-    Item.create({
-      name: 'Signed Darren Hu Basketball',
-      price: 1000.0,
-      quantity: 1,
-      imageUrl:
-        'https://bloximages.newyork1.vip.townnews.com/swnewsmedia.com/content/tncms/assets/v3/editorial/0/f6/0f69af9a-968e-5723-b868-ac1412842cf3/58b4414eb0a84.image.png?resize=400%2C319',
-      sport: 'basketball',
-    }),
-    Item.create({
-      name: 'Field Goal Posts',
-      price: 2000.0,
-      quantity: 1,
-      imageUrl:
-        'https://www.rogersathletic.com/media/3425/410353_main_stadium_pro_portable_goal_post.jpg',
-      sport: 'football',
-    }),
-    Item.create({
-      name: 'Computer Monitor',
-      price: 80.0,
-      quantity: 4,
-      imageUrl:
-        'https://www.staples-3p.com/s7/is/image/Staples/m001440649_sc7?wid=512&hei=512',
-      sport: 'eSports',
-    }),
-    Item.create({
-      name: 'Home Plate',
-      price: 100.0,
-      quantity: 2,
-      imageUrl:
-        'https://previews.123rf.com/images/toddtaulman/toddtaulman1511/toddtaulman151100007/48690694-baseball-home-plate-with-dirt-and-chalk-lines.jpg',
-      sport: 'baseball',
-    }),
-  ])
+  ] = await Promise.all(
+    names.map((item, i) => {
+      return Item.create({
+        name: names[i],
+        price: prices[i],
+        quantity: quantities[i],
+        imageUrl: imageUrls[i],
+        sport: sports[i],
+      })
+    })
+  )
+
+  // let seedingTimes = 7
+  // for (let i = 0; i < seedingTimes; i++) {
+  //   for (let j = 0; j < names.length; j++) {
+  //     Item.create({
+  //       name: names[j],
+  //       price: prices[j],
+  //       quantity: quantities[j],
+  //       imageUrl: imageUrls[j],
+  //       sport: sports[j],
+  //     })
+  //   }
+  // }
+
   const Carts = await Promise.all([
     Cart.create({
-      name: 'basketball hoop',
+      name: 'Basketball Hoop',
       price: 10.0,
       quantity: 2,
       imageUrl:
@@ -130,7 +68,7 @@ async function seed() {
       userId: cody.id,
     }),
     Cart.create({
-      name: 'football helmet',
+      name: 'Football Helmet',
       price: 30.0,
       quantity: 1,
       imageUrl:
@@ -140,7 +78,7 @@ async function seed() {
       userId: cody.id,
     }),
     Cart.create({
-      name: 'football',
+      name: 'Football',
       price: 25.0,
       quantity: 1,
       imageUrl:
@@ -150,7 +88,7 @@ async function seed() {
       userId: murphy.id,
     }),
     Cart.create({
-      name: 'basketball',
+      name: 'Basketball',
       price: 30.0,
       quantity: 2,
       sport: 'basketball',
