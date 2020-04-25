@@ -1,3 +1,6 @@
+import Avatar from '@material-ui/core/Avatar'
+import React from 'react'
+
 export const checkInventoryItemToItems = (
   item,
   allItems,
@@ -62,4 +65,19 @@ export const attachQuantityToCartItem = (item, cart, quantityToAdd) => {
 
   itemToChange.quantity = itemInCart.quantity + quantityToAdd
   return itemToChange
+}
+
+export const avatarLogic = (user) => {
+  if (user.firstName && user.lastName) {
+    const initials = `${user.firstName[0].toUpperCase()}${user.lastName[0].toUpperCase()}`
+    return <Avatar>{initials}</Avatar>
+  }
+  if (user.firstName) {
+    return <Avatar>{`${user.firstName[0].toUpperCase()}`}</Avatar>
+  }
+  if (user.email) {
+    return <Avatar>{`${user.email[0].toUpperCase()}`}</Avatar>
+  } else {
+    return <Avatar />
+  }
 }

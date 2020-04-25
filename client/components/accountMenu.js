@@ -2,7 +2,6 @@ import React from 'react'
 import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
-import {NavLink} from 'react-router-dom'
 import MenuIcon from '@material-ui/icons/Menu'
 import PersonIcon from '@material-ui/icons/Person'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -44,10 +43,8 @@ export default function AccountMenu(props) {
 
   return (
     <div>
-      <Button className="container-center-column" onClick={handleMenu}>
-        <div>Anderson</div>
-        <div>Chan</div>
-        <MenuIcon />
+      <Button onClick={handleMenu}>
+        <MenuIcon fontSize="large" />
       </Button>
       {isLoggedIn ? (
         <StyledMenu
