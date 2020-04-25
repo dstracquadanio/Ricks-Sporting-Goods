@@ -69,7 +69,7 @@ const DisconnectedCart = (props) => {
         })}
       </div>
       <div className="boxes container-8">
-        <h3 className="container-9">Complete Order!</h3>
+        <h3 className="container-9">Complete Order</h3>
         <div className="container-10">
           <div className="container-11">
             <div className="padding">
