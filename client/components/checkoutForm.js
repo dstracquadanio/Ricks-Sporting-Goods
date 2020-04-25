@@ -7,7 +7,8 @@ class DisconnectedCheckoutForm extends Component {
   constructor() {
     super()
     this.state = {
-      name: '',
+      firstName: '',
+      lastName: '',
       address: '',
       email: '',
     }
@@ -18,7 +19,8 @@ class DisconnectedCheckoutForm extends Component {
 
   componentDidMount() {
     this.setState({
-      name: this.props.user.name || '',
+      firstName: this.props.user.firstName || '',
+      lastName: this.props.user.lastName || '',
       address: this.props.user.address || '',
       email: this.props.user.email || '',
     })
@@ -38,7 +40,8 @@ class DisconnectedCheckoutForm extends Component {
     })
 
     this.setState({
-      name: '',
+      firstName: '',
+      LastName: '',
       address: '',
       email: '',
     })
@@ -49,12 +52,20 @@ class DisconnectedCheckoutForm extends Component {
     return (
       <form className="form-container" onSubmit={this.handleSubmit}>
         <h2>Checkout</h2>
-        <label htmlFor="name">Name: </label>
+        <label htmlFor="firstName">First Name: </label>
         <input
           type="text"
-          name="name"
+          name="firstName"
           required
-          value={this.state.name}
+          value={this.state.firstName}
+          onChange={this.handleChange}
+        />
+        <label htmlFor="lastName">Last Name: </label>
+        <input
+          type="text"
+          name="lastName"
+          required
+          value={this.state.lastName}
           onChange={this.handleChange}
         />
         <label htmlFor="address">Address: </label>
