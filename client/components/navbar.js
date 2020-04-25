@@ -42,7 +42,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => {
           </NavLink>
         </div>
       </nav>
-      <hr />
+      {/* <hr /> */}
     </div>
   )
 }

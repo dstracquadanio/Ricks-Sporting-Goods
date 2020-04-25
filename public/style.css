@@ -36,12 +36,14 @@ form div {
 }
 
 nav {
+  background-color: #ededed;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: x-large;
   font-weight: bold;
   height: 78px;
+  /* padding-bottom: 5px; */
 }
 
 button {
@@ -109,6 +111,10 @@ button {
 
 .boxes {
   border: solid black 1px;
+}
+
+.center-self {
+  align-self: center;
 }
 
 .container-2 {
@@ -341,6 +347,8 @@ button {
 .ricks-color {
   background-color: #0e6252;
   height: 160px;
+  border-bottom: solid 1px black;
+  border-top: solid 1px black;
 }
 
 .ricks-color img {
@@ -405,7 +413,7 @@ button {
 
 #logo {
   max-width: 100%;
-  max-height: 80px;
+  max-height: 50px;
   display: block;
   transition: filter 0.4s ease;
 }
