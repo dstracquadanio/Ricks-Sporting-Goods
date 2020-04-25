@@ -10,7 +10,7 @@ import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 500,
+    maxWidth: 700,
   },
 })
 
@@ -30,9 +30,9 @@ export default function ImgMediaCard(props) {
           />
         </CardActionArea>
       </Link>
-      <CardActions>
-        <Button size="small" color="primary">
-          {sport}
+      <CardActions className="container-center-column">
+        <Button size="large" color="primary">
+          <Link to={`/${sport}/items`}>{sport} </Link>
         </Button>
       </CardActions>
     </Card>

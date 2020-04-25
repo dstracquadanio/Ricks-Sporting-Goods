@@ -11,6 +11,9 @@ export const UserHome = (props) => {
   const {email} = props.user
   return (
     <div>
+      <div className="container-center-column ricks-color">
+        <img src="Logo.png" alt="banner" />
+      </div>
       <h3>Welcome, {email}</h3>
       <HomeCarousel />
     </div>
