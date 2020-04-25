@@ -1,4 +1,9 @@
-export const checkInventory = (item, allItems, cart, quantityToAdd) => {
+export const checkInventoryItemToItems = (
+  item,
+  allItems,
+  cart,
+  quantityToAdd
+) => {
   let totalAmtInventory = allItems.filter((eachItem) => {
     return eachItem.id === item.id
   })[0].quantity
@@ -9,10 +14,27 @@ export const checkInventory = (item, allItems, cart, quantityToAdd) => {
 
   // if there isn't enough in inventory, return the item id that has the issue
   if (totalAmtInventory - totalCartInventory < quantityToAdd) {
-    console.log('issue!')
     return item.id
   } else {
-    console.log('gucci')
+    return false
+  }
+}
+
+export const checkInventoryCartItemToItems = (
+  cartItem,
+  allItems,
+  cart,
+  quantityToAdd
+) => {
+  let totalAmtInventory = allItems.filter((eachItem) => {
+    return eachItem.id === cartItem.itemId
+  })[0].quantity
+  let totalCartInventory = cartItem.quantity
+
+  // if there isn't enough in inventory, return the cartItem id that has the issue
+  if (totalAmtInventory - totalCartInventory < quantityToAdd) {
+    return cartItem.itemId
+  } else {
     return false
   }
 }

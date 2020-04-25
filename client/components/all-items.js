@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import {Button} from '@material-ui/core'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import {updateCartThunk} from '../store/cart'
-import {checkInventory, attachQuantityToItem} from './utility'
+import {checkInventoryItemToItems, attachQuantityToItem} from './utility'
 import {ThemeProvider} from '@material-ui/core/styles'
 import {theme1} from '../materialColorThemes'
 
@@ -54,17 +54,15 @@ export class AllItems extends Component {
                   startIcon={<ShoppingCartIcon />}
                   type="button"
                   onClick={async () => {
-                    let check = checkInventory(
+                    let check = checkInventoryItemToItems(
                       item,
                       this.props.items,
                       this.props.cart,
                       1
                     )
-                    console.log('check!', check)
                     await this.setState({
                       addCartIssue: check,
                     })
-                    console.log(this.state.addCartIssue)
                     if (!this.state.addCartIssue) {
                       let itemToSend = attachQuantityToItem(
                         item,
