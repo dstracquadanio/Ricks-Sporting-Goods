@@ -53,7 +53,6 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin, updateSearch}) => {
           </NavLink>
         </div>
       </nav>
-      {/* <hr /> */}
     </div>
   )
 }

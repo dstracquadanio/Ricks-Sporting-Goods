@@ -107,9 +107,6 @@ class DisconnectedCart extends Component {
                       </div>
                     </div>
                   </div>
-                  {/* {this.state.addCartIssue === item.itemId && (
-                    <div className="error">{this.state.message}</div>
-                  )} */}
                   {this.state.addCartIssue === item.itemId ? (
                     <div className="error">{this.state.message}</div>
                   ) : (

@@ -9,8 +9,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import VpnKeyIcon from '@material-ui/icons/VpnKey'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
-import AccountBoxIcon from '@material-ui/icons/AccountBox'
 import {withStyles} from '@material-ui/core/styles'
+import history from '../history'
 
 export default function AccountMenu(props) {
   const StyledMenu = withStyles({
@@ -24,7 +24,7 @@ export default function AccountMenu(props) {
   const {isLoggedIn, handleLogout} = props
   const [anchorEl, setAnchorEl] = React.useState(null)
 
-  const handleClick = (event) => {
+  const handleMenu = (event) => {
     setAnchorEl(event.currentTarget)
   }
 
@@ -32,16 +32,22 @@ export default function AccountMenu(props) {
     setAnchorEl(null)
   }
 
-  const logoutAndClose = (event) => {
-    handleClose(event)
+  const logoutAndClose = () => {
+    handleClose()
     handleLogout()
+  }
+
+  const handleRedirect = (strMethod) => {
+    handleClose()
+    history.push(`/${strMethod}`)
   }
 
   return (
     <div>
-      <Button onClick={handleClick}>
+      <Button className="container-center-column" onClick={handleMenu}>
+        <div>Anderson</div>
+        <div>Chan</div>
         <MenuIcon />
-        {/* <AccountBoxIcon /> */}
       </Button>
       {isLoggedIn ? (
         <StyledMenu
@@ -51,7 +57,7 @@ export default function AccountMenu(props) {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={handleClose /* handleRedirect('profile') */}>
             <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>
@@ -73,22 +79,18 @@ export default function AccountMenu(props) {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>
-            <NavLink to="/login">
-              <ListItemIcon>
-                <VpnKeyIcon />
-              </ListItemIcon>
-              Login
-            </NavLink>
+          <MenuItem onClick={() => handleRedirect('login')}>
+            <ListItemIcon>
+              <VpnKeyIcon />
+            </ListItemIcon>
+            Login
           </MenuItem>
           <hr />
-          <MenuItem onClick={handleClose}>
-            <NavLink to="/signup">
-              <ListItemIcon>
-                <PersonAddIcon />
-              </ListItemIcon>
-              Sign Up
-            </NavLink>
+          <MenuItem onClick={() => handleRedirect('signup')}>
+            <ListItemIcon>
+              <PersonAddIcon />
+            </ListItemIcon>
+            Sign Up
           </MenuItem>
         </StyledMenu>
       )}
