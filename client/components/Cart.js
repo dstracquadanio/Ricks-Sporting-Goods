@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {removeCartItemThunk, editCartThunk} from '../store/cart'
 import {
   attachQuantityToCartItem,
   checkInventoryCartItemToItems,
 } from './utility'
+import StickyCheckoutBox from './stickyCheckoutBox'
 
 class DisconnectedCart extends Component {
   constructor() {
@@ -39,6 +39,7 @@ class DisconnectedCart extends Component {
                   <div className="line-item container-5">
                     <div>Quantity: {item.quantity}</div>
 
+                    {/* PLUS AND MINUS LOGIC */}
                     <div className="container-6">
                       <div
                         className="plus"
@@ -107,9 +108,6 @@ class DisconnectedCart extends Component {
                       </div>
                     </div>
                   </div>
-                  {/* {this.state.addCartIssue === item.itemId && (
-                    <div className="error">{this.state.message}</div>
-                  )} */}
                   {this.state.addCartIssue === item.itemId ? (
                     <div className="error">{this.state.message}</div>
                   ) : (
@@ -127,32 +125,7 @@ class DisconnectedCart extends Component {
             )
           })}
         </div>
-        <div className="boxes container-8">
-          <h3 className="container-9">Complete Order</h3>
-          <div className="container-10">
-            <div className="container-11">
-              <div className="padding">
-                Total Items In Cart:{' '}
-                {this.props.cart.reduce((accum, current) => {
-                  return accum + Number(current.quantity)
-                }, 0)}
-              </div>
-              <div>
-                Total Price: $
-                {this.props.cart
-                  .reduce((accum, current) => {
-                    return (
-                      accum + Number(current.price) * Number(current.quantity)
-                    )
-                  }, 0)
-                  .toFixed(2)}
-              </div>
-            </div>
-            <Link to="/checkout" className="checkout">
-              Checkout
-            </Link>
-          </div>
-        </div>
+        <StickyCheckoutBox />
       </div>
     )
   }
