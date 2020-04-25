@@ -10,7 +10,6 @@ import {theme1} from '../materialColorThemes'
 
 export class AllItems extends Component {
   render() {
-    console.log(this.props)
     let {items, searchBar} = this.props
     // binary search?
     if (searchBar.length) {
