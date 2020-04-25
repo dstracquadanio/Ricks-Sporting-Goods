@@ -1,5 +1,11 @@
 body {
   font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: #f5f4f4;
 }
 
 a {
@@ -34,12 +40,14 @@ form div {
 }
 
 nav {
+  background-color: #ededed;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: x-large;
   font-weight: bold;
   height: 78px;
+  /* padding-bottom: 5px; */
 }
 
 button {
@@ -66,10 +74,20 @@ button {
   width: 360px;
 }
 
+.image-container {
+  display: flex;
+  height: 250px;
+}
+
 .container-center-column {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+.container-row {
+  display: flex;
 }
 
 .container-even-row {
@@ -97,6 +115,10 @@ button {
 
 .boxes {
   border: solid black 1px;
+}
+
+.center-self {
+  align-self: center;
 }
 
 .container-2 {
@@ -210,10 +232,9 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 11%; //mess with this
+  width: 11%;
   border: 1px solid #ededed;
   background-color: white;
-  //difference
   align-items: center;
   height: auto;
   font-size: 16px;
@@ -258,6 +279,11 @@ button {
   justify-content: center;
 }
 
+.error {
+  color: red;
+  font-size: small;
+}
+
 .form-container {
   display: flex;
   flex-direction: column;
@@ -278,6 +304,7 @@ button {
   display: flex;
   align-items: center;
   max-height: 100%;
+  width: 50%;
 }
 
 .left-nav a {
@@ -315,6 +342,28 @@ button {
   display: flex;
 }
 
+.searchbar {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+}
+
+.searchbar:focus {
+  width: 100px;
+}
+
+.ricks-color {
+  background-color: #0e6252;
+  height: 160px;
+  border-bottom: solid 1px black;
+  border-top: solid 1px black;
+}
+
+.ricks-color img {
+  height: 100%;
+}
+
 /* IDs */
 #items {
   display: flex;
@@ -337,17 +386,18 @@ button {
   box-shadow: 0px 0px 2px 0px;
 }
 
-#items button {
+/* #items button {
   background: #ceb14b;
   border-radius: 2px;
   cursor: pointer;
-}
+  padding-left: 20px;
+  padding-right: 20px;
+} */
 
 #items img {
-  width: 200px;
   display: block;
   margin: auto;
-
+  max-width: 100%;
 }
 
 #shopping-cart-img {
@@ -372,11 +422,15 @@ button {
 
 #logo {
   max-width: 100%;
-  max-height: 100px;
+  max-height: 50px;
   display: block;
   transition: filter 0.4s ease;
 }
 
 #logo:hover {
-  filter: sepia(20%);
+  filter: grayscale(90%);
+}
+
+#search-icon {
+  padding: 15px;
 }

@@ -90,5 +90,20 @@ describe('User routes', () => {
       expect(purchasedItem.userId).to.be.equal(joe.id)
       expect(purchasedItem.itemId).to.be.equal(testItem1.id)
     })
+    it('DELETE /api/users/:userId/cart/:itemId removes a cart item', async () => {
+      await request(app)
+        .put(`/api/users/${joe.id}`)
+        .send({
+          ...testItem2.dataValues,
+          itemId: testItem2.id,
+        }) //Adds second item to the cart
+        .expect(201)
+      await request(app)
+        .delete(`/api/users/${joe.id}/cart/${testItem2.id}`)
+        .expect(204) //then remove that same item from cart
+      const cart = await request(app).get(`/api/users/${joe.id}/cart`)
+      //cart should have 1 item again
+      expect(cart.body.length).to.be.equal(1)
+    })
   }) // end describe('/api/users')
 }) // end describe('User routes')

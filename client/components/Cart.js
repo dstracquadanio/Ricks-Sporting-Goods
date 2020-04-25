@@ -1,107 +1,170 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {removeCartItemThunk, editCartThunk} from '../store/cart'
-import {attachQuantityToCartItem} from './utility'
+import {
+  attachQuantityToCartItem,
+  checkInventoryCartItemToItems,
+} from './utility'
 
-const DisconnectedCart = (props) => {
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    let userId = props.cart[0].userId
-    props.removeCartItem(userId, +event.target.value)
+class DisconnectedCart extends Component {
+  constructor() {
+    super()
+    this.state = {
+      addCartIssue: false,
+      message: '',
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  return (
-    <div className="container-7">
-      <div className="container-1">
-        {props.cart.map((item) => {
-          return (
-            <div key={item.itemId} className="container-2">
-              <img src={item.imageUrl} alt="" />
-              <div className="container-3">
-                <div className="line-item">{item.name}</div>
-                <div className="line-item">
-                  Total Price: ${(item.quantity * item.price).toFixed(2)}
-                </div>
-                <div className="line-item container-5">
-                  <div>Quantity: {item.quantity}</div>
-                  <div className="container-6">
-                    <div
-                      className="plus"
-                      onClick={() => {
-                        let itemToSend = attachQuantityToCartItem(
-                          item,
-                          props.cart,
-                          1
-                        )
-                        props.updateCart({
-                          user: props.user,
-                          item: itemToSend,
-                        })
-                      }}
-                    >
-                      +
-                    </div>
-                    <div
-                      className="minus"
-                      onClick={() => {
-                        let itemToSend = attachQuantityToCartItem(
-                          item,
-                          props.cart,
-                          -1
-                        )
-                        props.updateCart({
-                          user: props.user,
-                          item: itemToSend,
-                        })
-                      }}
-                    >
-                      -
+  handleSubmit(event) {
+    event.preventDefault()
+    console.log('1')
+    console.log('LOOK HERE!', this.props)
+    let userId = this.props.cart[0].userId
+    this.props.removeCartItem(userId, +event.target.value)
+  }
+
+  render() {
+    return (
+      <div className="container-7">
+        <div className="container-1">
+          {this.props.cart.map((item) => {
+            return (
+              <div key={item.itemId} className="container-2">
+                <img src={item.imageUrl} alt="" />
+                <div className="container-3">
+                  <div className="line-item">{item.name}</div>
+                  <div className="line-item">
+                    Total Price: ${(item.quantity * item.price).toFixed(2)}
+                  </div>
+                  <div className="line-item container-5">
+                    <div>Quantity: {item.quantity}</div>
+
+                    <div className="container-6">
+                      <div
+                        className="plus"
+                        onClick={async () => {
+                          await this.setState({
+                            addCartIssue: false,
+                            message: '',
+                          })
+                          let check = checkInventoryCartItemToItems(
+                            item,
+                            this.props.items,
+                            this.props.cart,
+                            1
+                          )
+                          if (check) {
+                            await this.setState({
+                              addCartIssue: check,
+                              message: 'Not enough in stock!',
+                            })
+                          }
+                          if (!this.state.addCartIssue) {
+                            let itemToSend = attachQuantityToCartItem(
+                              item,
+                              this.props.cart,
+                              1
+                            )
+                            this.props.updateCart({
+                              user: this.props.user,
+                              item: itemToSend,
+                            })
+                          }
+                        }}
+                      >
+                        +
+                      </div>
+                      <div
+                        className="minus"
+                        onClick={async () => {
+                          await this.setState({
+                            addCartIssue: false,
+                            message: '',
+                          })
+                          let quantityCheck =
+                            this.props.cart.filter((cartItem) => {
+                              return cartItem.itemId === item.itemId
+                            })[0].quantity - 1
+                          if (quantityCheck < 1) {
+                            await this.setState({
+                              addCartIssue: item.itemId,
+                              message: "Can't be less than 1!",
+                            })
+                          } else {
+                            let itemToSend = attachQuantityToCartItem(
+                              item,
+                              this.props.cart,
+                              -1
+                            )
+                            this.props.updateCart({
+                              user: this.props.user,
+                              item: itemToSend,
+                            })
+                          }
+                        }}
+                      >
+                        -
+                      </div>
                     </div>
                   </div>
+                  {/* {this.state.addCartIssue === item.itemId && (
+                    <div className="error">{this.state.message}</div>
+                  )} */}
+                  {this.state.addCartIssue === item.itemId ? (
+                    <div className="error">{this.state.message}</div>
+                  ) : (
+                    <div> </div>
+                  )}
                 </div>
+                <button
+                  type="button"
+                  value={item.itemId}
+                  onClick={this.handleSubmit}
+                >
+                  Remove Item From Cart
+                </button>
               </div>
-              <button type="button" value={item.itemId} onClick={handleSubmit}>
-                Remove Item From Cart
-              </button>
+            )
+          })}
+        </div>
+        <div className="boxes container-8">
+          <h3 className="container-9">Complete Order</h3>
+          <div className="container-10">
+            <div className="container-11">
+              <div className="padding">
+                Total Items In Cart:{' '}
+                {this.props.cart.reduce((accum, current) => {
+                  return accum + Number(current.quantity)
+                }, 0)}
+              </div>
+              <div>
+                Total Price: $
+                {this.props.cart
+                  .reduce((accum, current) => {
+                    return (
+                      accum + Number(current.price) * Number(current.quantity)
+                    )
+                  }, 0)
+                  .toFixed(2)}
+              </div>
             </div>
-          )
-        })}
-      </div>
-      <div className="boxes container-8">
-        <h3 className="container-9">Complete Order!</h3>
-        <div className="container-10">
-          <div className="container-11">
-            <div className="padding">
-              Total Items In Cart:{' '}
-              {props.cart.reduce((accum, current) => {
-                return accum + Number(current.quantity)
-              }, 0)}
-            </div>
-            <div>
-              Total Price: $
-              {props.cart
-                .reduce((accum, current) => {
-                  return (
-                    accum + Number(current.price) * Number(current.quantity)
-                  )
-                }, 0)
-                .toFixed(2)}
-            </div>
+            <Link to="/checkout" className="checkout">
+              Checkout
+            </Link>
           </div>
-          <Link to="/checkout" className="checkout">
-            Checkout
-          </Link>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 const mapStateToProps = (state) => {
   return {
     cart: state.cart,
     user: state.user,
+    items: state.items,
   }
 }
 

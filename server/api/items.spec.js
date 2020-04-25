@@ -83,5 +83,61 @@ describe('Item routes', () => {
       const notUpdatedItem = await request(app).get('/api/items/3')
       expect(notUpdatedItem.body.quantity).to.be.equal(2)
     })
+    it('POST /api/items/ adds an item to the inventory', async () => {
+      const allItems = await request(app).get('/api/items')
+      expect(allItems.body.length).to.be.equal(3)
+      await request(app).post('/api/items').send({
+        name: 'Soap',
+        price: 3.99,
+        quantity: 1,
+        sport: 'basketball',
+      })
+      const updatedItems = await request(app).get('/api/items')
+      expect(updatedItems.body.length).to.be.equal(4)
+    })
+    // it('POST /api/items/ responds with new Item??', async () => {
+
+    // })
+    // it('POST /api/items/ only works for Admins', async () => {
+
+    // })
+    it('DELETE /api/items/:itemId deletes an item from inventory', async () => {
+      const allItems = await request(app).get('/api/items')
+      expect(allItems.body.length).to.be.equal(3)
+      await request(app).delete('/api/items/1').expect(204)
+      const updatedItems = await request(app).get('/api/items')
+      expect(updatedItems.body.length).to.be.equal(2)
+    })
+    // it('DELETE /api/items/ only works for Admins', async () => {})
+    it('PUT /api/items/:itemId updates item info', async () => {
+      const item = await request(app).get(`/api/items/1`)
+      expect(item.body.name).to.be.equal('Toilet Paper')
+      await request(app)
+        .put('/api/items/1')
+        .send({
+          name: 'Tissues',
+          price: 50.0,
+          quantity: 2,
+          sport: 'basketball',
+        })
+        .expect(200)
+      const updatedItem = await request(app).get(`/api/items/1`)
+      expect(updatedItem.body.name).to.be.equal('Tissues')
+      expect(updatedItem.body.price).to.be.equal('50.00')
+      //Yes, we are expecting price to be served as a string because Postgres
+      //is annoying
+      expect(updatedItem.body.quantity).to.be.equal(2)
+    })
+    it('PUT /api/items/:itemId responds with updated item', async () => {
+      const updatedItem = await request(app).put('/api/items/1').send({
+        name: 'Tissues',
+        price: 50.0,
+        quantity: 2,
+        sport: 'basketball',
+      })
+      expect(updatedItem.body.name).to.be.equal('Tissues')
+      expect(updatedItem.body.quantity).to.be.equal(2)
+    })
+    // it('PUT /api/items/:itemId only works for Admins', async () => {})
   })
 })

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Itemform from './itemForm'
+import ItemForm from './itemForm'
 import {connect} from 'react-redux'
 import {updateSingleItem} from '../store/items'
 
@@ -61,7 +61,7 @@ class UpdateItems extends Component {
                   <img style={imageStyle} src={item.imageUrl} />
                   <h3>Quantity: {item.quantity}</h3>
                   <h3>Sport: {item.sport}</h3>
-                  <Itemform
+                  <ItemForm
                     {...this.state}
                     handleChange={this.handleChange}
                     handleSubmit={this.handleSubmit}

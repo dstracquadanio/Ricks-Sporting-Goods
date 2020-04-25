@@ -39,11 +39,7 @@ export default function AccountMenu(props) {
 
   return (
     <div>
-      <Button
-        // aria-controls="simple-menu"
-        // aria-haspopup="true"
-        onClick={handleClick}
-      >
+      <Button onClick={handleClick}>
         <MenuIcon />
         {/* <AccountBoxIcon /> */}
       </Button>

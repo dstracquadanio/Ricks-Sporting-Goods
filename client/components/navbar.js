@@ -5,8 +5,10 @@ import {NavLink} from 'react-router-dom'
 import {logout} from '../store'
 import AccountMenu from './accountMenu'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import SearchBar from './navbarSearch'
+import {updateBar} from '../store/searchBar'
 
-const Navbar = ({handleClick, isLoggedIn, isAdmin}) => {
+const Navbar = ({handleClick, isLoggedIn, isAdmin, updateSearch}) => {
   return (
     <div>
       <nav>
@@ -19,6 +21,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => {
           <NavLink to="/home">
             <img id="logo" src="/Logo.png" alt="logo" />
           </NavLink>
+          <SearchBar />
           {isAdmin ? (
             <Fragment>
               <NavLink to="/users">VIEW USERS</NavLink>
@@ -30,17 +33,27 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => {
           )}
         </div>
         <div className="right-nav">
-          <NavLink to="/items">All</NavLink>
-          <NavLink to="/basketball/items">Basketball</NavLink>
-          <NavLink to="/football/items">Football</NavLink>
-          <NavLink to="/baseball/items">Baseball</NavLink>
-          <NavLink to="/eSports/items">eSports</NavLink>
-          <NavLink to="/cart">
+          <NavLink to="/items" onClick={() => updateSearch('')}>
+            All
+          </NavLink>
+          <NavLink to="/basketball/items" onClick={() => updateSearch('')}>
+            Basketball
+          </NavLink>
+          <NavLink to="/football/items" onClick={() => updateSearch('')}>
+            Football
+          </NavLink>
+          <NavLink to="/baseball/items" onClick={() => updateSearch('')}>
+            Baseball
+          </NavLink>
+          <NavLink to="/eSports/items" onClick={() => updateSearch('')}>
+            eSports
+          </NavLink>
+          <NavLink to="/cart" onClick={() => updateSearch('')}>
             <ShoppingCartIcon id="shopping-cart-img" fontSize="large" />
           </NavLink>
         </div>
       </nav>
-      <hr />
+      {/* <hr /> */}
     </div>
   )
 }
@@ -60,6 +73,7 @@ const mapDispatch = (dispatch) => {
     handleClick() {
       dispatch(logout())
     },
+    updateSearch: (value) => dispatch(updateBar(value)),
   }
 }
 

@@ -1,6 +1,5 @@
 /* eslint-disable no-case-declarations */
 import axios from 'axios'
-import {combineReducers} from 'redux'
 
 // Action Types:
 const GET_CART = 'GET_CART'
