@@ -11,18 +11,10 @@ function SingleItemView(props) {
   const itemId = props.match.params.id
   const item = binarySearch(allItems, itemId)
 
-  const selectMenuMaker = (currentNum) => (
-    <MenuItem value={currentNum}>{currentNum}</MenuItem>
-  )
-  const selectElementQuantLogic = (stockNum) => {
-    if (stockNum > 10) {
-      stockNum = 10
-    }
-    for (let i = 1; i <= stockNum; i++) {
-      console.log('here', stockNum)
-      return selectMenuMaker(i)
-    }
-  }
+  //this is for setting the # on Select wheel
+  const min = Math.min(10, item.quantity) || 0
+  const arr = Array(min).fill('')
+
   return (
     <Paper className="single-item-page">
       <div className="single-item-page-container">
@@ -37,12 +29,17 @@ function SingleItemView(props) {
             <p className="price">{`$${item.price}`}</p>
             <p className="price">Left in stock: {item.quantity}</p>
           </div>
-          <p>QTY</p>
 
+          <p>QTY</p>
           <form onSubmit={(event) => props.handleSubmit(event, item, props)}>
-            <Select name="quantity">
-              <MenuItem value={1}>currentNum</MenuItem>
-              {selectElementQuantLogic(item.quantity)}
+            <Select native name="quantity">
+              {arr.map((entry, idx) => {
+                return (
+                  <option key={idx} value={idx + 1}>
+                    {idx + 1}
+                  </option>
+                )
+              })}
             </Select>
             <Button type="submit" variant="contained">
               Add to cart

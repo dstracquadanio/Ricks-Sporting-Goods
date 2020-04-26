@@ -53,6 +53,9 @@ const Navbar = ({
           <NavLink to="/football/items" onClick={() => updateSearch('')}>
             Football
           </NavLink>
+          <NavLink to="/soccer/items" onClick={() => updateSearch('')}>
+            Soccer
+          </NavLink>
           <NavLink to="/baseball/items" onClick={() => updateSearch('')}>
             Baseball
           </NavLink>
