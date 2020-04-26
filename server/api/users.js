@@ -39,7 +39,7 @@ router.param('userId', async (req, res, next, userId) => {
 })
 
 //GET THIS USER'S CART
-router.get('/:userId/cart/', isCurrentUserMiddleware, (req, res, next) => {
+router.get('/:userId/cart/', (req, res, next) => {
   res.json(req.currentUser.CartItems)
 })
 

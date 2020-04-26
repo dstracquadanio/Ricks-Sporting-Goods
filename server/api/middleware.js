@@ -1,21 +1,19 @@
 const isAdminMiddleware = (req, res, next) => {
-  const currentUser = req.session.user
+  const currentUser = req.session.passport.user
   if (currentUser && currentUser.isAdmin) {
     next()
   } else {
     const error = new Error('Access Denied!')
-    error.status(401)
     next(error)
   }
 }
 
 const isCurrentUserMiddleware = (req, res, next) => {
-  const currentUser = req.session.user
-  if (currentUser === req.params.userId) {
+  const currentUser = req.session.passport.user
+  if (currentUser === req.body.userId) {
     next()
   } else {
-    const error = new Error('Access Denies!')
-    error.status(401)
+    const error = new Error('Access Denied!')
     next(error)
   }
 }
