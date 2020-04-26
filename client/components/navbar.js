@@ -7,8 +7,16 @@ import AccountMenu from './accountMenu'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import SearchBar from './navbarSearch'
 import {updateBar} from '../store/searchBar'
+import {avatarLogic, cartItemReducer} from './utility'
 
-const Navbar = ({handleClick, isLoggedIn, isAdmin, updateSearch}) => {
+const Navbar = ({
+  cart,
+  user,
+  handleClick,
+  isLoggedIn,
+  isAdmin,
+  updateSearch,
+}) => {
   return (
     <div>
       <nav>
@@ -18,19 +26,22 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin, updateSearch}) => {
             isAdmin={isAdmin}
             handleLogout={handleClick}
           />
+
           <NavLink to="/home">
             <img id="logo" src="/Logo.png" alt="logo" />
           </NavLink>
           <SearchBar />
-          {isAdmin ? (
-            <Fragment>
-              <NavLink to="/users">VIEW USERS</NavLink>
-              <NavLink to="/additems">ADD AN ITEM</NavLink>
-              <NavLink to="/updateitems">UPDATE/REMOVE ITEM</NavLink>
-            </Fragment>
-          ) : (
+          {
+            isAdmin && (
+              <Fragment>
+                <NavLink to="/users">VIEW USERS</NavLink>
+                <NavLink to="/additems">ADD AN ITEM</NavLink>
+                <NavLink to="/updateitems">UPDATE/REMOVE ITEM</NavLink>
+              </Fragment>
+            ) /* : (
             ''
-          )}
+          ) */
+          }
         </div>
         <div className="right-nav">
           <NavLink to="/items" onClick={() => updateSearch('')}>
@@ -48,12 +59,13 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin, updateSearch}) => {
           <NavLink to="/eSports/items" onClick={() => updateSearch('')}>
             eSports
           </NavLink>
+          <NavLink to="/home">{avatarLogic(user)}</NavLink>
           <NavLink to="/cart" onClick={() => updateSearch('')}>
             <ShoppingCartIcon id="shopping-cart-img" fontSize="large" />
+            <span id="oval">{cart.reduce(cartItemReducer, 0)}</span>
           </NavLink>
         </div>
       </nav>
-      {/* <hr /> */}
     </div>
   )
 }
@@ -61,8 +73,11 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin, updateSearch}) => {
 /**
  * CONTAINER
  */
+
 const mapState = (state) => {
   return {
+    cart: state.cart,
+    user: state.user,
     isLoggedIn: !!state.user.id,
     isAdmin: !!state.user.isAdmin,
   }

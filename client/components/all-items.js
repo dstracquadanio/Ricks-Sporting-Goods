@@ -37,16 +37,16 @@ export class AllItems extends Component {
                 </div>
                 <h2>{item.name}</h2>
                 <h3>Price: ${item.price}</h3>
-                <h3>Quantity: {item.quantity}</h3>
+                <h3>In Stock: {item.quantity}</h3>
                 {this.state.addCartIssue === item.id && (
                   <div className="error">Not enough in stock!</div>
                 )}
               </Link>
-              <div className="container-4a">
+              {/* <div className="container-4a">
                 <Link to={`/items/${item.id}`}>
                   {item.description ? <p>{item.description}</p> : ''}
                 </Link>
-              </div>
+              </div> */}
               <ThemeProvider theme={theme1}>
                 <Button
                   variant="contained"

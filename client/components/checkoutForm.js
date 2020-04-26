@@ -2,6 +2,18 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {checkoutThunk} from '../store/cart'
 import history from '../history'
+import {withStyles} from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+
+const styles = (theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+})
 
 class DisconnectedCheckoutForm extends Component {
   constructor() {
@@ -41,7 +53,7 @@ class DisconnectedCheckoutForm extends Component {
 
     this.setState({
       firstName: '',
-      LastName: '',
+      lastName: '',
       address: '',
       email: '',
     })
@@ -49,42 +61,59 @@ class DisconnectedCheckoutForm extends Component {
   }
 
   render() {
+    const {classes} = this.props
     return (
-      <form className="form-container" onSubmit={this.handleSubmit}>
+      // <form className="form-container" onSubmit={this.handleSubmit}>
+      <form
+        className={`${classes.root} form-container`}
+        noValidate
+        autoComplete="off"
+        onSubmit={this.handleSubmit}
+      >
         <h2>Checkout</h2>
-        <label htmlFor="firstName">First Name: </label>
-        <input
+        <TextField
+          id="filled-basic"
+          label="First Name"
+          variant="filled"
           type="text"
           name="firstName"
           required
           value={this.state.firstName}
           onChange={this.handleChange}
         />
-        <label htmlFor="lastName">Last Name: </label>
-        <input
+        <TextField
+          id="filled-basic"
+          label="Last Name"
+          variant="filled"
           type="text"
           name="lastName"
           required
           value={this.state.lastName}
           onChange={this.handleChange}
         />
-        <label htmlFor="address">Address: </label>
-        <input
+        <TextField
+          id="filled-basic"
+          label="Address"
+          variant="filled"
           type="text"
           name="address"
           required
           value={this.state.address}
           onChange={this.handleChange}
         />
-        <label htmlFor="email">Email: </label>
-        <input
+        <TextField
+          id="filled-basic"
+          label="Email"
+          variant="filled"
           type="email"
           name="email"
           required
           value={this.state.email}
           onChange={this.handleChange}
         />
-        <button type="submit">Submit</button>
+        <Button variant="contained" color="secondary" type="submit">
+          Submit
+        </Button>
       </form>
     )
   }
@@ -108,4 +137,4 @@ const CheckoutForm = connect(
   mapDispatchToProps
 )(DisconnectedCheckoutForm)
 
-export default CheckoutForm
+export default withStyles(styles)(CheckoutForm)

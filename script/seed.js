@@ -2,7 +2,14 @@
 
 const db = require('../server/db')
 const {User, Item, Cart} = require('../server/db/models')
-const {names, prices, quantities, imageUrls, sports} = require('./seedInfo')
+const {
+  names,
+  prices,
+  quantities,
+  imageUrls,
+  sports,
+  descriptions,
+} = require('./seedInfo')
 
 async function seed() {
   await db.sync({force: true})
@@ -13,14 +20,14 @@ async function seed() {
       email: 'cody@email.com',
       password: '123',
       firstName: 'Cody',
-      lastName: 'Codyson',
+      lastName: 'Banks',
       address: '123 Main Street',
     }),
     User.create({
       email: 'murphy@email.com',
       password: '123',
       firstName: 'Murphy',
-      lastName: 'Murphson',
+      lastName: 'Smith',
     }),
     User.create({
       email: 'admin@email.com',
@@ -38,6 +45,7 @@ async function seed() {
         quantity: quantities[i],
         imageUrl: imageUrls[i],
         sport: sports[i],
+        description: descriptions[i],
       })
     })
   )

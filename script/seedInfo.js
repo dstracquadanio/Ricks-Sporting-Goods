@@ -26,6 +26,17 @@ const names = [
   'Cavaliers Jersey',
 ]
 
+const descriptions = [
+  'Materials: Made of durable polypropylene fiber material,heavy duty net for use outdoors or indoors. Length: 50cm. Basketball Net, 12 Loops Basketball Net, Heavy Duty Basketball Net, Heavy Duty Basketball Net Replacement Basketball Net for Wall Mounted Basketball Hoop Indoor Outdoor',
+  'Great for autographs and collectors. Includes interior padding and a 4-point chinstrap. Approximately 5" tall',
+  'Composite Leather. Imported. Official Size Football. NFL Branded. Super Grip Composite cover for a premium feel. Butyl rubber bladder for advanced air retention. Recommended for players 14+',
+  'THE #1 INDOOR BALL: The Evolution is the #1 indoor game basketball in America, on more courts than any other basketball. SIGNATURE EVO FEEL: The soft feel that the Evolution basketball is famous for is due it’s Cushion Core Carcass, making the ball softer to the touch and easier to grip around the rim',
+  'Easy break in: The soft synthetic leather material is lightweight and responsive making the glove easy and quick to break in so it will be game ready in no time for baseball, softball, or teeball',
+  'Lorem ipsum dolor sit amet, repudiandae philosophia instructior eam in, ut choro verterem argumentum vel, eu fugit dicant blandit usu. Congue soleat prodesset an vim, eam iudicabit inciderint at. Eam te wisi disputando delicatissimi, indoctum accusamus quaerendum duo ex. At vix veri magna constituto, cu viris lobortis eum, rebum legimus molestie sea an.',
+  'Eum putant singulis ad, ex nec omnium indoctum, per exerci menandri at. Ne exerci suscipit dissentiunt pri. Ex regione omnesque insolens est, has in saperet mandamus. Usu ex alia novum. Cibo similique vix id, mundi minimum vituperatoribus ea eam, vel cibo probatus in.',
+  'Lorem electram vituperata qui in. Aperiam saperet convenire qui ad. Vix et nisl labitur, no eius dissentiet pro. Ei eum accumsan patrioque consectetuer. Ea graeci fabulas est, his alia euismod alienum eu. Simul singulis ullamcorper eos an, ex summo eruditi duo. No sea meis sadipscing scribentur.',
+]
+
 const prices = [
   10.0,
   30.0,
@@ -144,4 +155,5 @@ module.exports = {
   quantities,
   imageUrls,
   sports,
+  descriptions,
 }
