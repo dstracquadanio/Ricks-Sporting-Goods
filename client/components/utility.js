@@ -1,3 +1,6 @@
+import Avatar from '@material-ui/core/Avatar'
+import React from 'react'
+
 export const checkInventoryItemToItems = (
   item,
   allItems,
@@ -62,4 +65,44 @@ export const attachQuantityToCartItem = (item, cart, quantityToAdd) => {
 
   itemToChange.quantity = itemInCart.quantity + quantityToAdd
   return itemToChange
+}
+
+//RENDERING AVATAR IN NAVBAR
+export const avatarLogic = (user) => {
+  if (user.firstName && user.lastName) {
+    const initials = `${user.firstName[0].toUpperCase()}${user.lastName[0].toUpperCase()}`
+    return <Avatar>{initials}</Avatar>
+  }
+  if (user.firstName) {
+    return <Avatar>{`${user.firstName[0].toUpperCase()}`}</Avatar>
+  }
+  if (user.email) {
+    return <Avatar>{`${user.email[0].toUpperCase()}`}</Avatar>
+  } else {
+    return <Avatar />
+  }
+}
+
+//Cart items counter
+export const cartItemReducer = (accum, current) => {
+  return accum + current.quantity
+}
+
+export const binarySearch = (arr, targetId) => {
+  if (arr.length === 0) return {}
+  let left = 0
+  let right = arr.length - 1
+  while (left <= right) {
+    let midElementIdx = Math.floor((left + right) / 2)
+    let id = arr[midElementIdx].id
+
+    if (id < targetId) {
+      left = midElementIdx + 1
+    } else if (id > targetId) {
+      right = midElementIdx - 1
+    } else {
+      return arr[midElementIdx]
+    }
+  }
+  return null
 }
