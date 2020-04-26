@@ -62,6 +62,7 @@ class UserProfile extends Component {
         <h2>Profile</h2>
         <h2>{this.state.firstName + ' ' + this.state.lastName}</h2>
         <h2>{this.state.address}</h2>
+        <h2>{this.state.email}</h2>
         <TextField
           id="filled-basic"
           label="First Name"
