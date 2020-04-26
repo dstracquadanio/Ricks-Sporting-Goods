@@ -13,7 +13,7 @@ function DisconnectedStickyCheckoutBox(props) {
       <div className="container-10">
         <div className="container-11">
           <div className="padding">
-            Total Items In Cart:{' '}
+            Items In Cart:{' '}
             {props.cart.reduce((accum, current) => {
               return accum + Number(current.quantity)
             }, 0)}

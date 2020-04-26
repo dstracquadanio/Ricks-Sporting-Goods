@@ -37,7 +37,7 @@ export class AllItems extends Component {
                 </div>
                 <h2>{item.name}</h2>
                 <h3>Price: ${item.price}</h3>
-                <h3>Quantity: {item.quantity}</h3>
+                <h3>In Stock: {item.quantity}</h3>
                 {this.state.addCartIssue === item.id && (
                   <div className="error">Not enough in stock!</div>
                 )}
