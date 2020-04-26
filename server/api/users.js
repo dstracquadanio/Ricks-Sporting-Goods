@@ -19,37 +19,33 @@ router.get('/', async (req, res, next) => {
 })
 
 //SERVES REQ.CURRENTUSER FOR EVERY ROUTE THAT HAS /:userId
-router.param(
-  'userId',
-  isCurrentUserMiddleware,
-  async (req, res, next, userId) => {
-    try {
-      req.currentUser = await User.findByPk(userId, {
-        attributes: ['id', 'email'],
-        include: [
-          {
-            model: Cart,
-            as: 'CartItems',
-          },
-        ],
-      })
-      if (!req.currentUser) throw new Error()
-      next()
-    } catch (err) {
-      res.status(404).send(`Error at router.param: User at id: ${userId}`)
-      next(err)
-    }
+router.param('userId', async (req, res, next, userId) => {
+  try {
+    req.currentUser = await User.findByPk(userId, {
+      attributes: ['id', 'email'],
+      include: [
+        {
+          model: Cart,
+          as: 'CartItems',
+        },
+      ],
+    })
+    if (!req.currentUser) throw new Error()
+    next()
+  } catch (err) {
+    res.status(404).send(`Error at router.param: User at id: ${userId}`)
+    next(err)
   }
-)
+})
 
 //GET THIS USER'S CART
-router.get('/:userId/cart/', (req, res, next) => {
+router.get('/:userId/cart/', isCurrentUserMiddleware, (req, res, next) => {
   res.json(req.currentUser.CartItems)
 })
 
 //ADD ITEM TO CART, IF ALREADY THERE UPDATE ITEM IN CART
 // Expecting the new total quantity of the cart. (Not incrementing)
-router.put('/:userId', async (req, res, next) => {
+router.put('/:userId', isCurrentUserMiddleware, async (req, res, next) => {
   //Only current user should be allowed to do this?? idk if this is something to address
   try {
     //SECURITY ALERT
@@ -63,29 +59,37 @@ router.put('/:userId', async (req, res, next) => {
 })
 
 //DELETES USER'S CART ON CHECKOUT, AND ADDS THOSE ITEMS TO PURCHASED HISTORY IN DB
-router.delete('/:userId/checkout', async (req, res, next) => {
-  //middleware: security
-  try {
-    const cartArray = req.currentUser.CartItems
-    const newOrderNum = await PurchasedItem.newOrderNumber()
-    for (let item of cartArray) {
-      item.dataValues.orderNumber = newOrderNum
-      await PurchasedItem.create(item.dataValues)
+router.delete(
+  '/:userId/checkout',
+  isCurrentUserMiddleware,
+  async (req, res, next) => {
+    //middleware: security
+    try {
+      const cartArray = req.currentUser.CartItems
+      const newOrderNum = await PurchasedItem.newOrderNumber()
+      for (let item of cartArray) {
+        item.dataValues.orderNumber = newOrderNum
+        await PurchasedItem.create(item.dataValues)
+      }
+      await req.currentUser.removeItems(cartArray.map((item) => item.itemId))
+      res.sendStatus(204)
+    } catch (err) {
+      next(err)
     }
-    await req.currentUser.removeItems(cartArray.map((item) => item.itemId))
-    res.sendStatus(204)
-  } catch (err) {
-    next(err)
   }
-})
+)
 
 //REMOVE A CART ITEM
-router.delete('/:userId/cart/:itemId', async (req, res, next) => {
-  //SECURITY ALERT
-  try {
-    await Cart.destroy({where: {itemId: req.params.itemId}})
-    res.sendStatus(204)
-  } catch (err) {
-    next(err)
+router.delete(
+  '/:userId/cart/:itemId',
+  isCurrentUserMiddleware,
+  async (req, res, next) => {
+    //SECURITY ALERT
+    try {
+      await Cart.destroy({where: {itemId: req.params.itemId}})
+      res.sendStatus(204)
+    } catch (err) {
+      next(err)
+    }
   }
-})
+)
