@@ -124,15 +124,42 @@ button {
 .container-2 {
   display: flex;
   flex-direction: row;
-  margin-bottom: 2em;
-  margin-top: 2em;
+  margin-top: 1.7em;
   margin-left: 2em;
+  height: 6em;
+  width: 75%;
+  padding: 1em;
+  background-color: white;
+  transition: box-shadow 0.3s ease;
+  /* border: solid black 1px; */
+}
+.container-2:hover {
+  box-shadow: 0px 0px 2px 0px;
 }
 
-.container-2 img {
+.container-2-img {
   /* saying max width is 100% of container. Important rule! Height auto adjusts to width*/
-  max-width: 20%;
-  height: auto;
+  display: flex;
+  max-height: 100%;
+  width: 20%;
+}
+
+.container-2-img img {
+  margin: auto; /* After you set height or width (em) this will preserve the aspect ratio */
+  max-height: 100%;
+  width: 6em;
+}
+
+.container-2a {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.cart-title {
+  font-weight: bold;
 }
 
 .container-3 {
@@ -161,27 +188,44 @@ button {
   width: 50%;
   height: 10em;
   padding-top: 0;
-  padding-left: 1em;
-  padding-right: 1em;
-  margin-right: 1em;
+  margin-top: 1.5em;
+  margin-right: 5.5em;
   font-size: larger;
   display: flex;
   flex-direction: column;
-  background-color: lightblue;
-  /* /* z-index: 2; */
+  background-color: white;
   position: sticky;
   top: 0;
+  transition: box-shadow 0.3s ease;
+}
+
+.container-8:hover {
+  box-shadow: 0px 0px 2px 0px;
 }
 
 .container-9 {
   display: flex;
   justify-content: center;
+  background-color: #0e6252;
+  color: white;
+  margin-bottom: 2em;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.container-8 h3 {
+  margin-block-start: 0;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  /* margin-block-end: 0; */
 }
 
 .container-10 {
   display: flex;
   justify-content: space-between;
   font-weight: bold;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .container-11 {
@@ -193,7 +237,7 @@ button {
   padding-bottom: 0.5em;
 }
 
-.checkout {
+/* .checkout {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -203,6 +247,10 @@ button {
   color: black;
   font-size: medium;
   padding: 1em;
+} */
+
+.checkout {
+  font-weight: bold;
 }
 
 .plus {
@@ -433,4 +481,15 @@ button {
 
 #search-icon {
   padding: 15px;
+}
+
+#delete-icon {
+  cursor: pointer;
+  height: 20px;
+  padding-right: 1em;
+}
+
+#plus-minus-icons {
+  cursor: pointer;
+  height: 0.8em;
 }

@@ -1,11 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import CompleteButton from '@material-ui/core/Button'
+import history from '../history'
 
 function DisconnectedStickyCheckoutBox(props) {
   return (
-    <div className="boxes container-8">
-      <h3 className="container-9">Complete Order</h3>
+    <div className="container-8">
+      {/* <h3 className="container-9">Complete Order</h3> */}
+      <div className="container-9">
+        <img src="/CompleteOrder.png" alt="completeOrder" />
+      </div>
       <div className="container-10">
         <div className="container-11">
           <div className="padding">
@@ -23,9 +27,15 @@ function DisconnectedStickyCheckoutBox(props) {
               .toFixed(2)}
           </div>
         </div>
-        <Link to="/checkout" className="checkout">
+        <CompleteButton
+          variant="contained"
+          color="secondary"
+          onClick={() => {
+            history.push('/checkout')
+          }}
+        >
           Checkout
-        </Link>
+        </CompleteButton>
       </div>
     </div>
   )

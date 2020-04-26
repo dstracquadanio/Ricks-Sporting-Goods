@@ -41,7 +41,7 @@ class DisconnectedCheckoutForm extends Component {
 
     this.setState({
       firstName: '',
-      LastName: '',
+      lastName: '',
       address: '',
       email: '',
     })
