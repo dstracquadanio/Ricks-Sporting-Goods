@@ -1,17 +1,7 @@
 const router = require('express').Router()
 const {User, Cart, PurchasedItem, Item} = require('../db/models')
+const {isAdminMiddleware, isCurrentUserMiddleware} = require('./middleware')
 module.exports = router
-
-const isAdminMiddleware = (req, res, next) => {
-  const currentUser = req.session.user
-  if (currentUser && currentUser.isAdmin) {
-    next()
-  } else {
-    const error = new Error('Access Denied!')
-    error.status(401)
-    next(error)
-  }
-}
 
 //GET ALL USERS
 router.get('/', async (req, res, next) => {
@@ -29,24 +19,28 @@ router.get('/', async (req, res, next) => {
 })
 
 //SERVES REQ.CURRENTUSER FOR EVERY ROUTE THAT HAS /:userId
-router.param('userId', async (req, res, next, userId) => {
-  try {
-    req.currentUser = await User.findByPk(userId, {
-      attributes: ['id', 'email'],
-      include: [
-        {
-          model: Cart,
-          as: 'CartItems',
-        },
-      ],
-    })
-    if (!req.currentUser) throw new Error()
-    next()
-  } catch (err) {
-    res.status(404).send(`Error at router.param: User at id: ${userId}`)
-    next(err)
+router.param(
+  'userId',
+  isCurrentUserMiddleware,
+  async (req, res, next, userId) => {
+    try {
+      req.currentUser = await User.findByPk(userId, {
+        attributes: ['id', 'email'],
+        include: [
+          {
+            model: Cart,
+            as: 'CartItems',
+          },
+        ],
+      })
+      if (!req.currentUser) throw new Error()
+      next()
+    } catch (err) {
+      res.status(404).send(`Error at router.param: User at id: ${userId}`)
+      next(err)
+    }
   }
-})
+)
 
 //GET THIS USER'S CART
 router.get('/:userId/cart/', (req, res, next) => {
