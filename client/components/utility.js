@@ -71,13 +71,15 @@ export const attachQuantityToCartItem = (item, cart, quantityToAdd) => {
 export const avatarLogic = (user) => {
   if (user.firstName && user.lastName) {
     const initials = `${user.firstName[0].toUpperCase()}${user.lastName[0].toUpperCase()}`
-    return <Avatar>{initials}</Avatar>
+    return <Avatar variant="rounded">{initials}</Avatar>
   }
   if (user.firstName) {
-    return <Avatar>{`${user.firstName[0].toUpperCase()}`}</Avatar>
+    return (
+      <Avatar variant="rounded">{`${user.firstName[0].toUpperCase()}`}</Avatar>
+    )
   }
   if (user.email) {
-    return <Avatar>{`${user.email[0].toUpperCase()}`}</Avatar>
+    return <Avatar variant="square">{`${user.email[0].toUpperCase()}`}</Avatar>
   } else {
     return <Avatar variant="square" />
   }
@@ -86,4 +88,23 @@ export const avatarLogic = (user) => {
 //Cart items counter
 export const cartItemReducer = (accum, current) => {
   return accum + current.quantity
+}
+
+export const binarySearch = (arr, targetId) => {
+  if (arr.length === 0) return {}
+  let left = 0
+  let right = arr.length - 1
+  while (left <= right) {
+    let midElementIdx = Math.floor((left + right) / 2)
+    let id = arr[midElementIdx].id
+
+    if (id < targetId) {
+      left = midElementIdx + 1
+    } else if (id > targetId) {
+      right = midElementIdx - 1
+    } else {
+      return arr[midElementIdx]
+    }
+  }
+  return null
 }
