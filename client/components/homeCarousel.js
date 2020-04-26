@@ -82,15 +82,15 @@ export default class homeCarousel extends Component {
           <div className="container-center-column">
             <div className="container-row">
               <ImgMediaCard
-                sport="eSports"
+                sport="gaming"
                 imageUrl="https://www.reviews.org/app/uploads/2019/06/best-internet-for-gaming_feat2.jpeg"
               />
               <ImgMediaCard
-                sport="eSports"
+                sport="gaming"
                 imageUrl="https://2txp1g4bjeyvg8rqz491ffs8-wpengine.netdna-ssl.com/wp-content/uploads/2019/12/A-Guide-To-Gaming-Platforms-For-Aspiring-Professional-Gamers.jpg"
               />
               <ImgMediaCard
-                sport="eSports"
+                sport="gaming"
                 imageUrl="https://cdn.logojoy.com/wp-content/uploads/20191003120146/How-to-Start-a-Gaming-Channel-02-1024x624.png"
               />
             </div>
