@@ -2,70 +2,85 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {binarySearch} from './utility'
 import Paper from '@material-ui/core/Paper'
-import Avatar from '@material-ui/core/Avatar'
-import CardHeader from '@material-ui/core/CardHeader'
-import IconButton from '@material-ui/core/IconButton'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
-import CardMedia from '@material-ui/core/CardMedia'
-import {
-  Card,
-  CardActionArea,
-  Divider,
-  MenuItem,
-  Select,
-  Button,
-} from '@material-ui/core'
-import {makeStyles} from '@material-ui/core/styles'
-
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 620,
-  },
-})
+import {Divider, Select, Button, MenuItem} from '@material-ui/core'
+import {updateCartThunk} from '../store/Cart'
+import history from '../history'
 
 function SingleItemView(props) {
   const allItems = props.allItems
   const itemId = props.match.params.id
   const item = binarySearch(allItems, itemId)
-  const classes = useStyles()
+
+  const selectMenuMaker = (currentNum) => (
+    <MenuItem value={currentNum}>{currentNum}</MenuItem>
+  )
+  const selectElementQuantLogic = (stockNum) => {
+    if (stockNum > 10) {
+      stockNum = 10
+    }
+    for (let i = 1; i <= stockNum; i++) {
+      console.log('here', stockNum)
+      return selectMenuMaker(i)
+    }
+  }
   return (
     <Paper className="single-item-page">
-      {/* <Card className={classes.root}>
-        <CardActionArea>
-          <CardMedia component="img" height="620" image={item.imageUrl} />
-        </CardActionArea>
-      </Card> */}
-      <div className="single-item-image">
-        <img src={item.imageUrl} alt={`${item.name} image`} />
-      </div>
-      <div className="description container-center-column ">
-        <p className="a">{item.name}</p>
-        <p>SECTION FOR REVIEWS</p>
-        {/* <Divider/> */}
-        <p>{`$${item.price}`}</p>
-        <p>QTY</p>
-        <div>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            // value={QTY}
-            // onChange={handleChange}
-          ></Select>
-          <Button variant="contained">Add to cart</Button>
+      <div className="single-item-page-container">
+        <div className="single-item-image">
+          <img src={item.imageUrl} alt={`${item.name} image`} />
         </div>
+        <div className="description container-center-column ">
+          <p className="title">{item.name && item.name.toUpperCase()}</p>
 
-        <p>Description</p>
-        <p>{item.description}</p>
+          <Divider />
+          <div className="container-even-row price-quant">
+            <p className="price">{`$${item.price}`}</p>
+            <p className="price">Left in stock: {item.quantity}</p>
+          </div>
+          <p>QTY</p>
+
+          <form onSubmit={(event) => props.handleSubmit(event, item, props)}>
+            <Select name="quantity">
+              <MenuItem value={1}>currentNum</MenuItem>
+              {selectElementQuantLogic(item.quantity)}
+            </Select>
+            <Button type="submit" variant="contained">
+              Add to cart
+            </Button>
+          </form>
+
+          <p className="d">DESCRIPTION</p>
+          <Divider />
+          <p className="description-text">{item.description}</p>
+        </div>
       </div>
     </Paper>
   )
 }
 
 const mapState = (state) => ({
+  user: state.user,
   allItems: state.items,
 })
 
-export default connect(mapState, null)(SingleItemView)
+const mapDispatch = (dispatch) => ({
+  updateCart: (obj) => dispatch(updateCartThunk(obj)),
+  handleSubmit: async function handleSubmit(event, currentItem, props) {
+    event.preventDefault()
+    const updatedItem = {
+      ...currentItem,
+      quantity: +event.target.quantity.value,
+    }
+    const objUserItem = {
+      user: props.user,
+      item: updatedItem,
+    }
+    await props.updateCart(objUserItem)
+    history.push('/cart')
+  },
+})
+
+export default connect(mapState, mapDispatch)(SingleItemView)
 
 //DARREN's stuff
 // <div>
@@ -91,4 +106,18 @@ export default connect(mapState, null)(SingleItemView)
 //   border: '1px solid #ddd',
 //   borderRadius: '4px',
 //   padding: '5px',
+// }
+
+// const handleSubmit = async (event, currentItem) => {
+//   event.preventDefault()
+//   const updatedItem = {
+//     ...currentItem,
+//     quantity: event.target.quantity.value,
+//   }
+//   const objUserItem = {
+//     user: props.user,
+//     item: updatedItem,
+//   }
+//   await props.updateCart(objUserItem)
+//   history.push('/cart')
 // }
