@@ -10,6 +10,7 @@ import VpnKeyIcon from '@material-ui/icons/VpnKey'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import {withStyles} from '@material-ui/core/styles'
 import history from '../history'
+import Divider from '@material-ui/core/Divider'
 
 export default function AccountMenu(props) {
   const StyledMenu = withStyles({
@@ -17,6 +18,7 @@ export default function AccountMenu(props) {
       border: '1px solid #d3d4d5',
       backgroundColor: '#F7F5FB',
       borderRadius: '1px',
+      width: '300px',
     },
   })((props) => <Menu {...props} />)
 
@@ -55,12 +57,12 @@ export default function AccountMenu(props) {
           onClose={handleClose}
         >
           <MenuItem onClick={handleClose /* handleRedirect('profile') */}>
-            <ListItemIcon>
+            <ListItemIcon className="test">
               <PersonIcon />
             </ListItemIcon>
             Profile
           </MenuItem>
-          <hr />
+          <Divider />
           <MenuItem onClick={logoutAndClose}>
             <ListItemIcon>
               <ExitToAppIcon />

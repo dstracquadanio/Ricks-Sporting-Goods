@@ -71,17 +71,15 @@ export const attachQuantityToCartItem = (item, cart, quantityToAdd) => {
 export const avatarLogic = (user) => {
   if (user.firstName && user.lastName) {
     const initials = `${user.firstName[0].toUpperCase()}${user.lastName[0].toUpperCase()}`
-    return <Avatar variant="rounded">{initials}</Avatar>
+    return <Avatar>{initials}</Avatar>
   }
   if (user.firstName) {
-    return (
-      <Avatar variant="rounded">{`${user.firstName[0].toUpperCase()}`}</Avatar>
-    )
+    return <Avatar>{`${user.firstName[0].toUpperCase()}`}</Avatar>
   }
   if (user.email) {
-    return <Avatar variant="square">{`${user.email[0].toUpperCase()}`}</Avatar>
+    return <Avatar>{`${user.email[0].toUpperCase()}`}</Avatar>
   } else {
-    return <Avatar variant="square" />
+    return <Avatar />
   }
 }
 

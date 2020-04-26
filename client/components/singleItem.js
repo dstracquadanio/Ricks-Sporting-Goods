@@ -1,24 +1,71 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {binarySearch} from './utility'
+import Paper from '@material-ui/core/Paper'
+import Avatar from '@material-ui/core/Avatar'
+import CardHeader from '@material-ui/core/CardHeader'
+import IconButton from '@material-ui/core/IconButton'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
+import CardMedia from '@material-ui/core/CardMedia'
+import {
+  Card,
+  CardActionArea,
+  Divider,
+  MenuItem,
+  Select,
+  Button,
+} from '@material-ui/core'
+import {makeStyles} from '@material-ui/core/styles'
 
-export class SingleItem extends React.Component {
-  render() {
-    // const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    // console.log(binarySearch(arr, 5))
-    const items = this.props.items
-    let itemId = this.props.match.params.id
-    // console.log()
-    const item = binarySearch(items, +itemId)
-    return <div>{item.name}</div>
-  }
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 620,
+  },
+})
+
+function SingleItemView(props) {
+  const allItems = props.allItems
+  const itemId = props.match.params.id
+  const item = binarySearch(allItems, itemId)
+  const classes = useStyles()
+  return (
+    <Paper className="single-item-page">
+      {/* <Card className={classes.root}>
+        <CardActionArea>
+          <CardMedia component="img" height="620" image={item.imageUrl} />
+        </CardActionArea>
+      </Card> */}
+      <div className="single-item-image">
+        <img src={item.imageUrl} alt={`${item.name} image`} />
+      </div>
+      <div className="description container-center-column ">
+        <p className="a">{item.name}</p>
+        <p>SECTION FOR REVIEWS</p>
+        {/* <Divider/> */}
+        <p>{`$${item.price}`}</p>
+        <p>QTY</p>
+        <div>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            // value={QTY}
+            // onChange={handleChange}
+          ></Select>
+          <Button variant="contained">Add to cart</Button>
+        </div>
+
+        <p>Description</p>
+        <p>{item.description}</p>
+      </div>
+    </Paper>
+  )
 }
 
 const mapState = (state) => ({
-  items: state.items,
+  allItems: state.items,
 })
 
-export default connect(mapState, null)(SingleItem)
+export default connect(mapState, null)(SingleItemView)
 
 //DARREN's stuff
 // <div>

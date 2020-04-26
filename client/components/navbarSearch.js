@@ -18,26 +18,28 @@ class DisconnectedSearchBar extends Component {
 
   render() {
     return (
-      <Paper
-        className="searchbar"
-        variant="outlined"
-        elevation={0}
-        component="form"
-      >
-        <SearchIcon id="search-icon" />
-
-        <InputBase
-          fullWidth={true}
-          margin="dense"
-          name="searchBar"
-          type="search"
-          value={this.props.searchBar}
-          placeholder="Search..."
-          onChange={this.handleChange}
-        />
-
-        <Divider orientation="vertical" />
-      </Paper>
+      <div className="searchbar">
+        <Paper
+          className="searchbar"
+          variant="outlined"
+          elevation={0}
+          component="form"
+        >
+          <SearchIcon id="search-icon" />
+          <InputBase
+            // fullWidth={true}
+            // margin="dense"
+            className="searchbar-input"
+            tabIndex="1"
+            color="secondary"
+            name="searchBar"
+            type="search"
+            value={this.props.searchBar}
+            placeholder="Search..."
+            onChange={this.handleChange}
+          />
+        </Paper>
+      </div>
     )
   }
 }

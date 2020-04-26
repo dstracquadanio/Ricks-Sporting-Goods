@@ -326,7 +326,6 @@ button {
 
 .MuiMenu-list {
   outline: 0;
-  width: 9.5em;
 }
 
 .MuiMenu-list hr {
@@ -343,15 +342,22 @@ button {
 }
 
 .searchbar {
-  width: 200px;
+  height: 40px;
+  /* width: 200px; */
   display: flex;
   align-items: center;
-  padding-right: 20px;
+  /* padding-right: 20px; */
+}
+/*
+.MuiInputBase-input {
+  background-color: black !important;
+  width: 100px;
+  transition: width 2s ease;
 }
 
-.searchbar:focus {
-  width: 100px;
-}
+.MuiInputBase-input:focus {
+  width: 250px;
+} */
 
 .ricks-color {
   background-color: #0e6252;
@@ -362,6 +368,37 @@ button {
 
 .ricks-color img {
   height: 100%;
+}
+
+.single-item-page {
+  display: flex;
+  margin: 30px;
+  padding: 75px;
+  padding-left: 350px;
+  padding-right: 350px;
+}
+
+.single-item-image {
+  align-items: flex-end;
+  display: flex;
+  width: 1200px;
+}
+
+.single-item-image img {
+  width: 90%;
+  margin: auto;
+  height: auto;
+}
+
+.description {
+  align-items: flex-start;
+  margin-left: 50px;
+}
+
+.description p.a {
+  font: 40px Arial, sans-serif;
+  font-weight: lighter;
+  font-variant: small-caps;
 }
 
 /* IDs */
