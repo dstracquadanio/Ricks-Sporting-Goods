@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const {User, Cart, PurchasedItem, Item} = require('../db/models')
-const {isAdminMiddleware, isCurrentUserMiddleware} = require('./middleware')
+const {isCurrentUserMiddleware} = require('./middleware')
 module.exports = router
 
 //GET ALL USERS

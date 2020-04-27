@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const {Item} = require('../db/models')
-const {isAdminMiddleware, isCurrentUserMiddleware} = require('./middleware')
+const {isAdminMiddleware} = require('./middleware')
 module.exports = router
 
 //GET ALL ITEMS
@@ -61,7 +61,7 @@ router.post('/', isAdminMiddleware, async (req, res, next) => {
 })
 
 //ADMIN ONLY - DELETE AN ITEM FROM INVENTORY
-router.delete('/:itemId', isCurrentUserMiddleware, async (req, res, next) => {
+router.delete('/:itemId', isAdminMiddleware, async (req, res, next) => {
   //need is isAdmin middleware here
   try {
     await req.currentItem.destroy()
