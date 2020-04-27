@@ -34,6 +34,7 @@ function saveStateToStorage(state) {
 function loadStateFromStorage() {
   try {
     const stringState = localStorage.getItem('state')
+    if (stringState === null) return undefined
     return JSON.parse(stringState)
   } catch (error) {
     console.log(error)
