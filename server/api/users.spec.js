@@ -57,7 +57,7 @@ describe('User routes', () => {
           ...testItem2.dataValues,
           itemId: testItem2.id,
         })
-        .expect(201)
+        .expect(200)
       const res = await request(app).get(`/api/users/${joe.id}/cart`)
       expect(res.body[0].name).to.be.equal('toilet paper')
       expect(res.body[1].name).to.be.equal('paper towel')
@@ -72,7 +72,7 @@ describe('User routes', () => {
           quantity: 12, //change the quantity of cart from 10 to 12
           itemId: testItem1.id,
         })
-        .expect(201)
+        .expect(200)
       const updatedCart = await request(app).get(`/api/users/${joe.id}/cart`)
       expect(updatedCart.body[0].quantity).to.be.equal(12)
     })
@@ -97,7 +97,6 @@ describe('User routes', () => {
           ...testItem2.dataValues,
           itemId: testItem2.id,
         }) //Adds second item to the cart
-        .expect(201)
       await request(app)
         .delete(`/api/users/${joe.id}/cart/${testItem2.id}`)
         .expect(204) //then remove that same item from cart

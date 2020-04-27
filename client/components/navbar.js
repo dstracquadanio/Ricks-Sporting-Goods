@@ -53,11 +53,14 @@ const Navbar = ({
           <NavLink to="/football/items" onClick={() => updateSearch('')}>
             Football
           </NavLink>
+          <NavLink to="/soccer/items" onClick={() => updateSearch('')}>
+            Soccer
+          </NavLink>
           <NavLink to="/baseball/items" onClick={() => updateSearch('')}>
             Baseball
           </NavLink>
-          <NavLink to="/eSports/items" onClick={() => updateSearch('')}>
-            eSports
+          <NavLink to="/gaming/items" onClick={() => updateSearch('')}>
+            Gaming
           </NavLink>
           <NavLink to="/users/profile">{avatarLogic(user)}</NavLink>
           <NavLink to="/cart" onClick={() => updateSearch('')}>

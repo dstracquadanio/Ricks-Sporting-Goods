@@ -33,6 +33,7 @@ export const updateCart = (cartItem) => {
 }
 
 export const updateCartThunk = (obj) => {
+  //expects obj with user and item
   return async (dispatch) => {
     try {
       let cartItem = obj.item
