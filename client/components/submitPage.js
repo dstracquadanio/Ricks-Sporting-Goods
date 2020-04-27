@@ -5,7 +5,7 @@ import CheckCircleTwoToneIcon from '@material-ui/icons/CheckCircle'
 
 class DisconnectedSubmitPage extends Component {
   componentDidMount() {
-    console.log('hi')
+    // console.log('hi')
   }
 
   render() {
