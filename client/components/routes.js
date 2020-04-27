@@ -33,7 +33,7 @@ class Routes extends Component {
     return (
       <Fragment>
         {load && (
-          <Backdrop /*className={classes.backdrop}*/ open={load}>
+          <Backdrop open={load}>
             <CircularProgress color="inherit" />
           </Backdrop>
         )}
@@ -47,10 +47,10 @@ class Routes extends Component {
           <Route path="/cart" component={Cart} />
           <Route path="/checkout" component={CheckoutForm} />
           <Route path="/submitPage" component={SubmitPage} />
+          <Route path="/home" component={UserHome} />
           {isLoggedIn && (
             <Switch>
               {/* Routes placed here are only available after logging in */}
-              <Route path="/home" component={UserHome} />
               <Route exact path="/users/profile" component={userProfile} />
               {isLoggedIn && isAdmin && (
                 <Switch>
