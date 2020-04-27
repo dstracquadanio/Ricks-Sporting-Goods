@@ -92,7 +92,7 @@ router.delete(
       next(err)
     }
   }
-})
+)
 
 //UPDATE USER PROFILE
 router.put('/profile/:id', async (req, res, next) => {
