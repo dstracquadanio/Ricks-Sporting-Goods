@@ -42,13 +42,13 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
-            <Route exact path="/users/profile" component={userProfile} />
+            <Route exact path="/user/profile" component={userProfile} />
             {isLoggedIn && isAdmin && (
               <Switch>
-                <Route path="/users" component={ViewUsers} />
-                <Route path="/addItems" component={addItems} />
-                <Route exact path="/updateitems" component={itemList} />
-                <Route path="/updateitems/:id" component={updateItems} />
+                <Route path="/admin/users" component={ViewUsers} />
+                <Route path="/admin/addItems" component={addItems} />
+                <Route exact path="/admin/updateItems" component={itemList} />
+                <Route path="/admin/updateItems/:id" component={updateItems} />
               </Switch>
             )}
             <Route component={UserHome} />

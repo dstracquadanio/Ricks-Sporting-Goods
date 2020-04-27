@@ -4,10 +4,12 @@ import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import {logout} from '../store'
 import AccountMenu from './accountMenu'
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import SearchBar from './navbarSearch'
 import {updateBar} from '../store/searchBar'
 import {avatarLogic, cartItemReducer} from './utility'
+import IconButton from '@material-ui/core/IconButton'
+import StyledCart from './styledCartBadge'
+import NavDrawer from './navDrawer'
 
 const Navbar = ({
   cart,
@@ -21,7 +23,12 @@ const Navbar = ({
     <div>
       <nav>
         <div className="left-nav">
-          <AccountMenu
+          {/* <AccountMenu
+            isLoggedIn={isLoggedIn}
+            isAdmin={isAdmin}
+            handleLogout={handleClick}
+          /> */}
+          <NavDrawer
             isLoggedIn={isLoggedIn}
             isAdmin={isAdmin}
             handleLogout={handleClick}
@@ -31,17 +38,13 @@ const Navbar = ({
             <img id="logo" src="/Logo.png" alt="logo" />
           </NavLink>
           <SearchBar />
-          {
-            isAdmin && (
-              <Fragment>
-                <NavLink to="/users">VIEW USERS</NavLink>
-                <NavLink to="/additems">ADD AN ITEM</NavLink>
-                <NavLink to="/updateitems">UPDATE/REMOVE ITEM</NavLink>
-              </Fragment>
-            ) /* : (
-            ''
-          ) */
-          }
+          {/* {isAdmin && (
+            <Fragment>
+              <NavLink to="/users">VIEW USERS</NavLink>
+              <NavLink to="/addItems">ADD AN ITEM</NavLink>
+              <NavLink to="/updateItems">UPDATE/REMOVE ITEM</NavLink>
+            </Fragment>
+          )} */}
         </div>
         <div className="right-nav">
           <NavLink to="/items" onClick={() => updateSearch('')}>
@@ -62,10 +65,11 @@ const Navbar = ({
           <NavLink to="/gaming/items" onClick={() => updateSearch('')}>
             Gaming
           </NavLink>
-          <NavLink to="/users/profile">{avatarLogic(user)}</NavLink>
+          <NavLink to="/user/profile">{avatarLogic(user)}</NavLink>
           <NavLink to="/cart" onClick={() => updateSearch('')}>
-            <ShoppingCartIcon id="shopping-cart-img" fontSize="large" />
-            <span id="oval">{cart.reduce(cartItemReducer, 0)}</span>
+            {/* <IconButton> */}
+            <StyledCart cartTotal={cart.reduce(cartItemReducer, 0)} />
+            {/* </IconButton> */}
           </NavLink>
         </div>
       </nav>
