@@ -9,6 +9,7 @@ import {updateBar} from '../store/searchBar'
 import {avatarLogic, cartItemReducer} from './utility'
 import IconButton from '@material-ui/core/IconButton'
 import StyledCart from './styledCartBadge'
+import NavDrawer from './navDrawer'
 
 const Navbar = ({
   cart,
@@ -22,7 +23,12 @@ const Navbar = ({
     <div>
       <nav>
         <div className="left-nav">
-          <AccountMenu
+          {/* <AccountMenu
+            isLoggedIn={isLoggedIn}
+            isAdmin={isAdmin}
+            handleLogout={handleClick}
+          /> */}
+          <NavDrawer
             isLoggedIn={isLoggedIn}
             isAdmin={isAdmin}
             handleLogout={handleClick}
@@ -32,13 +38,13 @@ const Navbar = ({
             <img id="logo" src="/Logo.png" alt="logo" />
           </NavLink>
           <SearchBar />
-          {isAdmin && (
+          {/* {isAdmin && (
             <Fragment>
               <NavLink to="/users">VIEW USERS</NavLink>
-              <NavLink to="/additems">ADD AN ITEM</NavLink>
-              <NavLink to="/updateitems">UPDATE/REMOVE ITEM</NavLink>
+              <NavLink to="/addItems">ADD AN ITEM</NavLink>
+              <NavLink to="/updateItems">UPDATE/REMOVE ITEM</NavLink>
             </Fragment>
-          )}
+          )} */}
         </div>
         <div className="right-nav">
           <NavLink to="/items" onClick={() => updateSearch('')}>

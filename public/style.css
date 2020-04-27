@@ -391,15 +391,18 @@ button {
   align-items: center;
   /* padding-right: 20px; */
 }
-/*
-.MuiInputBase-input {
-  background-color: black !important;
-  width: 100px;
-  transition: width 2s ease;
+
+/* .MuiDrawer-paperAnchorLeft {
+  background-color: #7cb4b8 #9ed2d4 !important;
+} */
+
+/* DRAWER COLORS */
+.MuiDrawer-paperAnchorLeft {
+  background-color: #f7f4ea !important;
 }
 
-.MuiInputBase-input:focus {
-  width: 250px;
+/* .MuiListItem-button {
+  color: white !important;
 } */
 
 .ricks-color {

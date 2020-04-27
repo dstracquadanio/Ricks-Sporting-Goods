@@ -45,10 +45,10 @@ class Routes extends Component {
             <Route exact path="/user/profile" component={userProfile} />
             {isLoggedIn && isAdmin && (
               <Switch>
-                <Route path="/users" component={ViewUsers} />
-                <Route path="/addItems" component={addItems} />
-                <Route exact path="/updateitems" component={itemList} />
-                <Route path="/updateitems/:id" component={updateItems} />
+                <Route path="/admin/users" component={ViewUsers} />
+                <Route path="/admin/addItems" component={addItems} />
+                <Route exact path="/admin/updateItems" component={itemList} />
+                <Route path="/admin/updateItems/:id" component={updateItems} />
               </Switch>
             )}
             <Route component={UserHome} />
