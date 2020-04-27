@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {Item} = require('../db/models')
+const {isAdminMiddleware} = require('./middleware')
 module.exports = router
 
 //GET ALL ITEMS
@@ -49,7 +50,7 @@ router.put('/checkout', async (req, res, next) => {
 })
 
 //ADMIN ONLY - POST A NEW ITEM TO INVENTORY
-router.post('/', async (req, res, next) => {
+router.post('/', isAdminMiddleware, async (req, res, next) => {
   //need is isAdmin middleware here
   try {
     res.json(await Item.create(req.body))
@@ -60,7 +61,7 @@ router.post('/', async (req, res, next) => {
 })
 
 //ADMIN ONLY - DELETE AN ITEM FROM INVENTORY
-router.delete('/:itemId', async (req, res, next) => {
+router.delete('/:itemId', isAdminMiddleware, async (req, res, next) => {
   //need is isAdmin middleware here
   try {
     await req.currentItem.destroy()
@@ -71,7 +72,7 @@ router.delete('/:itemId', async (req, res, next) => {
 })
 
 //ADMIN ONLY - EDIT ITEM INFORMATION
-router.put('/:itemId', async (req, res, next) => {
+router.put('/:itemId', isAdminMiddleware, async (req, res, next) => {
   //need is isAdmin middleware here
   try {
     res.status(200)

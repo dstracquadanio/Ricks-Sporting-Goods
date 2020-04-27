@@ -56,7 +56,7 @@ export default function AccountMenu(props) {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose /* handleRedirect('profile') */}>
+          <MenuItem onClick={() => handleRedirect('user/profile')}>
             <ListItemIcon className="test">
               <PersonIcon />
             </ListItemIcon>
