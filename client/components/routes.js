@@ -38,7 +38,6 @@ class Routes extends Component {
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={CheckoutForm} />
         <Route path="/submitPage" component={SubmitPage} />
-
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -57,6 +56,7 @@ class Routes extends Component {
         )}
         {/* Displays our Login component as a fallback */}
         <Route component={UserHome} />
+        {/* we want the url to show /home when catching all */}
       </Switch>
     )
   }
