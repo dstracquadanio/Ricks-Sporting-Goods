@@ -58,6 +58,8 @@ class Routes extends Component {
                   <Route path="/addItems" component={addItems} />
                   <Route exact path="/updateitems" component={itemList} />
                   <Route path="/updateitems/:id" component={updateItems} />
+                  <Route path="/home" component={UserHome} />
+
                   <Route component={UserHome} />
                 </Switch>
               )}
@@ -65,6 +67,7 @@ class Routes extends Component {
             </Switch>
           )}
           {/* Displays our Login component as a fallback */}
+
           <Route component={UserHome} />
           {/* we want the url to show /home when catching all */}
         </Switch>
