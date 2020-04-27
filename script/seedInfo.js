@@ -1,10 +1,15 @@
+// Seeding Instructions:
+// Add a name, price, quantity, imageUrl, and sport to the END of their respective
+// arrays. That process will seed 1 item
+// IMPORTANT
+
 const names = [
   'Basketball Hoop',
   'Football Helmet',
   'Football',
   'Basketball',
   'Baseball Glove',
-  'Signed Cam Ratliff Photo',
+  'Signed LeBron James Photo',
   'Signed Anderson Chan Mouse',
   'Signed Darren Hu Basketball',
   'Field Goal Posts',
@@ -24,6 +29,24 @@ const names = [
   'Yankees Jersey',
   'Red Sox Jersey',
   'Cavaliers Jersey',
+  'Manchester United Jersey',
+  'Ronaldo Jersey',
+  'Messi Jersey',
+  'Team USA Shirt',
+  'Soccer Ball',
+  'Soccer Cleats',
+  'Shin Guards',
+  'Goalie Gloves',
+  'Real Madrid Jersey',
+  'Barcelona Jersey',
+  'Xbox One S',
+  'Playstation 4',
+  'Nintendo Switch',
+  'Xbox One Controller',
+  'Playstation 4 Controller',
+  'Nintendo Switch Controller',
+  'Fortnite V-Bucks Gift Cards',
+  'Call of Duty Modern Warfare',
 ]
 
 const descriptions = [
@@ -32,10 +55,19 @@ const descriptions = [
   'Composite Leather. Imported. Official Size Football. NFL Branded. Super Grip Composite cover for a premium feel. Butyl rubber bladder for advanced air retention. Recommended for players 14+',
   'THE #1 INDOOR BALL: The Evolution is the #1 indoor game basketball in America, on more courts than any other basketball. SIGNATURE EVO FEEL: The soft feel that the Evolution basketball is famous for is due it’s Cushion Core Carcass, making the ball softer to the touch and easier to grip around the rim',
   'Easy break in: The soft synthetic leather material is lightweight and responsive making the glove easy and quick to break in so it will be game ready in no time for baseball, softball, or teeball',
+]
+
+const lorem = [
   'Lorem ipsum dolor sit amet, repudiandae philosophia instructior eam in, ut choro verterem argumentum vel, eu fugit dicant blandit usu. Congue soleat prodesset an vim, eam iudicabit inciderint at. Eam te wisi disputando delicatissimi, indoctum accusamus quaerendum duo ex. At vix veri magna constituto, cu viris lobortis eum, rebum legimus molestie sea an.',
   'Eum putant singulis ad, ex nec omnium indoctum, per exerci menandri at. Ne exerci suscipit dissentiunt pri. Ex regione omnesque insolens est, has in saperet mandamus. Usu ex alia novum. Cibo similique vix id, mundi minimum vituperatoribus ea eam, vel cibo probatus in.',
   'Lorem electram vituperata qui in. Aperiam saperet convenire qui ad. Vix et nisl labitur, no eius dissentiet pro. Ei eum accumsan patrioque consectetuer. Ea graeci fabulas est, his alia euismod alienum eu. Simul singulis ullamcorper eos an, ex summo eruditi duo. No sea meis sadipscing scribentur.',
 ]
+
+let seedLimit = names.length - descriptions.length
+for (let i = 0; i < seedLimit; i++) {
+  let loremIndex = i % lorem.length
+  descriptions.push(lorem[loremIndex])
+}
 
 const prices = [
   10.0,
@@ -63,6 +95,24 @@ const prices = [
   100.0,
   100.0,
   100.0,
+  100.0,
+  100.0,
+  100.0,
+  100.0,
+  100.0,
+  100.0,
+  100.0,
+  100.0,
+  100.0,
+  100.0,
+  150.0,
+  150.0,
+  150.0,
+  50.0,
+  50.0,
+  50.0,
+  10.0,
+  60.0,
 ]
 
 const quantities = [
@@ -91,6 +141,24 @@ const quantities = [
   50,
   50,
   50,
+  25,
+  25,
+  25,
+  25,
+  25,
+  25,
+  25,
+  25,
+  25,
+  25,
+  75,
+  75,
+  75,
+  75,
+  75,
+  75,
+  75,
+  75,
 ]
 
 const imageUrls = [
@@ -119,6 +187,24 @@ const imageUrls = [
   'https://cdn11.bigcommerce.com/s-1nrqf/images/stencil/1280x1280/products/156420/271118/New_York_Yankees_Big_Tall_Replica_Home_Jersey_by_Nike2_2__91304.1579562366.jpg?c=2&imbypass=on',
   'https://cdn2.bigcommerce.com/server2700/18e00/products/5757/images/15993/7700_RSXH__41730.1459373888.1280.1280.jpg?c=2',
   'https://clevelandsportsshop.com/wp-content/uploads/2017/02/LeBron-James-Cleveland-Cavaliers-adidas-Player-Swingman-Jersey-Navy.jpg',
+  'https://d2lhrgc5rek5ye.cloudfront.net/pub/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/e/d/ed7387_image.jpg',
+  'https://dks.scene7.com/is/image/GolfGalaxy/18ADIMCSJVWHTHMRNJUV?qlt=70&wid=600&fmt=pjpeg',
+  'https://images-na.ssl-images-amazon.com/images/I/61cVMSzSiLL._AC_UL1000_.jpg',
+  'https://images.footballfanatics.com/FFImage/thumb.aspx?i=/productimages/_2399000/ff_2399624_full.jpg&w=900',
+  'https://cdn.shopify.com/s/files/1/0906/5342/products/NickLight_SoccerBall1.jpg?v=1497386076',
+  'https://cdn3.volusion.com/goz35.avhz4/v/vspfiles/photos/SM-NIAJ3541-109-2.jpg?v-cache=1553159867',
+  'https://www.soccerpro.com/wp-content/uploads/sp0040_101_nike_j_guards_01.jpg',
+  'https://images-na.ssl-images-amazon.com/images/I/71mLGvbq28L._AC_SL1500_.jpg',
+  'https://i1.wp.com/hookedonsoccer.com/wp-content/uploads/2013/08/p-674-real-madrid-away-13_14.jpg?fit=800%2C800',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSs_5HYAzbSAvjvx0aW1k_l9Lb4jUSVY7xm978RgO1kG1ApDDE5&usqp=CAU',
+  'https://images-na.ssl-images-amazon.com/images/I/61zjj2sgXML._SL1500_.jpg',
+  'https://images-na.ssl-images-amazon.com/images/I/315zvYgE%2BtL.jpg',
+  'https://cdn02.nintendo-europe.com/media/images/10_share_images/support_9/H2x1_NSwitch_support_no_logo.jpg',
+  'https://images-na.ssl-images-amazon.com/images/I/41LO2OX6pRL._SX342_.jpg',
+  'https://images-na.ssl-images-amazon.com/images/I/41Q5bkJP37L._SR600,315_SCLZZZZZZZ_.jpg',
+  'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5748/5748618_sd.jpg',
+  'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6359/6359364_sd.jpg',
+  'https://media.gamestop.com/i/gamestop/11094749/Call-of-Duty-Modern-Warfare?$pdp$',
 ]
 
 const sports = [
@@ -128,14 +214,14 @@ const sports = [
   'basketball',
   'baseball',
   'basketball',
-  'eSports',
+  'gaming',
   'basketball',
   'football',
-  'eSports',
+  'gaming',
   'baseball',
   'baseball',
   'basketball',
-  'eSports',
+  'gaming',
   'football',
   'football',
   'football',
@@ -147,6 +233,24 @@ const sports = [
   'baseball',
   'baseball',
   'basketball',
+  'soccer',
+  'soccer',
+  'soccer',
+  'soccer',
+  'soccer',
+  'soccer',
+  'soccer',
+  'soccer',
+  'soccer',
+  'soccer',
+  'gaming',
+  'gaming',
+  'gaming',
+  'gaming',
+  'gaming',
+  'gaming',
+  'gaming',
+  'gaming',
 ]
 
 module.exports = {

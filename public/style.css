@@ -110,7 +110,9 @@ button {
 .container-1 {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 45%;
+  margin-top: 1.2em;
+  margin-left: 4em;
 }
 
 .boxes {
@@ -124,15 +126,17 @@ button {
 .container-2 {
   display: flex;
   flex-direction: row;
-  margin-top: 1.7em;
-  margin-left: 2em;
+  margin-top: 0.7em;
+  /* margin-top: .5em;
+  margin-left: 3.8em; */
   height: 6em;
-  width: 75%;
+  width: 86%;
   padding: 1em;
   background-color: white;
   transition: box-shadow 0.3s ease;
   /* border: solid black 1px; */
 }
+
 .container-2:hover {
   box-shadow: 0px 0px 2px 0px;
 }
@@ -185,11 +189,11 @@ button {
 }
 
 .container-8 {
-  width: 50%;
+  width: 55%;
   height: 10em;
   padding-top: 0;
   margin-top: 1.5em;
-  margin-right: 5.5em;
+  margin-right: 4em;
   font-size: larger;
   display: flex;
   flex-direction: column;
@@ -331,10 +335,10 @@ button {
 .form-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-top: 1em;
-  margin-left: 1em;
+  /* margin-left: 1em; */
 }
-
 .form-container input {
   width: 25em;
 }
@@ -409,18 +413,19 @@ button {
   height: 100%;
 }
 
+/* SINGLE ITEM VIEW CSS */
 .single-item-page {
   display: flex;
-  margin: 30px;
-  padding: 75px;
-  padding-left: 350px;
-  padding-right: 350px;
+  flex-direction: column;
+  padding-right: 7.5em;
+  padding-left: 7.5em;
 }
 
 .single-item-image {
   align-items: flex-end;
   display: flex;
-  width: 1200px;
+  padding-left: 3em;
+  padding-top: 4em;
 }
 
 .single-item-image img {
@@ -429,15 +434,70 @@ button {
   height: auto;
 }
 
+.single-item-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 5em;
+  padding-bottom: 16em;
+}
+
 .description {
   align-items: flex-start;
   margin-left: 50px;
+  width: 50%;
+  max-width: 35em;
 }
 
-.description p.a {
-  font: 40px Arial, sans-serif;
-  font-weight: lighter;
-  font-variant: small-caps;
+.description p.title {
+  font-family: Geneva, Tahoma, Verdana, sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 100;
+  line-height: 26.4px;
+  margin-bottom: 0.5em;
+}
+
+.description p.price {
+  font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 100;
+}
+
+.description p.d {
+  font-family: 'Amazon Ember', Arial, sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-variant: normal;
+  margin-bottom: 0.3em;
+  margin-top: 3em;
+}
+
+.description p.description-text {
+  font-family: 'Amazon Ember', Arial, sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-variant: normal;
+  margin-bottom: 0.3em;
+  line-height: 19px;
+}
+
+.description hr {
+  width: 100%;
+}
+
+.description .MuiSelect-select.MuiSelect-select {
+  width: 7em;
+}
+
+.description .MuiInput-root {
+  margin-right: 1em;
+}
+
+.price-quant {
+  width: 100%;
 }
 
 /* IDs */
@@ -539,4 +599,21 @@ button {
   height: 18px;
   width: 18px;
   text-align: center;
+}
+
+#no-items {
+  margin-top: 2.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  font-size: x-large;
+}
+#empty-cart-icon {
+  height: 2em;
+  width: 2em;
+  padding-bottom: 1em;
+}
+.pointer {
+  cursor: pointer;
 }

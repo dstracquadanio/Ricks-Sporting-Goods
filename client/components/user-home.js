@@ -12,7 +12,7 @@ export const UserHome = (props) => {
   return (
     <div>
       <div className="container-center-column ricks-color">
-        <img src="Logo.png" alt="banner" />
+        <img src="/Logo.png" alt="banner" />
       </div>
       {/* <h3>Welcome, {email}</h3> */}
       <HomeCarousel />

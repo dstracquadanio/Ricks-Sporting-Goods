@@ -1,19 +1,21 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {checkoutThunk} from '../store/cart'
-import history from '../history'
+import {updateUserProfile} from '../store/user'
+// import history from '../history'
 import {withStyles} from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+
 const styles = (theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      // width: '25ch',
+      width: '25ch',
     },
   },
 })
-class DisconnectedCheckoutForm extends Component {
+
+class UserProfile extends Component {
   constructor() {
     super()
     this.state = {
@@ -22,9 +24,11 @@ class DisconnectedCheckoutForm extends Component {
       address: '',
       email: '',
     }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
+
   componentDidMount() {
     this.setState({
       firstName: this.props.user.firstName || '',
@@ -33,36 +37,32 @@ class DisconnectedCheckoutForm extends Component {
       email: this.props.user.email || '',
     })
   }
+
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     })
   }
+
   handleSubmit(event) {
     event.preventDefault()
-    this.props.checkout({
-      user: this.props.user,
-      cart: this.props.cart,
-    })
-    this.setState({
-      firstName: '',
-      lastName: '',
-      address: '',
-      email: '',
-    })
-    history.push('/submitPage')
+
+    this.props.updateUserProfile(this.props.user.id, this.state)
   }
+
   render() {
     const {classes} = this.props
     return (
-      // <form className="form-container" onSubmit={this.handleSubmit}>
       <form
         className={`${classes.root} form-container`}
         noValidate
         autoComplete="off"
         onSubmit={this.handleSubmit}
       >
-        <h2>Checkout</h2>
+        <h2>Profile</h2>
+        <h2>Name : {this.state.firstName + ' ' + this.state.lastName}</h2>
+        <h2>Address : {this.state.address}</h2>
+        <h2>Email : {this.state.email}</h2>
         <TextField
           id="filled-basic"
           label="First Name"
@@ -104,25 +104,24 @@ class DisconnectedCheckoutForm extends Component {
           onChange={this.handleChange}
         />
         <Button variant="contained" color="secondary" type="submit">
-          Submit
+          Update
         </Button>
       </form>
     )
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     user: state.user,
     cart: state.cart,
   }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    checkout: (obj) => dispatch(checkoutThunk(obj)),
-  }
-}
-const CheckoutForm = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DisconnectedCheckoutForm)
-export default withStyles(styles)(CheckoutForm)
+
+const mapDispatchToProps = (dispatch) => ({
+  updateUserProfile: (id, changes) => dispatch(updateUserProfile(id, changes)),
+})
+
+const UserForm = connect(mapStateToProps, mapDispatchToProps)(UserProfile)
+
+export default withStyles(styles)(UserForm)

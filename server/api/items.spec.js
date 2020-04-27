@@ -63,10 +63,10 @@ describe('Item routes', () => {
       const allItems = await request(app).get('/api/items')
       expect(allItems.body).to.be.an('array')
     })
-    it('GET /api/items gets all items in alphabetical order', async () => {
+    it('GET /api/items gets all items ordered by id', async () => {
       const allItems = await request(app).get('/api/items')
-      expect(allItems.body[0].name).to.be.equal('Detergent')
-      expect(allItems.body[2].name).to.be.equal('Toilet Paper')
+      expect(allItems.body[0].name).to.be.equal('Toilet Paper')
+      expect(allItems.body[2].name).to.be.equal('Detergent')
     })
     it('GET /api/items/:itemId gets by Id', async () => {
       const item = await request(app).get(`/api/items/1`)

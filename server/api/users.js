@@ -92,4 +92,21 @@ router.delete(
       next(err)
     }
   }
-)
+})
+
+//UPDATE USER PROFILE
+router.put('/profile/:id', async (req, res, next) => {
+  try {
+    const userId = req.params.id
+    const [, updateUser] = await User.update(req.body, {
+      where: {
+        id: userId,
+      },
+      returning: true,
+      plain: true,
+    })
+    res.json(updateUser)
+  } catch (error) {
+    next(error)
+  }
+})

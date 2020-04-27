@@ -10,6 +10,7 @@ import singleItem from './singleItem'
 import addItems from './addItems'
 import itemList from './itemList'
 import updateItems from './updateItems'
+import userProfile from './userProfile'
 import {me} from '../store'
 import {getItems} from '../store/items'
 import {getCartThunk} from '../store/cart'
@@ -37,11 +38,11 @@ class Routes extends Component {
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={CheckoutForm} />
         <Route path="/submitPage" component={SubmitPage} />
-
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route exact path="/users/profile" component={userProfile} />
             {isLoggedIn && isAdmin && (
               <Switch>
                 <Route path="/users" component={ViewUsers} />
@@ -55,6 +56,7 @@ class Routes extends Component {
         )}
         {/* Displays our Login component as a fallback */}
         <Route component={UserHome} />
+        {/* we want the url to show /home when catching all */}
       </Switch>
     )
   }
