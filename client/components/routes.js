@@ -42,7 +42,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
-            <Route exact path="/users/profile" component={userProfile} />
+            <Route exact path="/user/profile" component={userProfile} />
             {isLoggedIn && isAdmin && (
               <Switch>
                 <Route path="/users" component={ViewUsers} />

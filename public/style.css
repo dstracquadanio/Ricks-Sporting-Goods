@@ -536,16 +536,6 @@ button {
   max-width: 100%;
 }
 
-#shopping-cart-img {
-  height: 36px;
-  border-radius: 10px;
-  transition: height 0.5s ease;
-}
-
-#shopping-cart-img:hover {
-  height: 50px;
-}
-
 #item-list {
   display: flex;
   flex-flow: column;
