@@ -14,6 +14,8 @@ import userProfile from './userProfile'
 import {me} from '../store'
 import {getItems} from '../store/items'
 import {getCartThunk} from '../store/cart'
+import Backdrop from '@material-ui/core/Backdrop'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 /**
  * COMPONENT
@@ -26,9 +28,16 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
-    const {isAdmin} = this.props.user
+    const {isAdmin} = this.props
+    const load = this.props.load
     return (
       <Switch>
+        {load && <div>HIIII</div>}
+        {/* {load && (
+          <Backdrop className={classes.backdrop} open={load}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        )} */}
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
@@ -72,6 +81,7 @@ const mapState = (state) => {
     isLoggedIn: !!state.user.id,
     isAdmin: !!state.user.isAdmin,
     user: state.user,
+    load: state.load,
   }
 }
 
