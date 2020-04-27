@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -14,6 +14,8 @@ import userProfile from './userProfile'
 import {me} from '../store'
 import {getItems} from '../store/items'
 import {getCartThunk} from '../store/cart'
+import Backdrop from '@material-ui/core/Backdrop'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 /**
  * COMPONENT
@@ -26,39 +28,47 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
-    const {isAdmin} = this.props.user
+    const {isAdmin} = this.props
+    const load = this.props.load
     return (
-      <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route exact path="/items" component={AllItems} />
-        <Route path="/:sport/items" component={AllItems} />
-        <Route path="/items/:id" component={singleItem} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/checkout" component={CheckoutForm} />
-        <Route path="/submitPage" component={SubmitPage} />
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-            <Route exact path="/user/profile" component={userProfile} />
-            {isLoggedIn && isAdmin && (
-              <Switch>
-                <Route path="/admin/users" component={ViewUsers} />
-                <Route path="/admin/addItems" component={addItems} />
-                <Route exact path="/admin/updateItems" component={itemList} />
-                <Route path="/admin/updateItems/:id" component={updateItems} />
-                <Route component={UserHome} />
-              </Switch>
-            )}
-            <Route component={UserHome} />
-          </Switch>
+      <Fragment>
+        {load && (
+          <Backdrop /*className={classes.backdrop}*/ open={load}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
         )}
-        {/* Displays our Login component as a fallback */}
-        <Route component={UserHome} />
-        {/* we want the url to show /home when catching all */}
-      </Switch>
+        <Switch>
+          {/* Routes placed here are available to all visitors */}
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route exact path="/items" component={AllItems} />
+          <Route path="/:sport/items" component={AllItems} />
+          <Route path="/items/:id" component={singleItem} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/checkout" component={CheckoutForm} />
+          <Route path="/submitPage" component={SubmitPage} />
+          {isLoggedIn && (
+            <Switch>
+              {/* Routes placed here are only available after logging in */}
+              <Route path="/home" component={UserHome} />
+              <Route exact path="/users/profile" component={userProfile} />
+              {isLoggedIn && isAdmin && (
+                <Switch>
+                  <Route path="/users" component={ViewUsers} />
+                  <Route path="/addItems" component={addItems} />
+                  <Route exact path="/updateitems" component={itemList} />
+                  <Route path="/updateitems/:id" component={updateItems} />
+                  <Route component={UserHome} />
+                </Switch>
+              )}
+              <Route component={UserHome} />
+            </Switch>
+          )}
+          {/* Displays our Login component as a fallback */}
+          <Route component={UserHome} />
+          {/* we want the url to show /home when catching all */}
+        </Switch>
+      </Fragment>
     )
   }
 }
@@ -73,6 +83,7 @@ const mapState = (state) => {
     isLoggedIn: !!state.user.id,
     isAdmin: !!state.user.isAdmin,
     user: state.user,
+    load: state.load,
   }
 }
 

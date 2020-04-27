@@ -7,6 +7,7 @@ import userReducer from './user'
 import allUsersReducer from './allUsers'
 import cartReducer from './cart'
 import searchReducer from './searchBar'
+import loadReducer from './loading'
 
 const reducer = combineReducers({
   items: itemsReducer,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   allUsers: allUsersReducer,
   cart: cartReducer,
   searchBar: searchReducer,
+  load: loadReducer,
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
