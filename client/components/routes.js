@@ -49,6 +49,7 @@ class Routes extends Component {
                 <Route path="/admin/addItems" component={addItems} />
                 <Route exact path="/admin/updateItems" component={itemList} />
                 <Route path="/admin/updateItems/:id" component={updateItems} />
+                <Route component={UserHome} />
               </Switch>
             )}
             <Route component={UserHome} />
