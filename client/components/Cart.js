@@ -5,10 +5,12 @@ import {
   attachQuantityToCartItem,
   checkInventoryCartItemToItems,
 } from './utility'
+import history from '../history'
 import StickyCheckoutBox from './stickyCheckoutBox'
 import DeleteIcon from '@material-ui/icons/Delete'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle'
+import EmptyShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart'
 
 class DisconnectedCart extends Component {
   constructor() {
@@ -19,22 +21,33 @@ class DisconnectedCart extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-
   handleSubmit(event, itemId) {
     event.preventDefault()
     let userId = this.props.cart[0].userId
     this.props.removeCartItem(userId, itemId)
   }
-
   render() {
     return (
       <div className="container-7">
         <div className="container-1">
+          {!this.props.cart.length && (
+            <div id="no-items">
+              <EmptyShoppingCartIcon id="empty-cart-icon" />
+              <div>Cart is Empty.</div>
+            </div>
+          )}
           {this.props.cart.map((item) => {
             return (
               <div key={item.itemId} className="container-2">
                 <div className="container-2-img">
-                  <img src={item.imageUrl} alt="" />
+                  <img
+                    src={item.imageUrl}
+                    alt=""
+                    className="pointer"
+                    onClick={() => {
+                      history.push(`/items/${item.itemId}`)
+                    }}
+                  />
                 </div>
                 <div className="container-2a">
                   <div className="container-3">
@@ -44,7 +57,6 @@ class DisconnectedCart extends Component {
                     </div>
                     <div className="line-item container-5">
                       <div>Quantity: {item.quantity}</div>
-
                       {/* PLUS AND MINUS LOGIC */}
                       <div className="container-6">
                         <AddCircleIcon
@@ -133,7 +145,6 @@ class DisconnectedCart extends Component {
     )
   }
 }
-
 const mapStateToProps = (state) => {
   return {
     cart: state.cart,
@@ -141,7 +152,6 @@ const mapStateToProps = (state) => {
     items: state.items,
   }
 }
-
 const mapDispatchToProps = (dispatch) => {
   return {
     updateCart: (obj) => dispatch(editCartThunk(obj)),
@@ -149,7 +159,5 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(removeCartItemThunk(userId, itemId)),
   }
 }
-
 const Cart = connect(mapStateToProps, mapDispatchToProps)(DisconnectedCart)
-
 export default Cart
