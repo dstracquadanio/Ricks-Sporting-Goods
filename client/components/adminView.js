@@ -2,10 +2,12 @@ import React, {Component} from 'react'
 import ItemForm from './itemForm'
 import {connect} from 'react-redux'
 import {updateSingleItem} from '../store/items'
-import AdminTable from './adminTable'
+import AdminUsersTable from './adminUsersTable'
+import AdminItemsTable from './adminItemsTable'
 
 export default function AdminView() {
-  return <AdminTable />
+  // return <AdminUsersTable />
+  return <AdminItemsTable />
 }
 
 // const imageStyle = {

@@ -17,9 +17,9 @@ const removeItem = (data) => ({
   data,
 })
 
-const updateItem = (data) => ({
+const updateItem = (updatedItem) => ({
   type: UPDATE_ITEM,
-  data,
+  updatedItem,
 })
 
 export const getItems = () => async (dispatch) => {
@@ -34,10 +34,10 @@ export const removeSingleItem = (id) => {
   }
 }
 
-export const updateSingleItem = (id, changes) => {
+export const updateSingleItem = (updatedItem) => {
   return async (dispatch) => {
     try {
-      const res = await axios.put(`/api/items/${id}`, changes)
+      const res = await axios.put(`/api/items/${updatedItem.id}`, updatedItem)
       dispatch(updateItem(res.data))
     } catch (error) {
       console.log('error')
@@ -68,8 +68,10 @@ export default function itemsReducer(state = defaultItems, action) {
     case DELETE_ITEM:
       return state.filter((item) => item.id !== action.data)
     case UPDATE_ITEM:
-      const newItemList = state.filter((item) => item.id !== action.data.id)
-      return [...newItemList, action.data] //i think we can just map here instead
+      const newItemList = state.filter(
+        (item) => item.id !== action.updatedItem.id
+      )
+      return [...newItemList, action.updatedItem] //i think we can just map here instead
     default:
       return state
   }

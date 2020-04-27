@@ -9,11 +9,12 @@ import ViewUsers from './viewUsers'
 import singleItem from './singleItem'
 import addItems from './addItems'
 import itemList from './itemList'
-import updateItems from './updateItems'
+import AdminUserTable from './adminView'
 import userProfile from './userProfile'
 import {me} from '../store'
 import {getItems} from '../store/items'
 import {getCartThunk} from '../store/cart'
+import AdminView from './adminView'
 
 /**
  * COMPONENT
@@ -45,10 +46,10 @@ class Routes extends Component {
             <Route exact path="/user/profile" component={userProfile} />
             {isLoggedIn && isAdmin && (
               <Switch>
-                <Route path="/admin/users" component={ViewUsers} />
-                <Route path="/admin/addItems" component={addItems} />
-                <Route exact path="/admin/updateItems" component={itemList} />
-                <Route path="/admin/updateItems/:id" component={updateItems} />
+                <Route path="/admin/users" component={AdminView} />
+                {/* <Route path="/admin/addItems" component={AdminView} /> */}
+                <Route exact path="/admin/updateItems" component={AdminView} />
+                {/* <Route path="/admin/updateItems/:id" component={AdminView} /> */}
                 <Route component={UserHome} />
               </Switch>
             )}
