@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {binarySearch} from './utility'
 import Paper from '@material-ui/core/Paper'
 import {Divider, Select, Button, MenuItem} from '@material-ui/core'
-import {updateCartThunk} from '../store/Cart'
+import {updateCartThunk} from '../store/cart'
 import history from '../history'
 
 function SingleItemView(props) {
