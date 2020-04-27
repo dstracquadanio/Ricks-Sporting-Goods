@@ -22,7 +22,7 @@ const middleware = composeWithDevTools(
 )
 
 // Save State to localStorage if page is refreshed
-function saveCartToStorage(state) {
+function saveStateToStorage(state) {
   try {
     const stringState = JSON.stringify(state)
     localStorage.setItem('state', stringState)
@@ -31,10 +31,9 @@ function saveCartToStorage(state) {
   }
 }
 
-function loadCartFromStorage() {
+function loadStateFromStorage() {
   try {
     const stringState = localStorage.getItem('state')
-    if (stringState === null) return undefined
     return JSON.parse(stringState)
   } catch (error) {
     console.log(error)
@@ -42,11 +41,11 @@ function loadCartFromStorage() {
   }
 }
 
-const savedState = loadCartFromStorage()
+const savedState = loadStateFromStorage()
 
 const store = createStore(reducer, savedState, middleware)
 
-store.subscribe(() => saveCartToStorage(store.getState()))
+store.subscribe(() => saveStateToStorage(store.getState()))
 
 export default store
 export * from './user'
