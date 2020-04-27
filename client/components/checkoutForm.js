@@ -5,16 +5,14 @@ import history from '../history'
 import {withStyles} from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-
 const styles = (theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      width: '25ch',
+      // width: '25ch',
     },
   },
 })
-
 class DisconnectedCheckoutForm extends Component {
   constructor() {
     super()
@@ -24,11 +22,9 @@ class DisconnectedCheckoutForm extends Component {
       address: '',
       email: '',
     }
-
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-
   componentDidMount() {
     this.setState({
       firstName: this.props.user.firstName || '',
@@ -37,20 +33,17 @@ class DisconnectedCheckoutForm extends Component {
       email: this.props.user.email || '',
     })
   }
-
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     })
   }
-
   handleSubmit(event) {
     event.preventDefault()
     this.props.checkout({
       user: this.props.user,
       cart: this.props.cart,
     })
-
     this.setState({
       firstName: '',
       lastName: '',
@@ -59,7 +52,6 @@ class DisconnectedCheckoutForm extends Component {
     })
     history.push('/submitPage')
   }
-
   render() {
     const {classes} = this.props
     return (
@@ -118,23 +110,19 @@ class DisconnectedCheckoutForm extends Component {
     )
   }
 }
-
 const mapStateToProps = (state) => {
   return {
     user: state.user,
     cart: state.cart,
   }
 }
-
 const mapDispatchToProps = (dispatch) => {
   return {
     checkout: (obj) => dispatch(checkoutThunk(obj)),
   }
 }
-
 const CheckoutForm = connect(
   mapStateToProps,
   mapDispatchToProps
 )(DisconnectedCheckoutForm)
-
 export default withStyles(styles)(CheckoutForm)
