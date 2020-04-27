@@ -59,7 +59,7 @@ const Navbar = ({
           <NavLink to="/eSports/items" onClick={() => updateSearch('')}>
             eSports
           </NavLink>
-          <NavLink to="/home">{avatarLogic(user)}</NavLink>
+          <NavLink to="/users/profile">{avatarLogic(user)}</NavLink>
           <NavLink to="/cart" onClick={() => updateSearch('')}>
             <ShoppingCartIcon id="shopping-cart-img" fontSize="large" />
             <span id="oval">{cart.reduce(cartItemReducer, 0)}</span>

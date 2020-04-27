@@ -10,6 +10,7 @@ import singleItem from './singleItem'
 import addItems from './addItems'
 import itemList from './itemList'
 import updateItems from './updateItems'
+import userProfile from './userProfile'
 import {me} from '../store'
 import {getItems} from '../store/items'
 import {getCartThunk} from '../store/cart'
@@ -42,6 +43,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route exact path="/users/profile" component={userProfile} />
             {isLoggedIn && isAdmin && (
               <Switch>
                 <Route path="/users" component={ViewUsers} />

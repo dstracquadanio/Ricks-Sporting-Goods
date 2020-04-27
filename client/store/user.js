@@ -7,6 +7,7 @@ import {getCartThunk} from './cart'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const UPDATE_USER = 'UPDATE_USER'
 
 /**
  * INITIAL STATE
@@ -18,6 +19,7 @@ const defaultUser = {}
  */
 const getUser = (user) => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+const updateProfile = (data) => ({type: UPDATE_USER, data})
 
 /**
  * THUNK CREATORS
@@ -63,6 +65,17 @@ export const logout = () => async (dispatch) => {
   }
 }
 
+export const updateUserProfile = (id, changes) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.put(`/api/users/profile/${id}`, changes)
+      dispatch(updateProfile(res.data))
+    } catch (error) {
+      console.log('error')
+    }
+  }
+}
+
 /**
  * REDUCER
  */
@@ -72,6 +85,8 @@ export default function userReducer(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case UPDATE_USER:
+      return action.data
     default:
       return state
   }
