@@ -10,7 +10,7 @@ const isAdminMiddleware = (req, res, next) => {
 
 const isCurrentUserMiddleware = (req, res, next) => {
   const currentUser = req.session.passport.user
-  if (currentUser === req.body.userId) {
+  if (currentUser === req.currentUser.dataValues.id) {
     next()
   } else {
     const error = new Error('Access Denied!')
