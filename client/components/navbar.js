@@ -65,7 +65,7 @@ const Navbar = ({
           <NavLink to="/gaming/items" onClick={() => updateSearch('')}>
             Gaming
           </NavLink>
-          <NavLink to="/users/profile">{avatarLogic(user)}</NavLink>
+          <NavLink to="/user/profile">{avatarLogic(user)}</NavLink>
           <NavLink to="/cart" onClick={() => updateSearch('')}>
             {/* <IconButton> */}
             <StyledCart cartTotal={cart.reduce(cartItemReducer, 0)} />

@@ -6,7 +6,6 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
-import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 
 const styles = (theme) => ({
@@ -20,6 +19,13 @@ const styles = (theme) => ({
     },
   },
 })
+
+const borderStyle = {
+  borderWidth: '2px',
+  borderColor: 'dark',
+  borderStyle: 'solid',
+  textAlign: 'center',
+}
 
 class UserProfile extends Component {
   constructor() {
@@ -69,12 +75,11 @@ class UserProfile extends Component {
               height="200"
               image="https://media.istockphoto.com/photos/all-sports-balls-in-stadium-3d-picture-id613558644?k=6&m=613558644&s=612x612&w=0&h=XmgnIstXyxQhqdSo5iW9eHtYE46uEfvwCfZZd4D3lbE="
             />
-            <CardContent>
-              <h1>Profile</h1>
+            <div style={borderStyle}>
               <h2>Name : {this.state.firstName + ' ' + this.state.lastName}</h2>
               <h2>Address : {this.state.address}</h2>
               <h2>Email : {this.state.email}</h2>
-            </CardContent>
+            </div>
           </CardActionArea>
         </Card>
         <div>
@@ -130,26 +135,25 @@ class UserProfile extends Component {
               </Button>
             </form>
           ) : null}
-          <button
-            type="button"
+          <Button
+            variant="contained"
+            color="secondary"
+            type="submit"
             onClick={() => {
               this.setState({show: !this.state.show})
             }}
           >
             Update Profile
-          </button>
+          </Button>
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-    cart: state.cart,
-  }
-}
+const mapStateToProps = (state) => ({
+  user: state.user,
+})
 
 const mapDispatchToProps = (dispatch) => ({
   updateUserProfile: (id, changes) => dispatch(updateUserProfile(id, changes)),
