@@ -11,12 +11,14 @@ import addItems from './addItems'
 import itemList from './itemList'
 import AdminUserTable from './adminView'
 import userProfile from './userProfile'
+import OrderHistory from './orderHistory'
 import {me} from '../store'
 import {getItems} from '../store/items'
 import {getCartThunk} from '../store/cart'
 import AdminView from './adminView'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import {getHistoryThunk} from '../store/user'
 
 /**
  * COMPONENT
@@ -54,6 +56,7 @@ class Routes extends Component {
             <Switch>
               {/* Routes placed here are only available after logging in */}
               <Route exact path="/users/profile" component={userProfile} />
+              <Route path="/orderhistory" component={OrderHistory} />
               {isLoggedIn && isAdmin && (
                 <Switch>
                   <Route
@@ -100,6 +103,7 @@ const mapDispatch = (dispatch) => {
     loadInitialData() {
       dispatch(me())
     },
+    getHistory: (userId) => dispatch(getHistoryThunk(userId)),
   }
 }
 

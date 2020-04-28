@@ -24,15 +24,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    // checkout: (obj) => dispatch(checkoutThunk(obj)),
-  }
-}
-
-const SubmitPage = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DisconnectedSubmitPage)
+const SubmitPage = connect(mapStateToProps)(DisconnectedSubmitPage)
 
 export default SubmitPage
