@@ -7,6 +7,7 @@ const UPDATE_CART = 'UPDATE_CART'
 const CHECKOUT = 'CHECKOUT'
 const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM'
 const REMOVE_USER = 'REMOVE_USER'
+const UPDATE_CLIENT = 'UPDATE_CLIENT'
 
 // Action Creators / Thunks
 const getCart = (cartItems) => ({
@@ -76,7 +77,7 @@ export const checkoutThunk = (checkoutObj) => {
         await axios.delete(`/api/users/${checkoutObj.user.id}/checkout`)
       }
       await axios.put('/api/items/checkout', checkoutObj.cart)
-      dispatch(checkout(checkoutObj.cart))
+      await dispatch(checkout(checkoutObj.cart))
     } catch (error) {
       console.log('Checkout Thunk Error:', error)
     }

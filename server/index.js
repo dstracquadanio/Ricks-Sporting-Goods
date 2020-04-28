@@ -10,6 +10,7 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -27,6 +28,7 @@ if (process.env.NODE_ENV === 'test') {
  * Node process on process.env
  */
 if (process.env.NODE_ENV !== 'production') require('../secrets')
+const stripe = require('stripe')(process.env.STRIPE_PUBLISHER_KEY)
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
@@ -79,6 +81,19 @@ const createApp = () => {
     } else {
       next()
     }
+  })
+
+  //STRIPE
+  app.get('/secret', async (req, res) => {
+    const intent = await stripe.paymentIntents.create({
+      amount: 1099,
+      currency: 'usd',
+      // Verify your integration in this guide by including this parameter
+      metadata: {integration_check: 'accept_a_payment'},
+    })
+
+    // ... Fetch or create the PaymentIntent
+    res.json({client_secret: intent.client_secret})
   })
 
   // sends index.html
