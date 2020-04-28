@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const GOT_ALL_USERS = 'GOT_ALL_USERS'
 const ADMIN_UPDATE_USER = 'ADMIN_UPDATE_USER'
+const DELETED_USER = 'DELETED_USER'
 
 // GET ALL USERS
 export const gotAllUsers = (allUsers) => ({
@@ -12,6 +13,11 @@ export const gotAllUsers = (allUsers) => ({
 const adminUpdatedUser = (updatedUser) => ({
   type: ADMIN_UPDATE_USER,
   updatedUser,
+})
+
+const deletedUser = (userId) => ({
+  type: DELETED_USER,
+  userId,
 })
 
 //THUNKS
@@ -34,6 +40,11 @@ export const getAllUsers = () => async (dispatch) => {
   dispatch(gotAllUsers(data))
 }
 
+export const deleteUser = (userId) => async (dispatch) => {
+  await axios.delete(`/api/users/${userId}`)
+  dispatch(deletedUser(userId))
+}
+
 const defaultUsers = []
 export default function allUsersReducer(state = defaultUsers, action) {
   switch (action.type) {
@@ -46,6 +57,8 @@ export default function allUsersReducer(state = defaultUsers, action) {
         }
         return user
       })
+    case DELETED_USER:
+      return state.filter((user) => user.id !== action.userId)
     default:
       return state
   }

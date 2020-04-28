@@ -1,20 +1,27 @@
 /* eslint-disable no-case-declarations */
 import axios from 'axios'
 
+//ACTION TYPES
 const GOT_ITEMS = 'GOT_ITEMS'
 const CHECKOUT = 'CHECKOUT'
 const DELETE_ITEM = 'DELETE_ITEM'
 const UPDATE_ITEM = 'UPDATE_ITEM'
+const POSTED_ITEM = 'POSTED_ITEM'
 
-// GET ALL ITEMS
+//ACTION TYPES
 export const gotItems = (items) => ({
   type: GOT_ITEMS,
   items,
 })
 
-const removeItem = (data) => ({
+const postedItem = (newItem) => ({
+  type: POSTED_ITEM,
+  newItem,
+})
+
+const removeItem = (id) => ({
   type: DELETE_ITEM,
-  data,
+  id,
 })
 
 const updateItem = (updatedItem) => ({
@@ -22,9 +29,15 @@ const updateItem = (updatedItem) => ({
   updatedItem,
 })
 
+//THUNKS
 export const getItems = () => async (dispatch) => {
   const {data} = await axios.get('/api/items')
   dispatch(gotItems(data))
+}
+
+export const postItem = (newItem) => async (dispatch) => {
+  const {data} = await axios.post('/api/items', newItem)
+  dispatch(postedItem(data))
 }
 
 export const removeSingleItem = (id) => {
@@ -72,6 +85,8 @@ export default function itemsReducer(state = defaultItems, action) {
         (item) => item.id !== action.updatedItem.id
       )
       return [...newItemList, action.updatedItem] //i think we can just map here instead
+    case POSTED_ITEM:
+      return [...state, action.newItem]
     default:
       return state
   }

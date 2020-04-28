@@ -5,9 +5,13 @@ import {updateSingleItem} from '../store/items'
 import AdminUsersTable from './adminUsersTable'
 import AdminItemsTable from './adminItemsTable'
 
-export default function AdminView() {
-  // return <AdminUsersTable />
-  return <AdminItemsTable />
+export default function AdminView(props) {
+  return (
+    <div>
+      {props.whichTable === 'users' && <AdminUsersTable />}
+      {props.whichTable === 'items' && <AdminItemsTable />}
+    </div>
+  )
 }
 
 // const imageStyle = {

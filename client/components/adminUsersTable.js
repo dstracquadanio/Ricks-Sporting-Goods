@@ -1,7 +1,8 @@
+/* eslint-disable react/no-access-state-in-setstate */
 import React, {Component} from 'react'
 import MaterialTable from 'material-table'
 import {tableIcons} from './iconsPackage'
-import {getAllUsers, adminUpdateUser} from '../store/allUsers'
+import {getAllUsers, adminUpdateUser, deleteUser} from '../store/allUsers'
 import {connect} from 'react-redux'
 
 class AdminUsersTable extends Component {
@@ -30,6 +31,7 @@ class AdminUsersTable extends Component {
         ]}
         data={this.state.data}
         editable={{
+          //UPDATE USER
           onRowUpdate: async (newData, oldData) => {
             await this.setState({
               data: this.state.data.map((user) => {
@@ -37,23 +39,31 @@ class AdminUsersTable extends Component {
                 return user
               }),
             })
+            this.props.updateUser(newData)
+          },
+          //DELETE USER
+          onRowDelete: async (oldData) => {
+            await this.setState({
+              data: this.state.data.filter((user) => user.id !== oldData.id),
+            })
+            this.props.deleteUser(oldData.id)
           },
         }}
-        actions={[
-          {
-            //DELETE ACTION
-            icon: tableIcons.Delete,
-            tooltip: 'Delete User',
-            onClick: (event, rowData) =>
-              console.log('gotta make the whole delete user feature'),
-          },
-          {
-            //SAVE CHANGES ACTION
-            icon: tableIcons.Save,
-            tooltip: 'Finalize Update',
-            onClick: (event, userInfo) => this.props.updateUser(userInfo),
-          },
-        ]}
+        // actions={[
+        //   {
+        //     //DELETE ACTION
+        //     icon: tableIcons.Delete,
+        //     tooltip: 'Delete User',
+        //     onClick: (event, rowData) =>
+        //       console.log('gotta make the whole delete user feature'),
+        //   },
+        //   {
+        //     //SAVE CHANGES ACTION
+        //     icon: tableIcons.Save,
+        //     tooltip: 'Finalize Update',
+        //     onClick: (event, userInfo) => this.props.updateUser(userInfo),
+        //   },
+        // ]}
         title="Users"
       />
     )
@@ -67,6 +77,7 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
   updateUser: (changedUser) => dispatch(adminUpdateUser(changedUser)),
   getAllUsers: () => dispatch(getAllUsers()),
+  deleteUser: (userId) => dispatch(deleteUser(userId)),
 })
 
 export default connect(mapState, mapDispatch)(AdminUsersTable)

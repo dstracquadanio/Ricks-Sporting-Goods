@@ -100,19 +100,20 @@ router.delete(
 router.put('/profile/:userId', async (req, res, next) => {
   //I THINK ADMIN AND CURRENT USER CAN USE
   try {
-    console.log('arrived at express ')
     res.status(200)
-
     res.json(await req.currentUser.update(req.body))
-    // const userId = req.params.id
-    // const [, updateUser] = await User.update(req.body, {
-    //   where: {
-    //     id: userId,
-    //   },
-    //   returning: true,
-    //   plain: true,
+  } catch (error) {
+    next(error)
+  }
+})
 
-    // res.json(updateUser)
+//DELETE USER
+router.delete('/:userId', async (req, res, next) => {
+  //SECURITY ALERT
+  try {
+    console.log('REACHED HEREEEEEEE')
+    await req.currentUser.destroy()
+    res.sendStatus(204)
   } catch (error) {
     next(error)
   }

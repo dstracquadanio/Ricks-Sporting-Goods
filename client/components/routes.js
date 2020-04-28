@@ -46,9 +46,15 @@ class Routes extends Component {
             <Route exact path="/user/profile" component={userProfile} />
             {isLoggedIn && isAdmin && (
               <Switch>
-                <Route path="/admin/users" component={AdminView} />
+                <Route
+                  path="/admin/users"
+                  render={() => <AdminView whichTable="users" />}
+                />
                 {/* <Route path="/admin/addItems" component={AdminView} /> */}
-                <Route exact path="/admin/updateItems" component={AdminView} />
+                <Route
+                  path="/admin/updateItems"
+                  render={() => <AdminView whichTable="items" />}
+                />
                 {/* <Route path="/admin/updateItems/:id" component={AdminView} /> */}
                 <Route component={UserHome} />
               </Switch>
