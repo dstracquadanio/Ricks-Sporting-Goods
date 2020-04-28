@@ -7,6 +7,7 @@ import userReducer from './user'
 import allUsersReducer from './allUsers'
 import cartReducer from './cart'
 import searchReducer from './searchBar'
+import loadReducer from './loading'
 
 const reducer = combineReducers({
   items: itemsReducer,
@@ -14,11 +15,38 @@ const reducer = combineReducers({
   allUsers: allUsersReducer,
   cart: cartReducer,
   searchBar: searchReducer,
+  load: loadReducer,
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
-const store = createStore(reducer, middleware)
+
+// Save State to localStorage if page is refreshed
+function saveStateToStorage(state) {
+  try {
+    const stringState = JSON.stringify(state)
+    localStorage.setItem('state', stringState)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+function loadStateFromStorage() {
+  try {
+    const stringState = localStorage.getItem('state')
+    if (stringState === null) return undefined
+    return JSON.parse(stringState)
+  } catch (error) {
+    console.log(error)
+    return undefined
+  }
+}
+
+const savedState = loadStateFromStorage()
+
+const store = createStore(reducer, savedState, middleware)
+
+store.subscribe(() => saveStateToStorage(store.getState()))
 
 export default store
 export * from './user'

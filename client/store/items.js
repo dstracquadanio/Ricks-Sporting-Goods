@@ -32,7 +32,9 @@ const updateItem = (updatedItem) => ({
 //THUNKS
 export const getItems = () => async (dispatch) => {
   const {data} = await axios.get('/api/items')
-  dispatch(gotItems(data))
+  // timer to show off our loading functionality!
+  await setTimeout(() => dispatch(gotItems(data)), 800)
+  // dispatch(gotItems(data))
 }
 
 export const postItem = (newItem) => async (dispatch) => {

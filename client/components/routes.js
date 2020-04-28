@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -15,6 +15,8 @@ import {me} from '../store'
 import {getItems} from '../store/items'
 import {getCartThunk} from '../store/cart'
 import AdminView from './adminView'
+import Backdrop from '@material-ui/core/Backdrop'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 /**
  * COMPONENT
@@ -27,45 +29,52 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
-    const {isAdmin} = this.props.user
+    const {isAdmin} = this.props
+    const load = this.props.load
     return (
-      <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route exact path="/items" component={AllItems} />
-        <Route path="/:sport/items" component={AllItems} />
-        <Route path="/items/:id" component={singleItem} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/checkout" component={CheckoutForm} />
-        <Route path="/submitPage" component={SubmitPage} />
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-            <Route exact path="/user/profile" component={userProfile} />
-            {isLoggedIn && isAdmin && (
-              <Switch>
-                <Route
+
+      <Fragment>
+        {load && (
+          <Backdrop open={load}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        )}
+        <Switch>
+          {/* Routes placed here are available to all visitors */}
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route exact path="/items" component={AllItems} />
+          <Route path="/:sport/items" component={AllItems} />
+          <Route path="/items/:id" component={singleItem} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/checkout" component={CheckoutForm} />
+          <Route path="/submitPage" component={SubmitPage} />
+          <Route path="/home" component={UserHome} />
+          {isLoggedIn && (
+            <Switch>
+              {/* Routes placed here are only available after logging in */}
+              <Route exact path="/users/profile" component={userProfile} />
+              {isLoggedIn && isAdmin && (
+                <Switch>
+                  <Route
                   path="/admin/users"
                   render={() => <AdminView whichTable="users" />}
                 />
-                {/* <Route path="/admin/addItems" component={AdminView} /> */}
                 <Route
                   path="/admin/updateItems"
                   render={() => <AdminView whichTable="items" />}
                 />
-                {/* <Route path="/admin/updateItems/:id" component={AdminView} /> */}
                 <Route component={UserHome} />
-              </Switch>
-            )}
-            <Route component={UserHome} />
-          </Switch>
-        )}
-        {/* Displays our Login component as a fallback */}
-        <Route component={UserHome} />
-        {/* we want the url to show /home when catching all */}
-      </Switch>
+                </Switch>
+              )}
+              <Route component={UserHome} />
+            </Switch>
+          )}
+          {/* Displays our Login component as a fallback */}
+          <Route component={UserHome} />
+          {/* we want the url to show /home when catching all */}
+        </Switch>
+      </Fragment>
     )
   }
 }
@@ -80,6 +89,7 @@ const mapState = (state) => {
     isLoggedIn: !!state.user.id,
     isAdmin: !!state.user.isAdmin,
     user: state.user,
+    load: state.load,
   }
 }
 
