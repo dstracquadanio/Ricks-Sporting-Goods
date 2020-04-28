@@ -67,7 +67,6 @@ class Routes extends Component {
                     render={() => <AdminView whichTable="items" />}
                   />
                   <Route component={UserHome} />
-                  >>>>>>> 500f594766891050b4bf8a4be354a3ed4e4a44d6
                 </Switch>
               )}
               <Route component={UserHome} />

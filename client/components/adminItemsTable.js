@@ -29,7 +29,13 @@ class AdminItemsTable extends Component {
       <MaterialTable
         icons={tableIcons}
         columns={[
-          {title: 'id', field: 'id', type: 'numeric', editable: 'never'},
+          {
+            title: 'id',
+            field: 'id',
+            type: 'numeric',
+            editable: 'never',
+            defaultSort: 'asc',
+          },
           {title: 'Product Name', field: 'name'},
           {
             title: 'Description',

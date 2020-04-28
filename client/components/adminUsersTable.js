@@ -49,21 +49,6 @@ class AdminUsersTable extends Component {
             this.props.deleteUser(oldData.id)
           },
         }}
-        // actions={[
-        //   {
-        //     //DELETE ACTION
-        //     icon: tableIcons.Delete,
-        //     tooltip: 'Delete User',
-        //     onClick: (event, rowData) =>
-        //       console.log('gotta make the whole delete user feature'),
-        //   },
-        //   {
-        //     //SAVE CHANGES ACTION
-        //     icon: tableIcons.Save,
-        //     tooltip: 'Finalize Update',
-        //     onClick: (event, userInfo) => this.props.updateUser(userInfo),
-        //   },
-        // ]}
         title="Users"
       />
     )
