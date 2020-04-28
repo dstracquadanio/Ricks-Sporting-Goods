@@ -35,48 +35,48 @@ class Routes extends Component {
     const load = this.props.load
     return (
       <Fragment>
-        {load && (
+        {load ? (
           <Backdrop open={load}>
             <CircularProgress color="inherit" />
           </Backdrop>
+        ) : (
+          <Switch>
+            {/* Routes placed here are available to all visitors */}
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route exact path="/items" component={AllItems} />
+            <Route path="/:sport/items" component={AllItems} />
+            <Route path="/items/:id" component={singleItem} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/checkout" component={CheckoutForm} />
+            <Route path="/submitPage" component={SubmitPage} />
+            <Route path="/home" component={UserHome} />
+            {isLoggedIn && (
+              <Switch>
+                {/* Routes placed here are only available after logging in */}
+                <Route exact path="/users/profile" component={userProfile} />
+                <Route path="/orderhistory" component={OrderHistory} />
+                {isLoggedIn && isAdmin && (
+                  <Switch>
+                    <Route
+                      path="/admin/users"
+                      render={() => <AdminView whichTable="users" />}
+                    />
+                    <Route
+                      path="/admin/updateItems"
+                      render={() => <AdminView whichTable="items" />}
+                    />
+                    <Route component={UserHome} />
+                  </Switch>
+                )}
+                <Route component={UserHome} />
+              </Switch>
+            )}
+            {/* Displays our Login component as a fallback */}
+            <Route component={UserHome} />
+            {/* we want the url to show /home when catching all */}
+          </Switch>
         )}
-        <Switch>
-          {/* Routes placed here are available to all visitors */}
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route exact path="/items" component={AllItems} />
-          <Route path="/:sport/items" component={AllItems} />
-          <Route path="/items/:id" component={singleItem} />
-          <Route path="/cart" component={Cart} />
-          <Route path="/checkout" component={CheckoutForm} />
-          <Route path="/submitPage" component={SubmitPage} />
-          <Route path="/home" component={UserHome} />
-          {isLoggedIn && (
-            <Switch>
-              {/* Routes placed here are only available after logging in */}
-              <Route exact path="/users/profile" component={userProfile} />
-              <Route path="/orderhistory" component={OrderHistory} />
-              {isLoggedIn && isAdmin && (
-                <Switch>
-                  <Route
-                    path="/admin/users"
-                    render={() => <AdminView whichTable="users" />}
-                  />
-                  <Route
-                    path="/admin/updateItems"
-                    render={() => <AdminView whichTable="items" />}
-                  />
-                  <Route component={UserHome} />
-                </Switch>
-              )}
-              <Route component={UserHome} />
-            </Switch>
-          )}
-          {/* Displays our Login component as a fallback */}
-
-          <Route component={Signup} />
-          {/* we want the url to show /home when catching all */}
-        </Switch>
       </Fragment>
     )
   }

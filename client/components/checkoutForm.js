@@ -60,7 +60,6 @@ class DisconnectedCheckoutForm extends Component {
   render() {
     const {classes} = this.props
     return (
-      // <form className="form-container" onSubmit={this.handleSubmit}>
       <form
         className={`${classes.root} form-container`}
         noValidate

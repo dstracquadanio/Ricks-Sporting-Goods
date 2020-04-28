@@ -58,11 +58,6 @@ export class AllItems extends Component {
                   <div className="error">Not enough in stock!</div>
                 )}
               </Link>
-              {/* <div className="container-4a">
-                <Link to={`/items/${item.id}`}>
-                  {item.description ? <p>{item.description}</p> : ''}
-                </Link>
-              </div> */}
               <ThemeProvider theme={theme1}>
                 <Button
                   variant="contained"
