@@ -115,6 +115,36 @@ button {
   margin-left: 4em;
 }
 
+.container-1-orders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-2-orders {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1em;
+  /* margin-top: .5em;
+  margin-left: 3.8em; */
+  width: 90%;
+  height: 6em;
+  padding: 1em;
+  background-color: white;
+  border: solid rgb(175, 175, 175) 1px;
+  border-radius: 5px;
+}
+
+#order-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large;
+  align-self: flex-start;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  margin-left: 2.6em;
+  font-weight: lighter;
+}
+
 .boxes {
   border: solid black 1px;
 }

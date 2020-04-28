@@ -27,20 +27,25 @@ class DisconnectedOrderHistory extends Component {
 
     return (
       // [[ { }, { }], [{ }, { }]]
-      <div>
+      <div className="container-1-orders">
+        <div id="order-title">Your Orders</div>
         {groupedOrders.map((orderGroup) => {
           return (
-            <div key={orderGroup.id}>
+            <div key={orderGroup.id} className="container-2-orders">
               <div>Order ID {orderGroup.group[0].createdAt}</div>
               {orderGroup.group.map((item) => {
                 return (
                   <div key={item.id}>
-                    Order Id{item.orderNumber}
+                    <div>
+                      <div>Order Id{item.orderNumber}</div>
+                      <div>
+                        Total Price: $
+                        {Number(item.price) * Number(item.quantity)}
+                      </div>
+                      {this.props.name && <div>{this.props.name}</div>}
+                    </div>
                     <div>Name: {item.name}</div>
                     <div>Quantity: {item.quantity}</div>
-                    <div>
-                      Total Price: ${Number(item.price) * Number(item.quantity)}
-                    </div>
                   </div>
                 )
               })}
@@ -55,6 +60,7 @@ class DisconnectedOrderHistory extends Component {
 const mapStateToProps = (state) => {
   return {
     orders: state.user.orders,
+    name: state.user.name,
   }
 }
 const OrderHistory = connect(mapStateToProps)(DisconnectedOrderHistory)
