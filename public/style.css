@@ -784,3 +784,25 @@ button {
   margin-top: 0.5em;
   font-size: large;
 }
+
+#account-icon {
+  height: 3em;
+  width: 3em;
+}
+
+.user-container1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-container2 {
+  display: flex;
+  align-items: center;
+}
+
+.user-container3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

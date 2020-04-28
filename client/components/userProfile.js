@@ -1,37 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {updateUserProfile} from '../store/user'
-import {withStyles} from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
-import CardActionArea from '@material-ui/core/CardActionArea'
-import CardMedia from '@material-ui/core/CardMedia'
-
-const styles = (theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
-    width: {
-      maxWidth: 345,
-    },
-  },
-})
-
-const imageStyle = {
-  width: '70px',
-  height: 'auto',
-  padding: '5px',
-}
-
-const borderStyle = {
-  borderWidth: '2px',
-  borderColor: 'dark',
-  borderStyle: 'solid',
-  textAlign: 'center',
-}
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 
 class UserProfile extends Component {
   constructor() {
@@ -73,25 +45,20 @@ class UserProfile extends Component {
     const {classes} = this.props
 
     return (
-      <div>
-        <Card className={classes.width}>
-          <CardActionArea>
-            <CardMedia
+      <div className="user-container1">
+        {/* <CardMedia
               component="img"
               height="200"
               image="https://media.istockphoto.com/photos/all-sports-balls-in-stadium-3d-picture-id613558644?k=6&m=613558644&s=612x612&w=0&h=XmgnIstXyxQhqdSo5iW9eHtYE46uEfvwCfZZd4D3lbE="
-            />
-            <div style={borderStyle}>
-              <img
-                src="https://testingjavascript.com/static/Pricing_Trophy_Gold-c7bda50071dab490179a098b4b6b4886.png"
-                style={imageStyle}
-              ></img>
-              <h2>Name : {this.state.firstName + ' ' + this.state.lastName}</h2>
-              <h2>Address : {this.state.address}</h2>
-              <h2>Email : {this.state.email}</h2>
-            </div>
-          </CardActionArea>
-        </Card>
+            /> */}
+        <div className="user-container2">
+          <AccountCircleIcon color="disabled" id="account-icon" />
+          <div className="user-container3">
+            <div>Name : {this.state.firstName + ' ' + this.state.lastName}</div>
+            <div>Address : {this.state.address}</div>
+            <div>Email : {this.state.email}</div>
+          </div>
+        </div>
         <div>
           {this.state.show ? (
             <form
@@ -171,4 +138,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 const UserForm = connect(mapStateToProps, mapDispatchToProps)(UserProfile)
 
-export default withStyles(styles)(UserForm)
+export default UserForm
