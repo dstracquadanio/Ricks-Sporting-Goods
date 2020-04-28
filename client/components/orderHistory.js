@@ -77,7 +77,6 @@ class DisconnectedOrderHistory extends Component {
                     </div>
                   </div>
                 </div>
-                {console.log(orderGroup)}
                 <div className="order-header3a">
                   <div className="order-header4">Order #</div>
                   <div className="order-header5">
