@@ -20,6 +20,12 @@ const styles = (theme) => ({
   },
 })
 
+const imageStyle = {
+  width: '70px',
+  height: 'auto',
+  padding: '5px',
+}
+
 const borderStyle = {
   borderWidth: '2px',
   borderColor: 'dark',
@@ -76,6 +82,10 @@ class UserProfile extends Component {
               image="https://media.istockphoto.com/photos/all-sports-balls-in-stadium-3d-picture-id613558644?k=6&m=613558644&s=612x612&w=0&h=XmgnIstXyxQhqdSo5iW9eHtYE46uEfvwCfZZd4D3lbE="
             />
             <div style={borderStyle}>
+              <img
+                src="https://testingjavascript.com/static/Pricing_Trophy_Gold-c7bda50071dab490179a098b4b6b4886.png"
+                style={imageStyle}
+              ></img>
               <h2>Name : {this.state.firstName + ' ' + this.state.lastName}</h2>
               <h2>Address : {this.state.address}</h2>
               <h2>Email : {this.state.email}</h2>
