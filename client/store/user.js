@@ -19,7 +19,7 @@ const defaultUser = {}
  */
 const getUser = (user) => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-const updateProfile = (data) => ({type: UPDATE_USER, data})
+const updateProfile = (updatedUser) => ({type: UPDATE_USER, updatedUser})
 
 /**
  * THUNK CREATORS
@@ -86,7 +86,7 @@ export default function userReducer(state = defaultUser, action) {
     case REMOVE_USER:
       return defaultUser
     case UPDATE_USER:
-      return action.data
+      return action.updatedUser
     default:
       return state
   }

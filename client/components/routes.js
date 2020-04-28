@@ -9,11 +9,12 @@ import ViewUsers from './viewUsers'
 import singleItem from './singleItem'
 import addItems from './addItems'
 import itemList from './itemList'
-import updateItems from './updateItems'
+import AdminUserTable from './adminView'
 import userProfile from './userProfile'
 import {me} from '../store'
 import {getItems} from '../store/items'
 import {getCartThunk} from '../store/cart'
+import AdminView from './adminView'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
@@ -33,7 +34,7 @@ class Routes extends Component {
     return (
       <Fragment>
         {load && (
-          <Backdrop /*className={classes.backdrop}*/ open={load}>
+          <Backdrop open={load}>
             <CircularProgress color="inherit" />
           </Backdrop>
         )}
@@ -47,20 +48,23 @@ class Routes extends Component {
           <Route path="/cart" component={Cart} />
           <Route path="/checkout" component={CheckoutForm} />
           <Route path="/submitPage" component={SubmitPage} />
+          <Route path="/home" component={UserHome} />
           {isLoggedIn && (
             <Switch>
               {/* Routes placed here are only available after logging in */}
-              <Route path="/home" component={UserHome} />
               <Route exact path="/users/profile" component={userProfile} />
               {isLoggedIn && isAdmin && (
                 <Switch>
-                  <Route path="/users" component={ViewUsers} />
-                  <Route path="/addItems" component={addItems} />
-                  <Route exact path="/updateitems" component={itemList} />
-                  <Route path="/updateitems/:id" component={updateItems} />
-                  <Route path="/home" component={UserHome} />
-
+                  <Route
+                    path="/admin/users"
+                    render={() => <AdminView whichTable="users" />}
+                  />
+                  <Route
+                    path="/admin/updateItems"
+                    render={() => <AdminView whichTable="items" />}
+                  />
                   <Route component={UserHome} />
+                  >>>>>>> 500f594766891050b4bf8a4be354a3ed4e4a44d6
                 </Switch>
               )}
               <Route component={UserHome} />

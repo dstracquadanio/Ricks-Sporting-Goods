@@ -99,21 +99,21 @@ export default function NavDrawer(props) {
             <ListItemIcon>
               <GroupIcon />
             </ListItemIcon>
-            <ListItemText primary="All Users" />
+            <ListItemText primary="Update Users" />
           </ListItem>
 
-          <ListItem button onClick={() => handleRedirect('admin/addItems')}>
+          {/* <ListItem button onClick={() => handleRedirect('admin/addItems')}>
             <ListItemIcon>
               <PostAddIcon />
             </ListItemIcon>
             <ListItemText primary="Add Item" />
-          </ListItem>
+          </ListItem> */}
 
           <ListItem button onClick={() => handleRedirect('admin/updateItems')}>
             <ListItemIcon>
               <CreateIcon />
             </ListItemIcon>
-            <ListItemText primary="Update Item" />
+            <ListItemText primary="Update Items" />
           </ListItem>
         </List>
       )}
