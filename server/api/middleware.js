@@ -1,5 +1,5 @@
 const isAdminMiddleware = (req, res, next) => {
-  const currentUser = req.session.passport.user
+  const currentUser = req.user
   if (currentUser && currentUser.isAdmin) {
     next()
   } else {
