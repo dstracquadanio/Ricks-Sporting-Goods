@@ -50,11 +50,11 @@ class Routes extends Component {
           <Route path="/checkout" component={CheckoutForm} />
           <Route path="/submitPage" component={SubmitPage} />
           <Route path="/home" component={UserHome} />
-          <Route path="/orderhistory" component={OrderHistory} />
           {isLoggedIn && (
             <Switch>
               {/* Routes placed here are only available after logging in */}
               <Route exact path="/users/profile" component={userProfile} />
+              <Route path="/orderhistory" component={OrderHistory} />
               {isLoggedIn && isAdmin && (
                 <Switch>
                   <Route path="/users" component={ViewUsers} />

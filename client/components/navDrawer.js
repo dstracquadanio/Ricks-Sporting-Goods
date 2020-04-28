@@ -22,6 +22,7 @@ import SportsEsportsIcon from '@material-ui/icons/SportsEsports'
 import GroupIcon from '@material-ui/icons/Group'
 import CreateIcon from '@material-ui/icons/Create'
 import PostAddIcon from '@material-ui/icons/PostAdd'
+import HistoryIcon from '@material-ui/icons/History'
 
 const useStyles = makeStyles({
   menu: {
@@ -66,6 +67,13 @@ export default function NavDrawer(props) {
               <PersonIcon />
             </ListItemIcon>
             <ListItemText primary="Profile" />
+          </ListItem>
+
+          <ListItem button onClick={() => handleRedirect('orderhistory')}>
+            <ListItemIcon>
+              <HistoryIcon />
+            </ListItemIcon>
+            <ListItemText primary="Order History" />
           </ListItem>
 
           <ListItem button onClick={handleLogout}>
