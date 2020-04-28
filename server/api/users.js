@@ -5,12 +5,14 @@ module.exports = router
 
 //GET ALL USERS
 router.get('/', async (req, res, next) => {
+  //I think isAdmin goes here
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ['id', 'email', 'isAdmin'],
+      attributes: ['id', 'email', 'isAdmin', 'firstName', 'lastName'],
+      order: [['id', 'ASC']],
     })
     res.json(users)
   } catch (err) {
@@ -113,17 +115,23 @@ router.delete(
 )
 
 //UPDATE USER PROFILE
-router.put('/profile/:id', async (req, res, next) => {
+router.put('/profile/:userId', async (req, res, next) => {
+  //I THINK ADMIN AND CURRENT USER CAN USE
   try {
-    const userId = req.params.id
-    const [, updateUser] = await User.update(req.body, {
-      where: {
-        id: userId,
-      },
-      returning: true,
-      plain: true,
-    })
-    res.json(updateUser)
+    res.status(200)
+    res.json(await req.currentUser.update(req.body))
+  } catch (error) {
+    next(error)
+  }
+})
+
+//DELETE USER
+router.delete('/:userId', async (req, res, next) => {
+  //SECURITY ALERT
+  try {
+    console.log('REACHED HEREEEEEEE')
+    await req.currentUser.destroy()
+    res.sendStatus(204)
   } catch (error) {
     next(error)
   }

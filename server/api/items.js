@@ -62,7 +62,6 @@ router.post('/', isAdminMiddleware, async (req, res, next) => {
 
 //ADMIN ONLY - DELETE AN ITEM FROM INVENTORY
 router.delete('/:itemId', isAdminMiddleware, async (req, res, next) => {
-  //need is isAdmin middleware here
   try {
     await req.currentItem.destroy()
     res.sendStatus(204)
@@ -73,7 +72,6 @@ router.delete('/:itemId', isAdminMiddleware, async (req, res, next) => {
 
 //ADMIN ONLY - EDIT ITEM INFORMATION
 router.put('/:itemId', isAdminMiddleware, async (req, res, next) => {
-  //need is isAdmin middleware here
   try {
     res.status(200)
     res.json(await req.currentItem.update(req.body))

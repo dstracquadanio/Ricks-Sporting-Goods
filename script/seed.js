@@ -32,8 +32,50 @@ async function seed() {
     User.create({
       email: 'admin@email.com',
       password: 'admin',
-      name: 'Big Admin Man',
+      firstName: 'Big Admin Man',
       isAdmin: true,
+    }),
+    User.create({
+      email: 'bigdog@email.com',
+      password: 'hotdog',
+      firstName: 'Joe',
+      lastName: 'Shmoe',
+      isAdmin: false,
+    }),
+    User.create({
+      email: 'smartdude@email.com',
+      password: 'e=mc^2',
+      firstName: 'Brian',
+      lastName: 'Brains',
+      isAdmin: false,
+    }),
+    User.create({
+      email: 'jetsfan@email.com',
+      password: 'jetsjetsjets',
+      firstName: 'Samantha',
+      lastName: 'Clark',
+      isAdmin: false,
+    }),
+    User.create({
+      email: 'datguy@email.com',
+      password: 'FOOD',
+      firstName: 'Guy',
+      lastName: 'Fieri',
+      isAdmin: false,
+    }),
+    User.create({
+      email: 'materialUIExpert@material.com',
+      password: 'materialFTW',
+      firstName: 'Andrew',
+      lastName: 'Chang',
+      isAdmin: true,
+    }),
+    User.create({
+      email: 'bonzai@email.com',
+      password: 'yatta',
+      firstName: 'Mary',
+      lastName: 'Bloom',
+      isAdmin: false,
     }),
   ])
 

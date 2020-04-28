@@ -41,8 +41,8 @@ function SingleItemView(props) {
                 )
               })}
             </Select>
-            <Button type="submit" variant="contained">
-              Add to cart
+            <Button type="submit" variant="contained" disabled={!item.quantity}>
+              {item.quantity ? 'Add To Cart' : 'OUT OF STOCK'}
             </Button>
           </form>
 

@@ -1,32 +1,45 @@
 /* eslint-disable no-case-declarations */
 import axios from 'axios'
 
+//ACTION TYPES
 const GOT_ITEMS = 'GOT_ITEMS'
 const CHECKOUT = 'CHECKOUT'
 const DELETE_ITEM = 'DELETE_ITEM'
 const UPDATE_ITEM = 'UPDATE_ITEM'
+const POSTED_ITEM = 'POSTED_ITEM'
 
-// GET ALL ITEMS
+//ACTION TYPES
 export const gotItems = (items) => ({
   type: GOT_ITEMS,
   items,
 })
 
-const removeItem = (data) => ({
+const postedItem = (newItem) => ({
+  type: POSTED_ITEM,
+  newItem,
+})
+
+const removeItem = (id) => ({
   type: DELETE_ITEM,
-  data,
+  id,
 })
 
-const updateItem = (data) => ({
+const updateItem = (updatedItem) => ({
   type: UPDATE_ITEM,
-  data,
+  updatedItem,
 })
 
+//THUNKS
 export const getItems = () => async (dispatch) => {
   const {data} = await axios.get('/api/items')
   // timer to show off our loading functionality!
   await setTimeout(() => dispatch(gotItems(data)), 800)
   // dispatch(gotItems(data))
+}
+
+export const postItem = (newItem) => async (dispatch) => {
+  const {data} = await axios.post('/api/items', newItem)
+  dispatch(postedItem(data))
 }
 
 export const removeSingleItem = (id) => {
@@ -36,10 +49,10 @@ export const removeSingleItem = (id) => {
   }
 }
 
-export const updateSingleItem = (id, changes) => {
+export const updateSingleItem = (updatedItem) => {
   return async (dispatch) => {
     try {
-      const res = await axios.put(`/api/items/${id}`, changes)
+      const res = await axios.put(`/api/items/${updatedItem.id}`, updatedItem)
       dispatch(updateItem(res.data))
     } catch (error) {
       console.log('error')
@@ -70,8 +83,12 @@ export default function itemsReducer(state = defaultItems, action) {
     case DELETE_ITEM:
       return state.filter((item) => item.id !== action.data)
     case UPDATE_ITEM:
-      const newItemList = state.filter((item) => item.id !== action.data.id)
-      return [...newItemList, action.data] //i think we can just map here instead
+      const newItemList = state.filter(
+        (item) => item.id !== action.updatedItem.id
+      )
+      return [...newItemList, action.updatedItem] //i think we can just map here instead
+    case POSTED_ITEM:
+      return [...state, action.newItem]
     default:
       return state
   }
