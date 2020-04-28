@@ -8,6 +8,7 @@ import {getCartThunk} from './cart'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const UPDATE_USER = 'UPDATE_USER'
+const GET_HISTORY = 'GET_HISTORY'
 
 /**
  * INITIAL STATE
@@ -30,6 +31,7 @@ export const me = () => async (dispatch) => {
     dispatch(getUser(res.data || defaultUser))
     if (res.data.id) {
       dispatch(getCartThunk(res.data.id))
+      dispatch(getHistoryThunk(res.data.id))
     }
   } catch (err) {
     console.error(err)
@@ -76,6 +78,25 @@ export const updateUserProfile = (id, changes) => {
   }
 }
 
+const getHistory = (purchasedItems) => ({
+  type: GET_HISTORY,
+  purchasedItems,
+})
+
+export const getHistoryThunk = (userId) => {
+  return async (dispatch) => {
+    try {
+      console.log('before thunk')
+      const {data} = await axios.get(`/api/users/${userId}/orders`)
+      console.log('after thunk')
+      console.log(data)
+      dispatch(getHistory(data))
+    } catch (error) {
+      console.log('getHistoryThunk Error', error)
+    }
+  }
+}
+
 /**
  * REDUCER
  */
@@ -87,6 +108,11 @@ export default function userReducer(state = defaultUser, action) {
       return defaultUser
     case UPDATE_USER:
       return action.updatedUser
+    case GET_HISTORY:
+      return {
+        ...state,
+        orders: action.purchasedItems,
+      }
     default:
       return state
   }

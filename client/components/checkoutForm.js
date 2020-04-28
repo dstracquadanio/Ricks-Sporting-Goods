@@ -5,6 +5,8 @@ import history from '../history'
 import {withStyles} from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import {getHistoryThunk} from '../store/user'
+
 const styles = (theme) => ({
   root: {
     '& > *': {
@@ -38,12 +40,15 @@ class DisconnectedCheckoutForm extends Component {
       [event.target.name]: event.target.value,
     })
   }
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault()
-    this.props.checkout({
+    await this.props.checkout({
       user: this.props.user,
       cart: this.props.cart,
     })
+    if (this.props.user.id) {
+      await this.props.addToHistory(this.props.user.id)
+    }
     this.setState({
       firstName: '',
       lastName: '',
@@ -119,6 +124,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     checkout: (obj) => dispatch(checkoutThunk(obj)),
+    addToHistory: (userId) => dispatch(getHistoryThunk(userId)),
   }
 }
 const CheckoutForm = connect(
