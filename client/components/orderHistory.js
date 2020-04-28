@@ -53,7 +53,10 @@ class DisconnectedOrderHistory extends Component {
                       $
                       {orderGroup.group
                         .reduce((accum, current) => {
-                          return accum + Number(current.price)
+                          return (
+                            accum +
+                            Number(current.price) * Number(current.quantity)
+                          )
                         }, 0)
                         .toFixed(2)}
                     </div>
