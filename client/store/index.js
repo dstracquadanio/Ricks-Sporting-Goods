@@ -24,6 +24,10 @@ const middleware = composeWithDevTools(
 // Save State to localStorage if page is refreshed
 function saveStateToStorage(state) {
   try {
+    let cart = state.cart
+    state = {
+      cart,
+    }
     const stringState = JSON.stringify(state)
     localStorage.setItem('state', stringState)
   } catch (error) {

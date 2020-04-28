@@ -86,10 +86,7 @@ const getHistory = (purchasedItems) => ({
 export const getHistoryThunk = (userId) => {
   return async (dispatch) => {
     try {
-      console.log('before thunk')
       const {data} = await axios.get(`/api/users/${userId}/orders`)
-      console.log('after thunk')
-      console.log(data)
       dispatch(getHistory(data))
     } catch (error) {
       console.log('getHistoryThunk Error', error)

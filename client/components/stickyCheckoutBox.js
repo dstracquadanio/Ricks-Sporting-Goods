@@ -7,7 +7,6 @@ import history from '../history'
 function DisconnectedStickyCheckoutBox(props) {
   return (
     <div className="container-8">
-      {/* <h3 className="container-9">Complete Order</h3> */}
       <div className="container-9">
         <img src="/CompleteOrder.png" alt="completeOrder" />
       </div>
