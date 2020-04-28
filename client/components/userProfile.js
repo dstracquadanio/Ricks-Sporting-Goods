@@ -130,26 +130,25 @@ class UserProfile extends Component {
               </Button>
             </form>
           ) : null}
-          <button
-            type="button"
+          <Button
+            variant="contained"
+            color="secondary"
+            type="submit"
             onClick={() => {
               this.setState({show: !this.state.show})
             }}
           >
             Update Profile
-          </button>
+          </Button>
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-    cart: state.cart,
-  }
-}
+const mapStateToProps = (state) => ({
+  user: state.user,
+})
 
 const mapDispatchToProps = (dispatch) => ({
   updateUserProfile: (id, changes) => dispatch(updateUserProfile(id, changes)),
