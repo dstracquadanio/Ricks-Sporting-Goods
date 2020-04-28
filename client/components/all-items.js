@@ -53,6 +53,7 @@ export class AllItems extends Component {
                   color="secondary"
                   startIcon={<ShoppingCartIcon />}
                   type="button"
+                  disabled={!item.quantity}
                   onClick={async () => {
                     let check = checkInventoryItemToItems(
                       item,
@@ -76,7 +77,7 @@ export class AllItems extends Component {
                     }
                   }}
                 >
-                  Add to Cart
+                  {item.quantity ? 'Add to Cart' : 'Out of Stock'}
                 </Button>
               </ThemeProvider>
             </div>
