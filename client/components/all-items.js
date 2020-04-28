@@ -7,18 +7,34 @@ import {updateCartThunk} from '../store/cart'
 import {checkInventoryItemToItems, attachQuantityToItem} from './utility'
 import {ThemeProvider} from '@material-ui/core/styles'
 import {theme1} from '../materialColorThemes'
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert'
 
 export class AllItems extends Component {
   constructor() {
     super()
     this.state = {
       addCartIssue: false,
+      successAlert: false,
     }
+  }
+
+  handleClick = () => {
+    this.setState({
+      successAlert: true,
+    })
+  }
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    this.setState({
+      successAlert: false,
+    })
   }
 
   render() {
     let {items, searchBar} = this.props
-    // binary search?
     if (searchBar.length) {
       items = items.filter((item) => {
         return item.name.toLowerCase().includes(searchBar.toLowerCase())
@@ -69,6 +85,7 @@ export class AllItems extends Component {
                         user: this.props.user,
                         item: itemToSend,
                       })
+                      this.handleClick()
                     }
                   }}
                 >
@@ -78,6 +95,20 @@ export class AllItems extends Component {
             </div>
           )
         })}
+        <Snackbar
+          open={this.state.successAlert}
+          autoHideDuration={6000}
+          onClose={this.handleClose}
+        >
+          <MuiAlert
+            severity="success"
+            elevation={6}
+            variant="filled"
+            onClose={this.handleClose}
+          >
+            Added!
+          </MuiAlert>
+        </Snackbar>
       </div>
     )
   }

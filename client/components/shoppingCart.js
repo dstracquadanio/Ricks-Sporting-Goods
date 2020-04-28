@@ -22,13 +22,11 @@ class DisconnectedCart extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-
   handleSubmit(event, itemId) {
     event.preventDefault()
     let userId = this.props.cart[0].userId
     this.props.removeCartItem(userId, itemId)
   }
-
 
   render() {
     return (
