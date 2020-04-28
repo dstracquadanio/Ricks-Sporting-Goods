@@ -11,11 +11,13 @@ import addItems from './addItems'
 import itemList from './itemList'
 import updateItems from './updateItems'
 import userProfile from './userProfile'
+import OrderHistory from './orderHistory'
 import {me} from '../store'
 import {getItems} from '../store/items'
 import {getCartThunk} from '../store/cart'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import {getHistoryThunk} from '../store/user'
 
 /**
  * COMPONENT
@@ -48,6 +50,7 @@ class Routes extends Component {
           <Route path="/checkout" component={CheckoutForm} />
           <Route path="/submitPage" component={SubmitPage} />
           <Route path="/home" component={UserHome} />
+          <Route path="/orderhistory" component={OrderHistory} />
           {isLoggedIn && (
             <Switch>
               {/* Routes placed here are only available after logging in */}
@@ -94,6 +97,7 @@ const mapDispatch = (dispatch) => {
     loadInitialData() {
       dispatch(me())
     },
+    getHistory: (userId) => dispatch(getHistoryThunk(userId)),
   }
 }
 

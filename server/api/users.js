@@ -43,6 +43,24 @@ router.get('/:userId/cart/', isCurrentUserMiddleware, (req, res, next) => {
   res.json(req.currentUser.CartItems)
 })
 
+//GET THIS USER'S PURCHASED ITEMS
+router.get(
+  '/:userId/orders/',
+  isCurrentUserMiddleware,
+  async (req, res, next) => {
+    try {
+      const items = await PurchasedItem.findAll({
+        where: {
+          userId: req.currentUser.id,
+        },
+      })
+      res.json(items)
+    } catch (error) {
+      next(error)
+    }
+  }
+)
+
 //ADD ITEM TO CART, IF ALREADY THERE UPDATE ITEM IN CART
 // Expecting the new total quantity of the cart. (Not incrementing)
 router.put('/:userId', isCurrentUserMiddleware, async (req, res, next) => {
