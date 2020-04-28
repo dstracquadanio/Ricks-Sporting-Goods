@@ -74,7 +74,7 @@ class Routes extends Component {
           )}
           {/* Displays our Login component as a fallback */}
 
-          <Route component={UserHome} />
+          <Route component={Signup} />
           {/* we want the url to show /home when catching all */}
         </Switch>
       </Fragment>
