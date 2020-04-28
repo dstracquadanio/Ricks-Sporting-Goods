@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import CompleteButton from '@material-ui/core/Button'
 import history from '../history'
+// import {getHistoryThunk} from '../store/user'
 
 function DisconnectedStickyCheckoutBox(props) {
   return (
@@ -45,11 +46,19 @@ function DisconnectedStickyCheckoutBox(props) {
 const mapStateToProps = (state) => {
   return {
     cart: state.cart,
+    user: state.user,
   }
 }
 
-const StickyCheckoutBox = connect(mapStateToProps)(
-  DisconnectedStickyCheckoutBox
-)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // addToHistory: (userId) => dispatch(getHistoryThunk(userId)),
+  }
+}
+
+const StickyCheckoutBox = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DisconnectedStickyCheckoutBox)
 
 export default StickyCheckoutBox
