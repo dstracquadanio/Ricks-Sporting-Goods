@@ -127,7 +127,7 @@ button {
   margin-top: 1em;
   /* margin-top: .5em;
   margin-left: 3.8em; */
-  width: 90%;
+  width: 70%;
   min-height: 10em;
   /* padding: 1em; */
   background-color: white;
@@ -146,6 +146,28 @@ button {
   display: flex;
 }
 
+.order-header3 {
+  display: flex;
+  flex-direction: column;
+  margin-right: 4em;
+  font-weight: lighter;
+}
+
+.order-header3a {
+  display: flex;
+  flex-direction: column;
+  font-weight: lighter;
+}
+
+.order-header4 {
+  margin-bottom: 0.3em;
+  font-size: 17px;
+}
+
+.order-header5 {
+  font-size: 14px;
+}
+
 .order-info {
   padding: 1em;
 }
@@ -156,7 +178,7 @@ button {
   align-self: flex-start;
   margin-top: 1em;
   margin-bottom: 0.5em;
-  margin-left: 2.6em;
+  margin-left: 9.6em;
   font-weight: lighter;
 }
 

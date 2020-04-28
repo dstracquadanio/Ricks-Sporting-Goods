@@ -34,35 +34,51 @@ class DisconnectedOrderHistory extends Component {
             <div key={orderGroup.id} className="container-2-orders">
               <div className="order-header">
                 <div className="order-header2">
-                  <div>
-                    <div>Order Placed</div>
-                    <div>{orderGroup.group[0].createdAt}</div>
-                  </div>
-                  <div>
-                    <div>Total</div>
-                    <div>
-                      $
-                      {orderGroup.group.reduce((accum, current) => {
-                        return accum + Number(current.price)
-                      }, 0)}
+                  <div className="order-header3">
+                    <div className="order-header4">Order Placed</div>
+                    <div className="order-header5">
+                      {orderGroup.group[0].createdAt.slice(5, 8) +
+                        orderGroup.group[0].createdAt.slice(8, 10) +
+                        '-' +
+                        orderGroup.group[0].createdAt.slice(0, 4)}
                     </div>
                   </div>
-                  <div>
-                    <div>Shipped To</div>
-                    <div>{this.props.name && <div>{this.props.name}</div>}</div>
+                  <div className="order-header3">
+                    <div className="order-header4">Total</div>
+                    <div className="order-header5">
+                      $
+                      {orderGroup.group
+                        .reduce((accum, current) => {
+                          return accum + Number(current.price)
+                        }, 0)
+                        .toFixed(2)}
+                    </div>
+                  </div>
+                  <div className="order-header3">
+                    <div className="order-header4">Shipped To</div>
+                    <div className="order-header5">
+                      {this.props.name && <div>{this.props.name}</div>}
+                    </div>
                   </div>
                 </div>
-                <div>Order #: 00000</div>
+                {console.log(orderGroup)}
+                <div className="order-header3a">
+                  <div className="order-header4">Order #</div>
+                  <div className="order-header5">
+                    {'0'.repeat(
+                      6 - orderGroup.group[0].orderNumber.toString().length
+                    ) + orderGroup.group[0].orderNumber}
+                  </div>
+                </div>
               </div>
               {orderGroup.group.map((item) => {
                 return (
                   <div key={item.id} className="order-info">
-                    <div>Order Id{item.orderNumber}</div>
+                    <div>Name: {item.name}</div>
+                    <div>Quantity: {item.quantity}</div>
                     <div>
                       Total Price: ${Number(item.price) * Number(item.quantity)}
                     </div>
-                    <div>Name: {item.name}</div>
-                    <div>Quantity: {item.quantity}</div>
                   </div>
                 )
               })}
