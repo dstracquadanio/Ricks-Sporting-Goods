@@ -4,6 +4,7 @@ import {Button} from '@material-ui/core'
 import {ThemeProvider} from '@material-ui/core/styles'
 import {theme1} from '../materialColorThemes'
 import history from '../history'
+import EmptyShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart'
 
 class DisconnectedOrderHistory extends Component {
   render() {
@@ -33,6 +34,14 @@ class DisconnectedOrderHistory extends Component {
       // [[ { }, { }], [{ }, { }]]
       <div className="container-1-orders">
         <div id="order-title">Your Orders</div>
+        {!groupedOrders.length && (
+          <div id="no-orders">
+            <div>
+              <EmptyShoppingCartIcon id="no-orders-icon" />
+            </div>
+            <div>No Previous Orders</div>
+          </div>
+        )}
         {groupedOrders.map((orderGroup) => {
           return (
             <div key={orderGroup.id} className="container-2-orders">

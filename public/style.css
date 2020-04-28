@@ -122,6 +122,20 @@ button {
   margin-bottom: 2em;
 }
 
+#no-orders {
+  margin-top: 3em;
+  font-size: large;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#no-orders-icon {
+  height: 2em;
+  width: 2em;
+  padding-bottom: 1em;
+}
+
 .container-2-orders {
   display: flex;
   flex-direction: column;
