@@ -97,23 +97,23 @@ export class AllItems extends Component {
                   {item.quantity ? 'Add to Cart' : 'Out of Stock'}
                 </Button>
               </ThemeProvider>
-              <Snackbar
-                open={this.state.successAlert}
-                autoHideDuration={6000}
-                onClose={this.handleClose}
-              >
-                <MuiAlert
-                  severity="success"
-                  elevation={6}
-                  variant="filled"
-                  onClose={this.handleClose}
-                >
-                  Added!
-                </MuiAlert>
-              </Snackbar>
             </div>
           )
         })}
+        <Snackbar
+          open={this.state.successAlert}
+          autoHideDuration={6000}
+          onClose={this.handleClose}
+        >
+          <MuiAlert
+            severity="success"
+            elevation={6}
+            variant="filled"
+            onClose={this.handleClose}
+          >
+            Added!
+          </MuiAlert>
+        </Snackbar>
       </div>
     )
   }
