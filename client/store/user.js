@@ -50,6 +50,7 @@ export const auth = (email, password, method) => async (dispatch) => {
     dispatch(getUser(res.data))
     if (res.data.id) {
       dispatch(getCartThunk(res.data.id))
+      dispatch(getHistoryThunk(res.data.id))
     }
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
