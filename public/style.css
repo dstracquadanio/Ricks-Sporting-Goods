@@ -125,11 +125,9 @@ button {
   display: flex;
   flex-direction: column;
   margin-top: 1em;
-  /* margin-top: .5em;
-  margin-left: 3.8em; */
   width: 70%;
   min-height: 10em;
-  /* padding: 1em; */
+  padding-bottom: 0.5em;
   background-color: white;
   border: solid rgb(212, 212, 212) 1px;
   border-radius: 5px;
@@ -138,6 +136,7 @@ button {
 .order-header {
   background-color: rgb(223, 223, 223);
   padding: 1em;
+  padding-right: 3.4em;
   display: flex;
   justify-content: space-between;
 }
@@ -169,7 +168,53 @@ button {
 }
 
 .order-info {
-  padding: 1em;
+  padding-top: 1em;
+  padding-bottom: 1.5em;
+  padding-left: 2em;
+  padding-right: 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 6em;
+}
+
+.order-info2 {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  width: 30%;
+}
+
+.order-img-container {
+  height: 100%;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+}
+
+.order-img-container img {
+  height: 100%;
+}
+
+.order-info3 {
+  width: 40%;
+  font-size: 15px;
+}
+
+.order-info-price {
+  color: red;
+}
+
+.button-div {
+  display: flex;
+  align-items: center;
+  font-size: 12px!;
+}
+
+.order-button {
+  height: 2.5em;
+  width: 8em;
 }
 
 #order-title {

@@ -1,5 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Button} from '@material-ui/core'
+import {ThemeProvider} from '@material-ui/core/styles'
+import {theme1} from '../materialColorThemes'
+import history from '../history'
 
 class DisconnectedOrderHistory extends Component {
   render() {
@@ -74,10 +78,34 @@ class DisconnectedOrderHistory extends Component {
               {orderGroup.group.map((item) => {
                 return (
                   <div key={item.id} className="order-info">
-                    <div>Name: {item.name}</div>
-                    <div>Quantity: {item.quantity}</div>
-                    <div>
-                      Total Price: ${Number(item.price) * Number(item.quantity)}
+                    <div className="order-info2">
+                      <div className="order-img-container">
+                        <img src={item.imageUrl} alt="" />
+                      </div>
+                      <div className="order-info3">
+                        <div>{item.name}</div>
+                        <div>Quantity: {item.quantity}</div>
+                        <div className="order-info-price">
+                          $
+                          {(Number(item.price) * Number(item.quantity)).toFixed(
+                            2
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="button-div">
+                      <ThemeProvider theme={theme1}>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          className="order-button"
+                          onClick={() => {
+                            history.push(`/items/${item.itemId}`)
+                          }}
+                        >
+                          Buy again
+                        </Button>
+                      </ThemeProvider>
                     </div>
                   </div>
                 )
