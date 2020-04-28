@@ -32,17 +32,34 @@ class DisconnectedOrderHistory extends Component {
         {groupedOrders.map((orderGroup) => {
           return (
             <div key={orderGroup.id} className="container-2-orders">
-              <div>Order ID {orderGroup.group[0].createdAt}</div>
+              <div className="order-header">
+                <div className="order-header2">
+                  <div>
+                    <div>Order Placed</div>
+                    <div>{orderGroup.group[0].createdAt}</div>
+                  </div>
+                  <div>
+                    <div>Total</div>
+                    <div>
+                      $
+                      {orderGroup.group.reduce((accum, current) => {
+                        return accum + Number(current.price)
+                      }, 0)}
+                    </div>
+                  </div>
+                  <div>
+                    <div>Shipped To</div>
+                    <div>{this.props.name && <div>{this.props.name}</div>}</div>
+                  </div>
+                </div>
+                <div>Order #: 00000</div>
+              </div>
               {orderGroup.group.map((item) => {
                 return (
-                  <div key={item.id}>
+                  <div key={item.id} className="order-info">
+                    <div>Order Id{item.orderNumber}</div>
                     <div>
-                      <div>Order Id{item.orderNumber}</div>
-                      <div>
-                        Total Price: $
-                        {Number(item.price) * Number(item.quantity)}
-                      </div>
-                      {this.props.name && <div>{this.props.name}</div>}
+                      Total Price: ${Number(item.price) * Number(item.quantity)}
                     </div>
                     <div>Name: {item.name}</div>
                     <div>Quantity: {item.quantity}</div>
@@ -60,7 +77,7 @@ class DisconnectedOrderHistory extends Component {
 const mapStateToProps = (state) => {
   return {
     orders: state.user.orders,
-    name: state.user.name,
+    name: state.user.firstName + ' ' + state.user.lastName,
   }
 }
 const OrderHistory = connect(mapStateToProps)(DisconnectedOrderHistory)
