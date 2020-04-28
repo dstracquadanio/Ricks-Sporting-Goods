@@ -5,9 +5,10 @@ class DisconnectedOrderHistory extends Component {
   render() {
     const orders = this.props.orders || []
 
-    let groupedOrders = [] // [[ { }, { }], [{ }, { }]]
+    let groupedOrders = [] // [ id: 1, group: [ { }, { }], id: 2, group: [{ }, { }]]
     let group = [] // [{ orderNumber: 3}, { orderNumber:3}]
-    console.log(orders.length)
+    let id = 1
+
     if (orders.length) {
       for (let i = 0; i < orders.length; i++) {
         if (i === 0) {
@@ -16,30 +17,35 @@ class DisconnectedOrderHistory extends Component {
           group.push(orders[i])
         } else {
           // if current orderNum !== previous orderNum
-          groupedOrders.push(group)
+          groupedOrders.push({id: id, group: group})
+          id++
           group = [orders[i]]
         }
       }
-      groupedOrders.push(group)
+      groupedOrders.push({id: id, group: group})
     }
-    console.log('groupedOrders', groupedOrders)
 
     return (
       // [[ { }, { }], [{ }, { }]]
       <div>
         {groupedOrders.map((orderGroup) => {
-          return orderGroup.map((item) => {
-            return (
-              <div key={item.id}>
-                Order Id{item.orderNumber}
-                <div>Name: {item.name}</div>
-                <div>Quantity: {item.quantity}</div>
-                <div>
-                  Total Price: ${Number(item.price) * Number(item.quantity)}
-                </div>
-              </div>
-            )
-          })
+          return (
+            <div key={orderGroup.id}>
+              <div>Order ID {orderGroup.group[0].createdAt}</div>
+              {orderGroup.group.map((item) => {
+                return (
+                  <div key={item.id}>
+                    Order Id{item.orderNumber}
+                    <div>Name: {item.name}</div>
+                    <div>Quantity: {item.quantity}</div>
+                    <div>
+                      Total Price: ${Number(item.price) * Number(item.quantity)}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          )
         })}
       </div>
     )
