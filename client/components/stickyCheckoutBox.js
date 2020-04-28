@@ -30,6 +30,7 @@ function DisconnectedStickyCheckoutBox(props) {
         <CompleteButton
           variant="contained"
           color="secondary"
+          disabled={!props.cart.length}
           onClick={() => {
             history.push('/checkout')
           }}
