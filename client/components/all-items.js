@@ -7,12 +7,15 @@ import {updateCartThunk} from '../store/cart'
 import {checkInventoryItemToItems, attachQuantityToItem} from './utility'
 import {ThemeProvider} from '@material-ui/core/styles'
 import {theme1} from '../materialColorThemes'
+import Paginate from './paginate'
 
 export class AllItems extends Component {
   constructor() {
     super()
     this.state = {
       addCartIssue: false,
+      currentPage: 1,
+      itemsPerPage: 15,
     }
   }
 
@@ -26,9 +29,12 @@ export class AllItems extends Component {
     }
     let {sport} = this.props.match.params
     items = !sport ? items : items.filter((item) => item.sport === sport)
+    const indexOfLastItem = this.state.currentPage * this.state.itemsPerPage
+    const indexOfFirstItem = indexOfLastItem - this.state.itemsPerPage
+    let currentItems = items.slice(indexOfFirstItem, indexOfLastItem)
     return (
       <div id="items">
-        {items.map((item) => {
+        {currentItems.map((item) => {
           return (
             <div key={item.id} className="singleItem">
               <Link to={`/items/${item.id}`} className="container-4">
@@ -78,6 +84,12 @@ export class AllItems extends Component {
             </div>
           )
         })}
+        <Paginate
+          itemsPerPage={this.state.itemsPerPage}
+          totalItems={items.length}
+          paginator={(pageNum) => this.setState({currentPage: pageNum})}
+          props={this.props}
+        />
       </div>
     )
   }

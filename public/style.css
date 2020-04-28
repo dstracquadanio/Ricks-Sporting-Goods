@@ -392,6 +392,24 @@ button {
   /* padding-right: 20px; */
 }
 
+.pagination {
+  display: flex;
+  align-items: flex-end;
+}
+
+.pagination a {
+  float: none;
+  padding: 8px 16px;
+}
+
+.pagination a.active {
+  background-color: #4caf50;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #4caf50;
+}
+
 /* .MuiDrawer-paperAnchorLeft {
   background-color: #7cb4b8 #9ed2d4 !important;
 } */
