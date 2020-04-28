@@ -9,11 +9,12 @@ import ViewUsers from './viewUsers'
 import singleItem from './singleItem'
 import addItems from './addItems'
 import itemList from './itemList'
-import updateItems from './updateItems'
+import AdminUserTable from './adminView'
 import userProfile from './userProfile'
 import {me} from '../store'
 import {getItems} from '../store/items'
 import {getCartThunk} from '../store/cart'
+import AdminView from './adminView'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
@@ -31,6 +32,7 @@ class Routes extends Component {
     const {isAdmin} = this.props
     const load = this.props.load
     return (
+
       <Fragment>
         {load && (
           <Backdrop open={load}>
@@ -54,11 +56,15 @@ class Routes extends Component {
               <Route exact path="/users/profile" component={userProfile} />
               {isLoggedIn && isAdmin && (
                 <Switch>
-                  <Route path="/users" component={ViewUsers} />
-                  <Route path="/addItems" component={addItems} />
-                  <Route exact path="/updateitems" component={itemList} />
-                  <Route path="/updateitems/:id" component={updateItems} />
-                  <Route component={UserHome} />
+                  <Route
+                  path="/admin/users"
+                  render={() => <AdminView whichTable="users" />}
+                />
+                <Route
+                  path="/admin/updateItems"
+                  render={() => <AdminView whichTable="items" />}
+                />
+                <Route component={UserHome} />
                 </Switch>
               )}
               <Route component={UserHome} />

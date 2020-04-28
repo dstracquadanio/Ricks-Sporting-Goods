@@ -3,7 +3,7 @@ const isAdminMiddleware = (req, res, next) => {
   if (currentUser && currentUser.isAdmin) {
     next()
   } else {
-    const error = new Error('Access Denied!')
+    const error = new Error('Access Denied! Not an Admin!')
     next(error)
   }
 }
@@ -13,7 +13,7 @@ const isCurrentUserMiddleware = (req, res, next) => {
   if (currentUser === req.currentUser.dataValues.id) {
     next()
   } else {
-    const error = new Error('Access Denied!')
+    const error = new Error('Access Denied! Not current User!')
     next(error)
   }
 }
