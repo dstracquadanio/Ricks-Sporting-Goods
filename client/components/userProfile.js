@@ -1,37 +1,10 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {updateUserProfile} from '../store/user'
-import {withStyles} from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
-import CardActionArea from '@material-ui/core/CardActionArea'
-import CardMedia from '@material-ui/core/CardMedia'
-
-const styles = (theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
-    width: {
-      maxWidth: 345,
-    },
-  },
-})
-
-const imageStyle = {
-  width: '70px',
-  height: 'auto',
-  padding: '5px',
-}
-
-const borderStyle = {
-  borderWidth: '2px',
-  borderColor: 'dark',
-  borderStyle: 'solid',
-  textAlign: 'center',
-}
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import FlexSnackbar from './flexSnackbar'
 
 class UserProfile extends Component {
   constructor() {
@@ -42,10 +15,12 @@ class UserProfile extends Component {
       address: '',
       email: '',
       show: false,
+      // snackOpen: false,
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.setState = this.setState.bind(this)
   }
 
   componentDidMount() {
@@ -70,31 +45,33 @@ class UserProfile extends Component {
   }
 
   render() {
-    const {classes} = this.props
-
     return (
-      <div>
-        <Card className={classes.width}>
-          <CardMedia
-            component="img"
-            height="200"
-            image="https://media.istockphoto.com/photos/all-sports-balls-in-stadium-3d-picture-id613558644?k=6&m=613558644&s=612x612&w=0&h=XmgnIstXyxQhqdSo5iW9eHtYE46uEfvwCfZZd4D3lbE="
-          />
-          <div style={borderStyle}>
-            <img
-              src="https://testingjavascript.com/static/Pricing_Trophy_Gold-c7bda50071dab490179a098b4b6b4886.png"
-              style={imageStyle}
-            ></img>
-            <h2>Name : {this.state.firstName + ' ' + this.state.lastName}</h2>
-            <h2>Address : {this.state.address}</h2>
-            <h2>Email : {this.state.email}</h2>
-          </div>
-          <div>
-            {this.state.show ? (
+      <Fragment>
+        <div className="user-container0">
+          <div className="user-container1">
+            <div className="user-img-container">
+              <img
+                src="https://media.istockphoto.com/photos/all-sports-balls-in-stadium-3d-picture-id613558644?k=6&m=613558644&s=612x612&w=0&h=XmgnIstXyxQhqdSo5iW9eHtYE46uEfvwCfZZd4D3lbE="
+                alt=""
+              />
+            </div>
+            <div className="user-container2">
+              <AccountCircleIcon color="disabled" id="account-icon" />
+              <div className="user-container3">
+                <div className="user-info">
+                  {this.props.user.firstName !== null
+                    ? this.props.user.firstName
+                    : ''}{' '}
+                  {this.props.user.lastName !== null &&
+                    this.props.user.lastName}
+                </div>
+                <div className="user-info">{this.props.user.address}</div>
+                <div className="user-info">{this.props.user.email}</div>
+              </div>
+            </div>
+            <div>
               <form
-                className={`${classes.root} form-container`}
-                noValidate
-                autoComplete="off"
+                className="form-container-user"
                 onSubmit={this.handleSubmit}
               >
                 <TextField
@@ -137,88 +114,27 @@ class UserProfile extends Component {
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
-                <Button variant="contained" color="secondary" type="submit">
-                  Update
-                </Button>
+                <div className="update-icon-container">
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    id="update-icon"
+                    type="submit"
+                  >
+                    Update
+                  </Button>
+                </div>
               </form>
-            ) : null}
-            <Button
-              variant="contained"
-              color="secondary"
-              type="submit"
-              onClick={() => {
-                this.setState({show: !this.state.show})
-              }}
-            >
-              Update Profile
-            </Button>
+            </div>
           </div>
-        </Card>
-        {/* <div>
-          {this.state.show ? (
-            <form
-              className={`${classes.root} form-container`}
-              noValidate
-              autoComplete="off"
-              onSubmit={this.handleSubmit}
-            >
-              <TextField
-                id="filled-basic"
-                label="First Name"
-                variant="filled"
-                type="text"
-                name="firstName"
-                required
-                value={this.state.firstName}
-                onChange={this.handleChange}
-              />
-              <TextField
-                id="filled-basic"
-                label="Last Name"
-                variant="filled"
-                type="text"
-                name="lastName"
-                required
-                value={this.state.lastName}
-                onChange={this.handleChange}
-              />
-              <TextField
-                id="filled-basic"
-                label="Address"
-                variant="filled"
-                type="text"
-                name="address"
-                required
-                value={this.state.address}
-                onChange={this.handleChange}
-              />
-              <TextField
-                id="filled-basic"
-                label="Email"
-                variant="filled"
-                type="email"
-                name="email"
-                required
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
-              <Button variant="contained" color="secondary" type="submit">
-                Update
-              </Button>
-            </form>
-          ) : null}
-          <Button
-            variant="contained"
-            color="secondary"
-            type="submit"
-            onClick={() => {
-              this.setState({show: !this.state.show})
-            }}
-          >
-            Update Profile
-          </Button>
-        </div> */}
-      </div>
+        </div>
+        {/* <FlexSnackbar
+          setOpen={this.state.snackOpen}
+          snackState={this.setState}
+          severity="warning"
+          message="Wrong Credit Card Information"
+        /> */}
+      </Fragment>
     )
   }
 }
@@ -233,4 +149,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 const UserForm = connect(mapStateToProps, mapDispatchToProps)(UserProfile)
 
-export default withStyles(styles)(UserForm)
+export default UserForm
