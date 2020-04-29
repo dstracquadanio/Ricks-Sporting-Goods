@@ -9,15 +9,17 @@ class DisconnectedSubmitPage extends Component {
       <div className="container-12">
         <CheckCircleTwoToneIcon id="order-placed-icon" />
         <div>Thank you for your purchase!</div>
-        <div id="submit-page-text">
-          Your order number is{' '}
-          {'0'.repeat(
-            6 -
-              this.props.orders[
-                this.props.orders.length - 1
-              ].orderNumber.toString().length
-          ) + this.props.orders[this.props.orders.length - 1].orderNumber}
-        </div>
+        {this.props.orders && (
+          <div id="submit-page-text">
+            Your order number is{' '}
+            {'0'.repeat(
+              6 -
+                this.props.orders[
+                  this.props.orders.length - 1
+                ].orderNumber.toString().length
+            ) + this.props.orders[this.props.orders.length - 1].orderNumber}
+          </div>
+        )}
       </div>
     )
   }

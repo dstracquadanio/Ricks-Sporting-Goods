@@ -1,13 +1,11 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import {logout} from '../store'
-import AccountMenu from './accountMenu'
 import SearchBar from './navbarSearch'
 import {updateBar} from '../store/searchBar'
 import {avatarLogic, cartItemReducer} from './utility'
-import IconButton from '@material-ui/core/IconButton'
 import StyledCart from './styledCartBadge'
 import NavDrawer from './navDrawer'
 
@@ -23,11 +21,6 @@ const Navbar = ({
     <div>
       <nav>
         <div className="left-nav">
-          {/* <AccountMenu
-            isLoggedIn={isLoggedIn}
-            isAdmin={isAdmin}
-            handleLogout={handleClick}
-          /> */}
           <NavDrawer
             isLoggedIn={isLoggedIn}
             isAdmin={isAdmin}
@@ -38,13 +31,6 @@ const Navbar = ({
             <img id="logo" src="/Logo.png" alt="logo" />
           </NavLink>
           <SearchBar />
-          {/* {isAdmin && (
-            <Fragment>
-              <NavLink to="/users">VIEW USERS</NavLink>
-              <NavLink to="/addItems">ADD AN ITEM</NavLink>
-              <NavLink to="/updateItems">UPDATE/REMOVE ITEM</NavLink>
-            </Fragment>
-          )} */}
         </div>
         <div className="right-nav">
           <NavLink to="/items" onClick={() => updateSearch('')}>
@@ -65,11 +51,13 @@ const Navbar = ({
           <NavLink to="/gaming/items" onClick={() => updateSearch('')}>
             Gaming
           </NavLink>
-          <NavLink to="/user/profile">{avatarLogic(user)}</NavLink>
+          {isLoggedIn ? (
+            <NavLink to="/user/profile">{avatarLogic(user)}</NavLink>
+          ) : (
+            <NavLink to="/signup">{avatarLogic(user)}</NavLink>
+          )}
           <NavLink to="/cart" onClick={() => updateSearch('')}>
-            {/* <IconButton> */}
             <StyledCart cartTotal={cart.reduce(cartItemReducer, 0)} />
-            {/* </IconButton> */}
           </NavLink>
         </div>
       </nav>

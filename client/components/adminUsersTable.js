@@ -23,7 +23,12 @@ class AdminUsersTable extends Component {
       <MaterialTable
         icons={tableIcons}
         columns={[
-          {title: 'id', field: 'id', type: 'numeric', editable: 'never'},
+          {
+            title: 'id',
+            field: 'id',
+            type: 'numeric',
+            editable: 'never',
+          },
           {title: 'First Name', field: 'firstName'},
           {title: 'Last Name', field: 'lastName'},
           {title: 'Email', field: 'email'},
@@ -48,6 +53,10 @@ class AdminUsersTable extends Component {
             })
             this.props.deleteUser(oldData.id)
           },
+        }}
+        style={{
+          margin: '2em',
+          padding: '3em',
         }}
         title="Users"
       />

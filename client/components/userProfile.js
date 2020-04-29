@@ -75,24 +75,86 @@ class UserProfile extends Component {
     return (
       <div>
         <Card className={classes.width}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="200"
-              image="https://media.istockphoto.com/photos/all-sports-balls-in-stadium-3d-picture-id613558644?k=6&m=613558644&s=612x612&w=0&h=XmgnIstXyxQhqdSo5iW9eHtYE46uEfvwCfZZd4D3lbE="
-            />
-            <div style={borderStyle}>
-              <img
-                src="https://testingjavascript.com/static/Pricing_Trophy_Gold-c7bda50071dab490179a098b4b6b4886.png"
-                style={imageStyle}
-              ></img>
-              <h2>Name : {this.state.firstName + ' ' + this.state.lastName}</h2>
-              <h2>Address : {this.state.address}</h2>
-              <h2>Email : {this.state.email}</h2>
-            </div>
-          </CardActionArea>
+          <CardMedia
+            component="img"
+            height="200"
+            image="https://media.istockphoto.com/photos/all-sports-balls-in-stadium-3d-picture-id613558644?k=6&m=613558644&s=612x612&w=0&h=XmgnIstXyxQhqdSo5iW9eHtYE46uEfvwCfZZd4D3lbE="
+          />
+          <div style={borderStyle}>
+            <img
+              src="https://testingjavascript.com/static/Pricing_Trophy_Gold-c7bda50071dab490179a098b4b6b4886.png"
+              style={imageStyle}
+            ></img>
+            <h2>Name : {this.state.firstName + ' ' + this.state.lastName}</h2>
+            <h2>Address : {this.state.address}</h2>
+            <h2>Email : {this.state.email}</h2>
+          </div>
+          <div>
+            {this.state.show ? (
+              <form
+                className={`${classes.root} form-container`}
+                noValidate
+                autoComplete="off"
+                onSubmit={this.handleSubmit}
+              >
+                <TextField
+                  id="filled-basic"
+                  label="First Name"
+                  variant="filled"
+                  type="text"
+                  name="firstName"
+                  required
+                  value={this.state.firstName}
+                  onChange={this.handleChange}
+                />
+                <TextField
+                  id="filled-basic"
+                  label="Last Name"
+                  variant="filled"
+                  type="text"
+                  name="lastName"
+                  required
+                  value={this.state.lastName}
+                  onChange={this.handleChange}
+                />
+                <TextField
+                  id="filled-basic"
+                  label="Address"
+                  variant="filled"
+                  type="text"
+                  name="address"
+                  required
+                  value={this.state.address}
+                  onChange={this.handleChange}
+                />
+                <TextField
+                  id="filled-basic"
+                  label="Email"
+                  variant="filled"
+                  type="email"
+                  name="email"
+                  required
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+                <Button variant="contained" color="secondary" type="submit">
+                  Update
+                </Button>
+              </form>
+            ) : null}
+            <Button
+              variant="contained"
+              color="secondary"
+              type="submit"
+              onClick={() => {
+                this.setState({show: !this.state.show})
+              }}
+            >
+              Update Profile
+            </Button>
+          </div>
         </Card>
-        <div>
+        {/* <div>
           {this.state.show ? (
             <form
               className={`${classes.root} form-container`}
@@ -155,7 +217,7 @@ class UserProfile extends Component {
           >
             Update Profile
           </Button>
-        </div>
+        </div> */}
       </div>
     )
   }
