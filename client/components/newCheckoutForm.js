@@ -17,7 +17,6 @@ const styles = (theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      // width: '25ch',
     },
   },
 })
@@ -34,10 +33,10 @@ function newCheckoutForm(props) {
 
   useEffect(() => {
     props.getClientSecret()
-    setFirstName(user.firstName)
-    setLastName(user.lastName)
-    setAddress(user.address)
-    setEmail(user.email)
+    setFirstName(user.firstName || '')
+    setLastName(user.lastName || '')
+    setAddress(user.address || '')
+    setEmail(user.email || '')
   }, [])
 
   const stripe = useStripe()
@@ -63,7 +62,6 @@ function newCheckoutForm(props) {
     //PAYMENT FAILED
     if (result.error) {
       await setOpen(true)
-      console.log(errorSnackOpen)
       // Show error to your customer (e.g., insufficient funds)
       console.log(result.error.message)
     }
@@ -138,15 +136,20 @@ function newCheckoutForm(props) {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
+        <CardSection />
         <Button
-          // disable={!stripe}
+          disabled={
+            !firstName.length ||
+            !lastName.length ||
+            !email.length ||
+            !address.length
+          }
           variant="contained"
           color="secondary"
           type="submit"
         >
           Submit
         </Button>
-        <CardSection />
       </form>
       <FlexSnackbar
         setOpen={setOpen}

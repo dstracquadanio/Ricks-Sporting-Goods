@@ -45,7 +45,7 @@ class AdminItemsTable extends Component {
                 ? rowData.description.slice(0, 140) + '...'
                 : '',
           },
-          {title: 'Price', field: 'price', type: 'numeric'},
+          {title: 'Price', field: 'price', type: 'currency'},
           {title: 'Quantity', field: 'quantity', type: 'numeric'},
           {title: 'Sport', field: 'sport'},
 
@@ -85,6 +85,10 @@ class AdminItemsTable extends Component {
             })
             this.props.postItem(newData)
           },
+        }}
+        style={{
+          margin: '2em',
+          padding: '3em',
         }}
         title="Inventory"
       />
