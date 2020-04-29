@@ -55,10 +55,10 @@ class UserProfile extends Component {
             <AccountCircleIcon color="disabled" id="account-icon" />
             <div className="user-container3">
               <div className="user-info">
-                {this.state.firstName + ' ' + this.state.lastName}
+                {this.props.user.firstName + ' ' + this.props.user.lastName}
               </div>
-              <div className="user-info">{this.state.address}</div>
-              <div className="user-info">{this.state.email}</div>
+              <div className="user-info">{this.props.user.address}</div>
+              <div className="user-info">{this.props.user.email}</div>
             </div>
           </div>
           <div>

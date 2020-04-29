@@ -806,11 +806,12 @@ button {
 }
 
 .user-img-container {
-  height: 10em;
+  height: 7em;
   overflow: hidden;
 }
 
 .user-img-container img {
+  margin-top: -9em;
 }
 
 .user-container2 {
