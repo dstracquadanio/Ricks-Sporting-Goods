@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Item, Cart} = require('../server/db/models')
+const {User, Item, Cart, PurchasedItem} = require('../server/db/models')
 const {
   names,
   prices,
@@ -151,6 +151,35 @@ async function seed() {
       sport: 'baseball',
       itemId: glove.id,
       userId: admin.id,
+    }),
+  ])
+
+  const PurchasedItems = await Promise.all([
+    PurchasedItem.create({
+      name: 'Basketball Hoop',
+      price: 10.0,
+      quantity: 1,
+      description:
+        'Materials: Made of durable polypropylene fiber material,heavy duty net for use outdoors or indoors. Length: 50cm. Basketball Net, 12 Loops Basketball Net, Heavy Duty Basketball Net, Heavy Duty Basketball Net Replacement Basketball Net for Wall Mounted Basketball Hoop Indoor Outdoor',
+      imageUrl:
+        'https://www.anthem-sports.com/media/extendware/ewimageopt/media/inline/b0/c/bison-pro-tech-competition-breakaway-basketball-goal-ba35--eeb.jpg',
+      sport: 'basketball',
+      itemId: hoop.id,
+      userId: cody.id,
+      orderNumber: 1,
+    }),
+    PurchasedItem.create({
+      name: 'Football Helmet',
+      price: 30.0,
+      quantity: 1,
+      description:
+        'Great for autographs and collectors. Includes interior padding and a 4-point chinstrap. Approximately 5 tall',
+      imageUrl:
+        'https://cdn.vox-cdn.com/thumbor/Ck7EIuSSZBpSn7QIkFZHpAhGuS0=/26x136:1026x803/1200x800/filters:focal(26x136:1026x803)/cdn.vox-cdn.com/uploads/chorus_image/image/30673345/speedflex_quarter_view_lr__2_.0.jpg',
+      sport: 'football',
+      itemId: helmet.id,
+      userId: cody.id,
+      orderNumber: 2,
     }),
   ])
 
