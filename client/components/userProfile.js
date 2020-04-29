@@ -4,7 +4,8 @@ import {updateUserProfile} from '../store/user'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
-import FlexSnackbar from './flexSnackbar'
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert'
 
 class UserProfile extends Component {
   constructor() {
@@ -15,12 +16,11 @@ class UserProfile extends Component {
       address: '',
       email: '',
       show: false,
-      // snackOpen: false,
+      snackOpen: false,
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.setState = this.setState.bind(this)
   }
 
   componentDidMount() {
@@ -32,6 +32,16 @@ class UserProfile extends Component {
     })
   }
 
+  //SNACKBAR HANDLER
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    this.setState({
+      snackOpen: false,
+    })
+  }
+
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
@@ -40,7 +50,9 @@ class UserProfile extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-
+    this.setState({
+      snackOpen: true,
+    })
     this.props.updateUserProfile(this.props.user.id, this.state)
   }
 
@@ -128,12 +140,20 @@ class UserProfile extends Component {
             </div>
           </div>
         </div>
-        {/* <FlexSnackbar
-          setOpen={this.state.snackOpen}
-          snackState={this.setState}
-          severity="warning"
-          message="Wrong Credit Card Information"
-        /> */}
+        <Snackbar
+          open={this.state.snackOpen}
+          autoHideDuration={6000}
+          onClose={this.handleClose}
+        >
+          <MuiAlert
+            severity="success"
+            elevation={6}
+            variant="filled"
+            onClose={this.handleClose}
+          >
+            Saved Changes
+          </MuiAlert>
+        </Snackbar>
       </Fragment>
     )
   }

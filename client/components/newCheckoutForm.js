@@ -61,7 +61,7 @@ function newCheckoutForm(props) {
 
     //PAYMENT FAILED
     if (result.error) {
-      await setOpen(true)
+      setOpen(true)
       // Show error to your customer (e.g., insufficient funds)
       console.log(result.error.message)
     }
@@ -136,6 +136,7 @@ function newCheckoutForm(props) {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
+
         <CardSection />
         <Button
           disabled={
@@ -155,7 +156,7 @@ function newCheckoutForm(props) {
         setOpen={setOpen}
         snackState={errorSnackOpen}
         severity="warning"
-        message="Wrong Credit Card Information"
+        message="Credit card information is incorrect"
       />
     </Fragment>
   )

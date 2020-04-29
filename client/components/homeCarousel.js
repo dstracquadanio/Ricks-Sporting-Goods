@@ -29,7 +29,7 @@ export default class homeCarousel extends Component {
           className="test"
           index={carouselIndex}
           onChangeIndex={this.handleChangeIndex}
-          interval={7500}
+          interval={7200}
         >
           <div className="container-center-column">
             <div className="container-row">
