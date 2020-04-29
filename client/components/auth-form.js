@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import {auth} from '../store'
 import {Button, TextField} from '@material-ui/core'
 import ShopIcon from '@material-ui/icons/Shop'
+import Tooltip from '@material-ui/core/Tooltip'
 
 /**
  * COMPONENT
@@ -15,22 +16,64 @@ const AuthForm = (props) => {
     <div className="container-center-column">
       <form className="auth-container" onSubmit={handleSubmit} name={name}>
         <h2>{displayName}</h2>
-        <TextField
-          fullWidth
-          name="email"
-          required={true}
-          variant="outlined"
-          placeholder="Email"
-        />
-        <TextField
-          fullWidth
-          type="password"
-          name="password"
-          required={true}
-          variant="outlined"
-          placeholder="Password"
-          color="secondary"
-        />
+
+        {name === 'login' ? (
+          <Tooltip
+            arrow
+            disableHoverListener
+            open={true}
+            placement="left"
+            title="Try cody@email.com"
+          >
+            <TextField
+              fullWidth
+              name="email"
+              required={true}
+              variant="outlined"
+              placeholder="Email"
+            />
+          </Tooltip>
+        ) : (
+          <TextField
+            fullWidth
+            name="email"
+            required={true}
+            variant="outlined"
+            placeholder="Email"
+          />
+        )}
+
+        {name === 'login' ? (
+          <Tooltip
+            arrow
+            disableHoverListener
+            open={true}
+            placement="left"
+            title="Try
+          123"
+          >
+            <TextField
+              fullWidth
+              type="password"
+              name="password"
+              required={true}
+              variant="outlined"
+              placeholder="Password"
+              color="secondary"
+            />
+          </Tooltip>
+        ) : (
+          <TextField
+            fullWidth
+            type="password"
+            name="password"
+            required={true}
+            variant="outlined"
+            placeholder="Password"
+            color="secondary"
+          />
+        )}
+
         <div className="container-even-row">
           <Button type="submit" variant="contained">
             {displayName}

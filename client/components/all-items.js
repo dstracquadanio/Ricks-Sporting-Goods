@@ -97,7 +97,7 @@ export class AllItems extends Component {
         })}
         <Snackbar
           open={this.state.successAlert}
-          autoHideDuration={6000}
+          autoHideDuration={2000}
           onClose={this.handleClose}
         >
           <MuiAlert

@@ -69,7 +69,7 @@ export default function NavDrawer(props) {
             <ListItemText primary="Profile" />
           </ListItem>
 
-          <ListItem button onClick={() => handleRedirect('/cart')}>
+          <ListItem button onClick={() => handleRedirect('cart')}>
             <ListItemIcon>
               <ShoppingCartIcon />
             </ListItemIcon>
@@ -104,6 +104,13 @@ export default function NavDrawer(props) {
               <PersonAddIcon />
             </ListItemIcon>
             <ListItemText primary="Sign Up" />
+          </ListItem>
+
+          <ListItem button onClick={() => handleRedirect('cart')}>
+            <ListItemIcon>
+              <ShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Your Cart" />
           </ListItem>
         </List>
       )}

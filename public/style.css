@@ -522,6 +522,19 @@ button {
   display: flex;
 }
 
+.MuiAvatar-colorDefault {
+  color: #fafafa;
+  background-color: #207263 !important;
+}
+
+.MuiPaper-rounded {
+  border-radius: 0px 0px 4px 4px !important;
+}
+
+.MuiMobileStepper-root {
+  background-color: #f5f4f4 !important;
+}
+
 .searchbar {
   height: 40px;
   /* width: 200px; */

@@ -1,5 +1,6 @@
 import React from 'react'
 import {CardElement} from '@stripe/react-stripe-js'
+import Tooltip from '@material-ui/core/Tooltip'
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -21,10 +22,18 @@ const CARD_ELEMENT_OPTIONS = {
 
 function CardSection() {
   return (
-    <label className="checkout-card-label">
-      Card details
-      <CardElement options={CARD_ELEMENT_OPTIONS} />
-    </label>
+    <Tooltip
+      arrow
+      disableHoverListener
+      open={true}
+      placement="left"
+      title="Try 4242-4242-4242-4242 MM/YY:11/21 CVC:111 zip:12345"
+    >
+      <label className="checkout-card-label">
+        Card details
+        <CardElement options={CARD_ELEMENT_OPTIONS} />
+      </label>
+    </Tooltip>
   )
 }
 
