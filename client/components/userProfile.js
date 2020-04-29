@@ -42,31 +42,27 @@ class UserProfile extends Component {
   }
 
   render() {
-    const {classes} = this.props
-
     return (
-      <div className="user-container1">
-        {/* <CardMedia
-              component="img"
-              height="200"
-              image="https://media.istockphoto.com/photos/all-sports-balls-in-stadium-3d-picture-id613558644?k=6&m=613558644&s=612x612&w=0&h=XmgnIstXyxQhqdSo5iW9eHtYE46uEfvwCfZZd4D3lbE="
-            /> */}
-        <div className="user-container2">
-          <AccountCircleIcon color="disabled" id="account-icon" />
-          <div className="user-container3">
-            <div>Name : {this.state.firstName + ' ' + this.state.lastName}</div>
-            <div>Address : {this.state.address}</div>
-            <div>Email : {this.state.email}</div>
+      <div className="user-container0">
+        <div className="user-container1">
+          <div className="user-img-container">
+            <img
+              src="https://media.istockphoto.com/photos/all-sports-balls-in-stadium-3d-picture-id613558644?k=6&m=613558644&s=612x612&w=0&h=XmgnIstXyxQhqdSo5iW9eHtYE46uEfvwCfZZd4D3lbE="
+              alt=""
+            />
           </div>
-        </div>
-        <div>
-          {this.state.show ? (
-            <form
-              className={`${classes.root} form-container`}
-              noValidate
-              autoComplete="off"
-              onSubmit={this.handleSubmit}
-            >
+          <div className="user-container2">
+            <AccountCircleIcon color="disabled" id="account-icon" />
+            <div className="user-container3">
+              <div className="user-info">
+                {this.state.firstName + ' ' + this.state.lastName}
+              </div>
+              <div className="user-info">{this.state.address}</div>
+              <div className="user-info">{this.state.email}</div>
+            </div>
+          </div>
+          <div>
+            <form className="form-container-user" onSubmit={this.handleSubmit}>
               <TextField
                 id="filled-basic"
                 label="First Name"
@@ -107,21 +103,18 @@ class UserProfile extends Component {
                 value={this.state.email}
                 onChange={this.handleChange}
               />
-              <Button variant="contained" color="secondary" type="submit">
-                Update
-              </Button>
+              <div className="update-icon-container">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  id="update-icon"
+                  type="submit"
+                >
+                  Update
+                </Button>
+              </div>
             </form>
-          ) : null}
-          <Button
-            variant="contained"
-            color="secondary"
-            type="submit"
-            onClick={() => {
-              this.setState({show: !this.state.show})
-            }}
-          >
-            Update Profile
-          </Button>
+          </div>
         </div>
       </div>
     )
